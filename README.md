@@ -1,11 +1,11 @@
 # Installation
-### Clone The Repo
-#### if you have ssh set up
+### 1. Clone The Repo
+#### If you have ssh set up
   `git clone git@github.com:Cathartes/records-spa.git`
-#### if you don't have ssh set up *and really enjoy typing in your username and password*
+#### If you don't have ssh set up *and really enjoy typing in your username and password*
   `git clone https://github.com/Cathartes/records-spa.git`
 
-### Install Yarn
+### 2. Install Yarn
 #### Linux
   `sudo apt install yarn`
 
@@ -15,10 +15,10 @@
 #### Windows
   [Download Installer](https://yarnpkg.com/latest.msi)
 
-### Move To The Directory
+### 3. Move To The Directory
  `cd records-spa`
 
-### Install All Dependencies
+### 4. Install All Dependencies
   `yarn install`
 
 ### Start The App
