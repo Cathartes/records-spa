@@ -2,6 +2,17 @@
   "name": "records-spa",
   "version": "0.1.0",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Cathartes/records-api"
+  },
+  "bugs": {
+    "url": "https://github.com/Cathartes/records-api/issues"
+  },
+  "engines": {
+    "node": "^8.2.1",
+    "yarn": "^0.27.5"
+  },
   "dependencies": {
     "@types/jest": "^20.0.2",
     "@types/node": "^8.0.9",
@@ -9,10 +20,12 @@
     "@types/react-dom": "^15.5.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-scripts-ts": "2.3.2"
+    "react-scripts-ts": "2.3.2",
+    "source-map-explorer": "^1.4.0"
   },
   "devDependencies": {},
   "scripts": {
+    "analyze": "source-map-explorer build/static/js/main.*",
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
