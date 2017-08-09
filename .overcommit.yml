@@ -17,11 +17,9 @@
 
 PreCommit:
 
-  EsLint:
-    enabled: true
-
   TsLint:
     enabled: true
+    required: true
 
   TrailingWhitespace:
     enabled: true
