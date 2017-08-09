@@ -6,6 +6,9 @@ import App from './App';
 
 import './index.css';
 
+var injectTapEventPlugin = require('react-tap-event-plugin');
+injectTapEventPlugin();
+
 ReactDOM.render(
   <App />,
   document.getElementById('root') as HTMLElement
