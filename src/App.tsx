@@ -1,22 +1,32 @@
 import * as React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-// import getMuiTheme from 'material-ui/styles/getMuiTheme';
-// import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+import createPalette from 'material-ui/styles/palette';
 
 import Header from './components/Header/Header';
 import Splash from './components/Splash/Splash';
 
+import './App.css';
+
+const theme = createMuiTheme({
+  palette: createPalette({
+    type: 'dark'
+  })
+});
+
 class App extends React.PureComponent<{}, {}> {
   render() {
     return (
-      <MuiThemeProvider>
+      <MuiThemeProvider theme={theme}>
         <Router>
           <div>
             <Header/>
-            <Switch>
-              <Route exact={true} path="/" component={Splash}/>
-            </Switch>
+            <div className="App-content">
+              <Switch>
+                <Route exact={true} path="/" component={Splash}/>
+              </Switch>
+            </div>
           </div>
         </Router>
       </MuiThemeProvider>
