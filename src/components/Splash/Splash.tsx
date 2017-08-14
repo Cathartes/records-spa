@@ -2,7 +2,7 @@ import * as React from 'react';
 
 const background = require('./background.png');
 
-class Splash extends React.Component<{}, {}> {
+class Splash extends React.PureComponent<{}, {}> {
   render() {
     return (
       <div>

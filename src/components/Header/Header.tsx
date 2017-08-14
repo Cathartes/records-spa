@@ -1,9 +1,13 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 
-class Header extends React.Component<{}, {}> {
+class Header extends React.PureComponent<{}, {}> {
   render() {
     return (
-      <h1>Welcome to Cathartes - A Destiny Clan</h1>
+      <div>
+        <h3><Link to="/">Back</Link></h3>
+        <h3><Link to="/test">Test</Link></h3>
+      </div>
     );
   }
 }
