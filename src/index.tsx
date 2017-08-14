@@ -4,6 +4,7 @@ import * as ReactDOM from 'react-dom';
 import registerServiceWorker from './registerServiceWorker';
 import App from './App';
 
+import 'typeface-roboto';
 import './index.css';
 
 ReactDOM.render(

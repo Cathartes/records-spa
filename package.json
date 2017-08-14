@@ -19,11 +19,13 @@
     "@types/react": "^16.0.2",
     "@types/react-dom": "^15.5.2",
     "@types/react-router-dom": "^4.0.7",
+    "material-ui": "next",
+    "material-ui-icons": "^1.0.0-alpha.19",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-router-dom": "^4.1.2",
     "react-scripts-ts": "2.5.0",
-    "source-map-explorer": "^1.4.0"
+    "typeface-roboto": "^0.0.35"
   },
   "devDependencies": {},
   "scripts": {
