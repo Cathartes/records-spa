@@ -4,10 +4,8 @@ import * as ReactDOM from 'react-dom';
 import registerServiceWorker from './registerServiceWorker';
 import App from './App';
 
+import 'typeface-roboto';
 import './index.css';
-
-var injectTapEventPlugin = require('react-tap-event-plugin');
-injectTapEventPlugin();
 
 ReactDOM.render(
   <App />,
