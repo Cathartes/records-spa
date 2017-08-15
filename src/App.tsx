@@ -6,6 +6,7 @@ import createPalette from 'material-ui/styles/palette';
 
 import Header from './components/Header/Header';
 import Splash from './components/Splash/Splash';
+import BasicTable from './Table';
 
 import './App.css';
 
@@ -23,6 +24,7 @@ class App extends React.PureComponent<{}, {}> {
           <div>
             <Header/>
             <div className="App-content">
+              <BasicTable/>
               <Switch>
                 <Route exact={true} path="/" component={Splash}/>
               </Switch>
