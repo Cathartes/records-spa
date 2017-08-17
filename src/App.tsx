@@ -5,8 +5,9 @@ import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 import createPalette from 'material-ui/styles/palette';
 
 import Header from './components/Header/Header';
-import Splash from './components/Splash/Splash';
-import BasicTable from './Table';
+// import Splash from './components/Splash/Splash';
+import ChallengeTable from './components/ChallengeTable/ChallengeTable';
+import TeamTable from './components/TeamTable/TeamTable';
 
 import './App.css';
 
@@ -24,9 +25,11 @@ class App extends React.PureComponent<{}, {}> {
           <div>
             <Header/>
             <div className="App-content">
-              <BasicTable/>
+              <TeamTable team={{name: 'Team 1'}} users={[{id: 5, name: 'Justin LaForge', points: 50}]}/>
+              <TeamTable team={{name: 'Team 2'}} users={[{id: 6, name: 'Tyler Hogan', points: 47}]}/>
+              <ChallengeTable challenges={[{id: 5, name: 'Test', points: 54}]}/>
               <Switch>
-                <Route exact={true} path="/" component={Splash}/>
+                <Route exact={true} path="/"/>
               </Switch>
             </div>
           </div>
