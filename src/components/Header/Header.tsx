@@ -31,7 +31,7 @@ class Header extends React.PureComponent<HeaderProps> {
             <MenuIcon />
           </IconButton>
           <Typography type="title" className={this.props.classes.appTitle}>
-            Cathartes - A Destiny Clan
+            CATHARTES
           </Typography>
           <Link to="/" className="button-link"><Button>Login</Button></Link>
         </Toolbar>
