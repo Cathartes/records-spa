@@ -10,26 +10,24 @@
     "url": "https://github.com/Cathartes/records-api/issues"
   },
   "engines": {
-    "node": "^8.2.1",
-    "yarn": "^0.27.5"
+    "node": "^8.4.0",
+    "yarn": "^1.0.1"
   },
   "dependencies": {
-    "@types/jest": "^20.0.6",
-    "@types/node": "^8.0.20",
-    "@types/react": "^16.0.2",
-    "@types/react-dom": "^15.5.2",
+    "@types/jest": "^20.0.8",
+    "@types/node": "^8.0.28",
+    "@types/react": "^16.0.5",
+    "@types/react-dom": "^15.5.4",
     "@types/react-router-dom": "^4.0.7",
     "material-ui": "next",
-    "material-ui-icons": "^1.0.0-alpha.19",
+    "material-ui-icons": "^1.0.0-beta.5",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-router-dom": "^4.1.2",
-    "react-scripts-ts": "2.5.0",
+    "react-router-dom": "^4.2.2",
+    "react-scripts-ts": "2.6.0",
     "typeface-roboto": "^0.0.35"
   },
-  "devDependencies": {},
   "scripts": {
-    "analyze": "source-map-explorer build/static/js/main.*",
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
