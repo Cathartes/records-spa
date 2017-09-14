@@ -1,15 +1,21 @@
 import * as React from 'react';
+import classNames from 'classnames';
 
-import { createStyleSheet, withStyles } from 'material-ui/styles';
+import withStyles from 'material-ui/styles/withStyles';
+
 import Avatar from 'material-ui/Avatar';
-import List, { ListItem, ListItemAvatar, ListItemSecondaryAction, ListItemText } from 'material-ui/List';
+import List from 'material-ui/List';
+import ListItem from 'material-ui/List/ListItem';
+import ListItemAvatar from 'material-ui/List/ListItemAvatar';
+import ListItemSecondaryAction from 'material-ui/List/ListItemSecondaryAction';
+import ListItemText from 'material-ui/List/ListItemText';
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 
 import AccountBoxIcon from 'material-ui-icons/AccountBox';
 import FolderIcon from 'material-ui-icons/Folder';
 
-const styleSheet = createStyleSheet(theme => ({
+const styles = theme => ({
   paper: {
     margin: theme.spacing.unit
   },
@@ -22,36 +28,38 @@ const styleSheet = createStyleSheet(theme => ({
   hr: {
     width: 'calc(100% - 32px)'
   }
-}));
+});
 
-type MemberChallengeListProps = {
-  challenges: [{
-    id: number,
-    name: string,
-    points: number
-  }],
-  classes: {
-    paper: string,
-    listHeaderTitle: string,
-    listHeaderBody: string,
-    hr: string
-  }
+type MemberChallengeListClasses = {
+  paper: string,
+  listHeaderTitle: string,
+  listHeaderBody: string,
+  hr: string
 };
 
-class MemberChallengeList extends React.PureComponent<MemberChallengeListProps> {
+type MemberChallengeListProps = {
+  challenges: {
+    id: number,
+    name: string,
+    points?: number
+  }[]
+};
+
+class MemberChallengeList extends React.PureComponent<MemberChallengeListProps & { classes: MemberChallengeListClasses }, {}> {
   render() {
+    const { challenges, classes } = this.props;
     return (
-      <Paper className={this.props.classes.paper}>
-        <Typography type="subheading" className={this.props.classes.listHeaderTitle}>
+      <Paper className={classNames(classes.paper)}>
+        <Typography type="subheading" className={classNames(classes.listHeaderTitle)}>
           MEMBER CHALLENGES
         </Typography>
-        <Typography paragraph={true} type="body1" className={this.props.classes.listHeaderBody}>
+        <Typography paragraph={true} type="body1" className={classNames(classes.listHeaderBody)}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           Mauris vitae egestas mauris.
         </Typography>
-        <hr className={this.props.classes.hr} />
+        <hr className={classNames(classes.hr)} />
         <List>
-          {this.props.challenges.map(challenge => {
+          {challenges.map(challenge => {
             return (
               <ListItem key={challenge.id}>
                 <ListItemAvatar>
@@ -74,4 +82,4 @@ class MemberChallengeList extends React.PureComponent<MemberChallengeListProps> 
   }
 }
 
-export default withStyles(styleSheet)(MemberChallengeList);
+export default withStyles<MemberChallengeListProps>(styles)(MemberChallengeList);

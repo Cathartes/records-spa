@@ -1,7 +1,8 @@
 import * as React from 'react';
+import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 
-import { createStyleSheet, withStyles } from 'material-ui/styles';
+import withStyles from 'material-ui/styles/withStyles';
 import AppBar from 'material-ui/AppBar';
 import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
@@ -10,27 +11,28 @@ import Typography from 'material-ui/Typography';
 
 import MenuIcon from 'material-ui-icons/Menu';
 
-const styleSheet = createStyleSheet(theme => ({
+const styles = theme => ({
   appTitle: {
     flex: 1
   }
-}));
+});
 
-type HeaderProps = {
-  classes: {
-    appTitle: string
-  }
+type HeaderClasses = {
+  appTitle: string
 };
 
-class Header extends React.PureComponent<HeaderProps> {
+type HeaderProps = {};
+
+class Header extends React.PureComponent<HeaderProps & { classes: HeaderClasses }> {
   render() {
+    const { classes } = this.props;
     return (
-      <AppBar position="fixed">
+      <AppBar>
         <Toolbar>
           <IconButton color="contrast" aria-label="Menu">
             <MenuIcon />
           </IconButton>
-          <Typography type="title" className={this.props.classes.appTitle}>
+          <Typography type="title" className={classNames(classes.appTitle)}>
             CATHARTES
           </Typography>
           <Link to="/" className="button-link"><Button>Login</Button></Link>
@@ -40,4 +42,4 @@ class Header extends React.PureComponent<HeaderProps> {
   }
 }
 
-export default withStyles(styleSheet)(Header);
+export default withStyles<HeaderProps>(styles)(Header);

@@ -1,15 +1,20 @@
 import * as React from 'react';
+import classNames from 'classnames';
 
-import { createStyleSheet, withStyles } from 'material-ui/styles';
+import withStyles from 'material-ui/styles/withStyles';
 import Avatar from 'material-ui/Avatar';
-import List, { ListItem, ListItemAvatar, ListItemSecondaryAction, ListItemText } from 'material-ui/List';
+import List from 'material-ui/List';
+import ListItem from 'material-ui/List/ListItem';
+import ListItemAvatar from 'material-ui/List/ListItemAvatar';
+import ListItemSecondaryAction from 'material-ui/List/ListItemSecondaryAction';
+import ListItemText from 'material-ui/List/ListItemText';
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 
 import AccountBoxIcon from 'material-ui-icons/AccountBox';
 import FolderIcon from 'material-ui-icons/Folder';
 
-const styleSheet = createStyleSheet(theme => ({
+const styles = theme => ({
   paper: {
     margin: theme.spacing.unit
   },
@@ -22,40 +27,41 @@ const styleSheet = createStyleSheet(theme => ({
   hr: {
     width: 'calc(100% - 32px)'
   }
-}));
+});
+
+type TeamStandingsListClasses = {
+  paper: string,
+  listHeaderTitle: string,
+  listHeaderBody: string,
+  hr: string
+};
 
 type TeamStandingsListProps = {
   team: {
     id: number,
     name: string
-  }
-  challenges: [{
+  },
+  challenges: {
     id: number,
-    name: string,
-    numCompleted: number
-  }],
-  classes: {
-    paper: string,
-    listHeaderTitle: string,
-    listHeaderBody: string,
-    hr: string
-  }
+    name: string
+  }[]
 };
 
-class TeamStandingsList extends React.PureComponent<TeamStandingsListProps> {
+class TeamStandingsList extends React.PureComponent<TeamStandingsListProps & { classes: TeamStandingsListClasses }> {
   render() {
+    const { challenges, classes, team } = this.props;
     return (
-      <Paper className={this.props.classes.paper}>
-        <Typography type="subheading" className={this.props.classes.listHeaderTitle}>
-          MEMBER CHALLENGES
+      <Paper className={classNames(classes.paper)}>
+        <Typography type="subheading" className={classNames(classes.listHeaderTitle)}>
+          {team.name}
         </Typography>
-        <Typography paragraph={true} type="body1" className={this.props.classes.listHeaderBody}>
+        <Typography paragraph={true} type="body1" className={classNames(classes.listHeaderBody)}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           Mauris vitae egestas mauris.
         </Typography>
-        <hr className={this.props.classes.hr} />
+        <hr className={classNames(classes.hr)} />
         <List>
-          {this.props.challenges.map(challenge => {
+          {challenges.map(challenge => {
             return (
               <ListItem key={challenge.id}>
                 <ListItemAvatar>
@@ -78,4 +84,4 @@ class TeamStandingsList extends React.PureComponent<TeamStandingsListProps> {
   }
 }
 
-export default withStyles(styleSheet)(TeamStandingsList);
+export default withStyles<TeamStandingsListProps>(styles)(TeamStandingsList);

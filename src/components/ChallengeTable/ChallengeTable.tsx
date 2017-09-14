@@ -1,19 +1,23 @@
 import * as React from 'react';
 
-import { createStyleSheet, withStyles } from 'material-ui/styles';
+import withStyles from 'material-ui/styles/withStyles';
 import Paper from 'material-ui/Paper';
-import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
+import Table from 'material-ui/Table';
+import TableBody from 'material-ui/Table/TableBody';
+import TableCell from 'material-ui/Table/TableCell';
+import TableHead from 'material-ui/Table/TableHead';
+import TableRow from 'material-ui/Table/TableRow';
 
 import DeleteIconButton from '../DeleteButton/DeleteIconButton';
 
-const styleSheet = createStyleSheet(theme => ({
+const styles = theme => ({
   paper: {
     margin: theme.spacing.unit
   },
   tableCellName: {
     width: '50%'
   }
-}));
+});
 
 type ChallengeTableProps = {
   challenges: [{
@@ -74,4 +78,4 @@ class ChallengeTable extends React.PureComponent<ChallengeTableProps> {
   }
 }
 
-export default withStyles(styleSheet)(ChallengeTable);
+export default withStyles(styles)(ChallengeTable);
