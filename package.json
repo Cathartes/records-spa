@@ -19,7 +19,7 @@
     "@types/react": "^16.0.5",
     "@types/react-dom": "^15.5.4",
     "@types/react-router-dom": "^4.0.7",
-    "material-ui": "next",
+    "material-ui": "^1.0.0-beta.10",
     "material-ui-icons": "^1.0.0-beta.5",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
