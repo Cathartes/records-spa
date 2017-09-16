@@ -1,6 +1,8 @@
 import * as React from 'react';
 
 import withStyles from 'material-ui/styles/withStyles';
+import { Theme } from 'material-ui/styles/createMuiTheme';
+
 import Paper from 'material-ui/Paper';
 import Table from 'material-ui/Table';
 import TableBody from 'material-ui/Table/TableBody';
@@ -10,7 +12,7 @@ import TableRow from 'material-ui/Table/TableRow';
 
 import DeleteIconButton from '../DeleteButton/DeleteIconButton';
 
-const styles = theme => ({
+const styles = (theme: Theme) => ({
   paper: {
     margin: theme.spacing.unit
   },

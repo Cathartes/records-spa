@@ -1,7 +1,8 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import * as classNames from 'classnames';
 
 import withStyles from 'material-ui/styles/withStyles';
+import { Theme } from 'material-ui/styles/createMuiTheme';
 
 import Avatar from 'material-ui/Avatar';
 import List from 'material-ui/List';
@@ -15,7 +16,7 @@ import Typography from 'material-ui/Typography';
 import AccountBoxIcon from 'material-ui-icons/AccountBox';
 import FolderIcon from 'material-ui-icons/Folder';
 
-const styles = theme => ({
+const styles = (theme: Theme) => ({
   paper: {
     margin: theme.spacing.unit
   },

@@ -1,8 +1,10 @@
 import * as React from 'react';
-import classNames from 'classnames';
+import * as classNames from 'classnames';
 import { Link } from 'react-router-dom';
 
 import withStyles from 'material-ui/styles/withStyles';
+import { Theme } from 'material-ui/styles/createMuiTheme';
+
 import AppBar from 'material-ui/AppBar';
 import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
@@ -11,7 +13,7 @@ import Typography from 'material-ui/Typography';
 
 import MenuIcon from 'material-ui-icons/Menu';
 
-const styles = theme => ({
+const styles = (theme: Theme) => ({
   appTitle: {
     flex: 1
   }
