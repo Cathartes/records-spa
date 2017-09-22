@@ -19,7 +19,7 @@ let store = createStore(
     thunkMiddleware,
     loggerMiddleware
   )
-)
+);
 
 ReactDOM.render(
   <Provider store={store}>
