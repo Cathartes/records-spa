@@ -1,9 +1,5 @@
 body {
-  font-family: sans-serif;
   margin: 0;
   padding: 0;
-}
-
-.button-link {
-  text-decoration: none;
+  font-family: sans-serif;
 }

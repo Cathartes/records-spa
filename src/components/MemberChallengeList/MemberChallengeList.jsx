@@ -1,8 +1,8 @@
-import * as React from 'react';
-import * as classNames from 'classnames';
+import React, { Component } from 'react';
+import classNames from 'classnames';
+import { connect } from 'react-redux';
 
 import withStyles from 'material-ui/styles/withStyles';
-import { Theme } from 'material-ui/styles/createMuiTheme';
 
 import Avatar from 'material-ui/Avatar';
 import List from 'material-ui/List';
@@ -16,7 +16,9 @@ import Typography from 'material-ui/Typography';
 import AccountBoxIcon from 'material-ui-icons/AccountBox';
 import FolderIcon from 'material-ui-icons/Folder';
 
-const styles = (theme: Theme) => ({
+import { challengesGet } from '../../actions/challenges';
+
+const styles = (theme) => ({
   paper: {
     margin: theme.spacing.unit
   },
@@ -31,22 +33,12 @@ const styles = (theme: Theme) => ({
   }
 });
 
-type MemberChallengeListClasses = {
-  paper: string,
-  listHeaderTitle: string,
-  listHeaderBody: string,
-  hr: string
-};
+class MemberChallengeList extends Component {
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(challengesGet());
+  }
 
-type MemberChallengeListProps = {
-  challenges: {
-    id: number,
-    name: string,
-    points?: number
-  }[]
-};
-
-class MemberChallengeList extends React.PureComponent<MemberChallengeListProps & { classes: MemberChallengeListClasses }, {}> {
   render() {
     const { challenges, classes } = this.props;
     return (
@@ -68,7 +60,7 @@ class MemberChallengeList extends React.PureComponent<MemberChallengeListProps &
                     <FolderIcon />
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary={challenge.name.toUpperCase()} secondary="[Member Name Here]" />
+                <ListItemText primary={challenge.attributes.name.toUpperCase()} secondary="[Member Name Here]" />
                 <ListItemSecondaryAction>
                   <Avatar>
                     <AccountBoxIcon />
@@ -83,4 +75,10 @@ class MemberChallengeList extends React.PureComponent<MemberChallengeListProps &
   }
 }
 
-export default withStyles<MemberChallengeListProps>(styles)(MemberChallengeList);
+const mapStateToProps = (state: ChallengesState) => {
+  return {
+    challenges: state.challenges
+  };
+};
+
+export default connect(mapStateToProps)(withStyles(styles)(MemberChallengeList));
