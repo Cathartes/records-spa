@@ -21,11 +21,11 @@ class App extends PureComponent {
       <MuiThemeProvider theme={theme}>
         <Router>
           <div>
-            <Header/>
+            <Header />
             <div className="App-content">
               <MemberChallengeList />
               <Switch>
-                <Route exact={true} path="/"/>
+                <Route exact={true} path="/" />
               </Switch>
             </div>
           </div>

@@ -12,7 +12,7 @@ import Typography from 'material-ui/Typography';
 
 import MenuIcon from 'material-ui-icons/Menu';
 
-const styles = (theme) => ({
+const styles = theme => ({
   appTitle: {
     flex: 1
   }
@@ -30,7 +30,9 @@ class Header extends PureComponent {
           <Typography type="title" className={classNames(classes.appTitle)}>
             CATHARTES
           </Typography>
-          <Link to="/" className="button-link"><Button>Login</Button></Link>
+          <Link to="/" className="button-link">
+            <Button>Login</Button>
+          </Link>
         </Toolbar>
       </AppBar>
     );

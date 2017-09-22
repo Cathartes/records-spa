@@ -18,7 +18,7 @@ import FolderIcon from 'material-ui-icons/Folder';
 
 import { challengesGet } from '../../actions/challenges';
 
-const styles = (theme) => ({
+const styles = theme => ({
   paper: {
     margin: theme.spacing.unit
   },
@@ -43,12 +43,19 @@ class MemberChallengeList extends Component {
     const { challenges, classes } = this.props;
     return (
       <Paper className={classNames(classes.paper)}>
-        <Typography type="subheading" className={classNames(classes.listHeaderTitle)}>
+        <Typography
+          type="subheading"
+          className={classNames(classes.listHeaderTitle)}
+        >
           MEMBER CHALLENGES
         </Typography>
-        <Typography paragraph={true} type="body1" className={classNames(classes.listHeaderBody)}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Mauris vitae egestas mauris.
+        <Typography
+          paragraph={true}
+          type="body1"
+          className={classNames(classes.listHeaderBody)}
+        >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae
+          egestas mauris.
         </Typography>
         <hr className={classNames(classes.hr)} />
         <List>
@@ -60,7 +67,10 @@ class MemberChallengeList extends Component {
                     <FolderIcon />
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary={challenge.attributes.name.toUpperCase()} secondary="[Member Name Here]" />
+                <ListItemText
+                  primary={challenge.attributes.name.toUpperCase()}
+                  secondary="[Member Name Here]"
+                />
                 <ListItemSecondaryAction>
                   <Avatar>
                     <AccountBoxIcon />
@@ -81,4 +91,6 @@ const mapStateToProps = (state: ChallengesState) => {
   };
 };
 
-export default connect(mapStateToProps)(withStyles(styles)(MemberChallengeList));
+export default connect(mapStateToProps)(
+  withStyles(styles)(MemberChallengeList)
+);
