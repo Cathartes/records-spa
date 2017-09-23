@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import withStyles from 'material-ui/styles/withStyles';
@@ -21,12 +22,16 @@ import SideNav from '../SideNav/SideNav';
 const styles = theme => ({
   appTitle: {
     flex: 1
+  },
+  currentUser: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit
   }
 });
 
 class Header extends PureComponent {
   render() {
-    const { classes, isSideNavOpen, onMenuIconClick } = this.props;
+    const { classes, currentUser, isSideNavOpen, onMenuIconClick } = this.props;
     return (
       <AppBar>
         <Toolbar>
@@ -49,9 +54,17 @@ class Header extends PureComponent {
             CATHARTES RECORD BOOKS
           </Typography>
 
-          <Link to="/" className="button-link">
-            <Button>Login</Button>
-          </Link>
+          {currentUser && (
+            <div className={classNames(classes.currentUser)}>
+              {currentUser.attributes.email}
+            </div>
+          )}
+          {currentUser && <Button>Logout</Button>}
+          {!currentUser && (
+            <Link to="/login" className="button-link">
+              <Button>Login</Button>
+            </Link>
+          )}
         </Toolbar>
       </AppBar>
     );
@@ -60,6 +73,7 @@ class Header extends PureComponent {
 
 const mapStateToProps = state => {
   return {
+    currentUser: state.auth.currentUser,
     isSideNavOpen: state.sideNav.isOpen
   };
 };

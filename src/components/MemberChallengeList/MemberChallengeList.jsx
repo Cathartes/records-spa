@@ -85,7 +85,7 @@ class MemberChallengeList extends Component {
   }
 }
 
-const mapStateToProps = (state: ChallengesState) => {
+const mapStateToProps = state => {
   return {
     challenges: state.challenges
   };
