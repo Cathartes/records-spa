@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
 
 import challenges from './challenges';
+import sideNav from './sideNav';
 
 const appReducers = combineReducers({
-  challenges
+  challenges,
+  sideNav
 });
 
 export default appReducers;
