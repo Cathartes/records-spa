@@ -11,27 +11,29 @@
   },
   "engines": {
     "node": "^8.4.0",
-    "yarn": "^1.0.1"
+    "yarn": "^1.0.2"
   },
   "dependencies": {
-    "@types/classnames": "^2.2.3",
-    "@types/jest": "^20.0.8",
-    "@types/node": "^8.0.28",
-    "@types/react": "^16.0.5",
-    "@types/react-dom": "^15.5.4",
-    "@types/react-router-dom": "^4.0.7",
-    "material-ui": "^1.0.0-beta.10",
-    "material-ui-icons": "^1.0.0-beta.5",
+    "material-ui": "^1.0.0-beta.11",
+    "material-ui-icons": "^1.0.0-beta.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
-    "react-scripts-ts": "2.6.0",
+    "react-scripts": "1.0.13",
+    "redux": "^3.7.2",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0",
     "typeface-roboto": "^0.0.35"
   },
   "scripts": {
-    "start": "react-scripts-ts start",
-    "build": "react-scripts-ts build",
-    "test": "react-scripts-ts test --env=jsdom",
-    "eject": "react-scripts-ts eject"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "eslint-plugin-prettier": "^2.3.1",
+    "prettier": "^1.7.0"
   }
 }

@@ -17,9 +17,10 @@
 
 PreCommit:
 
-  TsLint:
+  EsLint:
     enabled: true
     required: true
+    required_executable: './node_modules/.bin/eslint'
 
   TrailingWhitespace:
     enabled: true
