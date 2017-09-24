@@ -5,6 +5,8 @@ import createMuiTheme from 'material-ui/styles/createMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import Header from './components/Header/Header';
+import Login from './components/Login/Login';
+import Logout from './components/Logout/Logout';
 import MemberChallengeList from './components/MemberChallengeList/MemberChallengeList';
 
 import './App.css';
@@ -23,9 +25,10 @@ class App extends PureComponent {
           <div>
             <Header />
             <div className="App-content">
-              <MemberChallengeList />
               <Switch>
-                <Route exact={true} path="/" />
+                <Route exact path="/" component={MemberChallengeList} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/logout" component={Logout} />
               </Switch>
             </div>
           </div>
