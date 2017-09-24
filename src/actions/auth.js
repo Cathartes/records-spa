@@ -1,7 +1,7 @@
 export const LOGIN_POST_ERROR = 'LOGIN_POST_ERROR';
 export const LOGIN_POST_SUCCESS = 'LOGIN_POST_SUCCESS';
-export const LOGIN_LOADING = 'LOGIN_LOADING';
-export const SET_AUTH_HEADERS = 'SET_AUTH_HEADERS';
+export const LOGIN_POST_REQUESTING = 'LOGIN_POST_REQUESTING';
+export const LOGOUT_DELETE = 'LOGOUT_DELETE';
 
 export const loginPostError = isError => {
   return {
@@ -11,23 +11,22 @@ export const loginPostError = isError => {
 };
 
 export const loginPostSuccess = user => {
-  console.log(user);
   return {
     type: LOGIN_POST_SUCCESS,
     user
   };
 };
 
-export const loginLoading = isLoading => {
+export const loginPostRequesting = isRequesting => {
   return {
-    type: LOGIN_LOADING,
-    isLoading
+    type: LOGIN_POST_REQUESTING,
+    isRequesting
   };
 };
 
 export const loginPost = (email, password) => {
   return dispatch => {
-    dispatch(loginLoading(true));
+    dispatch(loginPostRequesting(true));
 
     fetch(`${process.env.REACT_APP_API_URL}/v1/sessions`, {
       method: 'POST',
@@ -44,15 +43,16 @@ export const loginPost = (email, password) => {
       })
     })
       .then(response => {
+        dispatch(loginPostRequesting(false));
+
         if (!response.ok) {
           throw Error(response.statusText);
         }
 
-        dispatch(loginLoading(false));
-
         const uid = response.headers.get('X-USER-UID');
         const token = response.headers.get('X-USER-TOKEN');
-        dispatch(setAuthHeaders(uid, token));
+        localStorage.setItem('X-USER-UID', uid);
+        localStorage.setItem('X-USER-TOKEN', token);
 
         return response.json();
       })
@@ -61,10 +61,11 @@ export const loginPost = (email, password) => {
   };
 };
 
-export const setAuthHeaders = (uid, token) => {
+export const logoutDelete = () => {
+  localStorage.setItem('X-USER-UID', null);
+  localStorage.setItem('X-USER-TOKEN', null);
+
   return {
-    type: SET_AUTH_HEADERS,
-    uid,
-    token
+    type: LOGOUT_DELETE
   };
 };
