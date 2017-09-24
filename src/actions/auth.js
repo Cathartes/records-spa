@@ -1,6 +1,9 @@
+import { callV1Api } from '../helpers/api';
+
 export const LOGIN_POST_ERROR = 'LOGIN_POST_ERROR';
 export const LOGIN_POST_SUCCESS = 'LOGIN_POST_SUCCESS';
 export const LOGIN_POST_REQUESTING = 'LOGIN_POST_REQUESTING';
+export const LOGIN_VALIDATE = 'LOGIN_VALIDATE';
 export const LOGOUT_DELETE = 'LOGOUT_DELETE';
 
 export const loginPostError = isError => {
@@ -28,20 +31,16 @@ export const loginPost = (email, password) => {
   return dispatch => {
     dispatch(loginPostRequesting(true));
 
-    fetch(`${process.env.REACT_APP_API_URL}/v1/sessions`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        data: {
-          attributes: {
-            email: email,
-            password: password
-          }
+    const body = {
+      data: {
+        attributes: {
+          email: email,
+          password: password
         }
-      })
-    })
+      }
+    };
+
+    callV1Api('sessions', 'POST', body)
       .then(response => {
         dispatch(loginPostRequesting(false));
 
@@ -58,6 +57,21 @@ export const loginPost = (email, password) => {
       })
       .then(user => dispatch(loginPostSuccess(user.data)))
       .catch(() => dispatch(loginPostError(true)));
+  };
+};
+
+export const loginValidate = () => {
+  return dispatch => {
+    callV1Api('sessions', 'GET')
+      .then(response => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+
+        return response.json();
+      })
+      .then(user => dispatch(loginPostSuccess(user.data)))
+      .catch(() => null);
   };
 };
 
