@@ -45,7 +45,7 @@ export const loginPost = (email, password) => {
         dispatch(loginPostRequesting(false));
 
         if (!response.ok) {
-          throw Error(response.statusText);
+          throw response;
         }
 
         const uid = response.headers.get('X-USER-UID');
@@ -65,13 +65,17 @@ export const loginValidate = () => {
     callV1Api('sessions', 'GET')
       .then(response => {
         if (!response.ok) {
-          throw Error(response.statusText);
+          throw response;
         }
 
         return response.json();
       })
       .then(user => dispatch(loginPostSuccess(user.data)))
-      .catch(() => null);
+      .catch(response => {
+        if (response.status === 401) {
+          dispatch(logoutDelete());
+        }
+      });
   };
 };
 
