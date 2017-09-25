@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "staging": "records-spa-staging",
+    "production": "records-spa-production"
+  }
+}
