@@ -2,9 +2,11 @@ import {
   SNACKBAR_ADD,
   SNACKBAR_CLOSE,
   SNACKBAR_REMOVE
-} from '../actions/snackbars';
+} from '../../actions/snackbars';
 
-const snackbars = (state = [], action) => {
+const initialState = [];
+
+const snackbars = (state = initialState, action) => {
   switch (action.type) {
     case SNACKBAR_ADD:
       return [

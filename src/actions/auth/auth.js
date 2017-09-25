@@ -1,8 +1,8 @@
-import { callV1Api } from '../helpers/api';
+import { callV1Api } from '../../helpers/api';
 
 export const LOGIN_POST_ERROR = 'LOGIN_POST_ERROR';
-export const LOGIN_POST_SUCCESS = 'LOGIN_POST_SUCCESS';
 export const LOGIN_POST_REQUESTING = 'LOGIN_POST_REQUESTING';
+export const LOGIN_POST_SUCCESS = 'LOGIN_POST_SUCCESS';
 export const LOGIN_VALIDATE = 'LOGIN_VALIDATE';
 export const LOGOUT_DELETE = 'LOGOUT_DELETE';
 
@@ -13,17 +13,17 @@ export const loginPostError = isError => {
   };
 };
 
-export const loginPostSuccess = user => {
-  return {
-    type: LOGIN_POST_SUCCESS,
-    user
-  };
-};
-
 export const loginPostRequesting = isRequesting => {
   return {
     type: LOGIN_POST_REQUESTING,
     isRequesting
+  };
+};
+
+export const loginPostSuccess = user => {
+  return {
+    type: LOGIN_POST_SUCCESS,
+    user
   };
 };
 
@@ -80,8 +80,8 @@ export const loginValidate = () => {
 };
 
 export const logoutDelete = () => {
-  localStorage.setItem('X-USER-UID', null);
-  localStorage.setItem('X-USER-TOKEN', null);
+  localStorage.removeItem('X-USER-UID');
+  localStorage.removeItem('X-USER-TOKEN');
 
   return {
     type: LOGOUT_DELETE

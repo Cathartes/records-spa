@@ -1,6 +1,8 @@
-import { CHALLENGES_GET_SUCCESS } from '../actions/challenges';
+import { CHALLENGES_GET_SUCCESS } from '../../actions/challenges';
 
-const challenges = (state = [], action) => {
+const initialState = [];
+
+const challenges = (state = initialState, action) => {
   switch (action.type) {
     case CHALLENGES_GET_SUCCESS:
       return action.challenges;
