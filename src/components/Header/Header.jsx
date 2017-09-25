@@ -74,19 +74,9 @@ class Header extends PureComponent {
               CATHARTES
             </Typography>
 
-            {currentUser && (
-              <div className={classNames(classes.currentUser)}>
-                {currentUser.attributes.email}
-              </div>
-            )}
-            {currentUser && (
-              <Link to="/logout" className="button-link">
-                <Button>Logout</Button>
-              </Link>
-            )}
             {!currentUser && (
               <Link to="/login" className="button-link">
-                <Button>Login</Button>
+                <Button>Log In</Button>
               </Link>
             )}
           </Toolbar>
@@ -97,8 +87,8 @@ class Header extends PureComponent {
             <Snackbar
               key={snackbar.id}
               open={snackbar.open}
-              anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
-              autoHideDuration={1500}
+              anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+              autoHideDuration={2000}
               onRequestClose={() => this.handleRequestClose(snackbar.id)}
               onExited={() => this.handleExited(snackbar.id)}
               message={<span>{snackbar.message}</span>}
