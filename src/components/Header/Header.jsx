@@ -15,7 +15,7 @@ import Typography from 'material-ui/Typography';
 
 import MenuIcon from 'material-ui-icons/Menu';
 
-import { sidenavToggle } from '../../actions/sideNav';
+import { sideNavToggle } from '../../actions/sideNav';
 import { snackbarClose, snackbarRemove } from '../../actions/snackbars';
 
 import SideNav from '../SideNav/SideNav';
@@ -122,7 +122,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onMenuIconClick: isSideNavOpen => {
-      dispatch(sidenavToggle(isSideNavOpen));
+      dispatch(sideNavToggle(isSideNavOpen));
     },
     snackbarClose: id => {
       dispatch(snackbarClose(id));

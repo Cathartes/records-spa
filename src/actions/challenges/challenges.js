@@ -1,6 +1,8 @@
+import { callV1Api } from '../../helpers/api';
+
 export const CHALLENGES_GET_ERROR = 'CHALLENGES_GET_ERROR';
 export const CHALLENGES_GET_SUCCESS = 'CHALLENGES_GET_SUCCESS';
-export const CHALLENGES_LOADING = 'CHALLENGES_LOADING';
+export const CHALLENGES_GET_REQUESTING = 'CHALLENGES_GET_REQUESTING';
 
 export const challengesGetError = isError => {
   return {
@@ -16,24 +18,24 @@ export const challengesGetSuccess = challenges => {
   };
 };
 
-export const challengesLoading = isLoading => {
+export const challengesGetRequesting = isRequesting => {
   return {
-    type: CHALLENGES_LOADING,
-    isLoading
+    type: CHALLENGES_GET_REQUESTING,
+    isRequesting
   };
 };
 
 export const challengesGet = () => {
   return dispatch => {
-    dispatch(challengesLoading(true));
+    dispatch(challengesGetRequesting(true));
 
-    fetch(`${process.env.REACT_APP_API_URL}/v1/challenges`)
+    callV1Api('challenges', 'GET')
       .then(response => {
         if (!response.ok) {
           throw Error(response.statusText);
         }
 
-        dispatch(challengesLoading(false));
+        dispatch(challengesGetRequesting(false));
 
         return response.json();
       })

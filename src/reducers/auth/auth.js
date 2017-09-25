@@ -2,7 +2,7 @@ import {
   LOGIN_POST_REQUESTING,
   LOGIN_POST_SUCCESS,
   LOGOUT_DELETE
-} from '../actions/auth';
+} from '../../actions/auth';
 
 const initialState = {
   currentUser: null

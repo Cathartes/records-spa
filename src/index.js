@@ -1,23 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import thunkMiddleware from 'redux-thunk';
-import { createLogger } from 'redux-logger';
 
 import registerServiceWorker from './registerServiceWorker';
-import App from './App';
-import appReducers from './reducers/index';
+import store from './helpers/store';
 import { loginValidate } from './actions/auth';
+
+import App from './App';
 
 import 'typeface-roboto';
 import './index.css';
 
-const loggerMiddleware = createLogger();
-let store = createStore(
-  appReducers,
-  applyMiddleware(thunkMiddleware, loggerMiddleware)
-);
+// Validate current login if one exists
+if (localStorage.getItem('X-USER-UID')) {
+  store.dispatch(loginValidate());
+}
 
 ReactDOM.render(
   <Provider store={store}>
@@ -26,8 +23,3 @@ ReactDOM.render(
   document.getElementById('root')
 );
 registerServiceWorker();
-
-// Validate current login if one exists
-if (localStorage.getItem('X-USER-UID') !== 'null') {
-  store.dispatch(loginValidate());
-}
