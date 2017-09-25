@@ -51,7 +51,7 @@ jobs:
             - node_modules
       - run:
           name: Build React Application
-          command: yarn build
+          command: REACT_APP_API_URL=https://records-api-staging.herokuapp.com PORT=null yarn build
       - deploy:
           name: Deploy "develop" to Firebase Application "records-spa-staging"
           command: firebase deploy -P staging --token "$FIREBASE_TOKEN" --non-interactive
@@ -78,7 +78,7 @@ jobs:
             - node_modules
       - run:
           name: Build React Application
-          command: yarn build
+          command: REACT_APP_API_URL=https://records-api-production.herokuapp.com PORT=null yarn build
       - deploy:
           name: Deploy "develop" to Firebase Application "records-spa-production"
           command: firebase deploy -P production --token "$FIREBASE_TOKEN" --non-interactive
