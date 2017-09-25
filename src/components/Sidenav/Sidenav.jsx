@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import Divider from 'material-ui/Divider';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 
+import AddIcon from 'material-ui-icons/Add';
 import InboxIcon from 'material-ui-icons/Inbox';
 
 import { recordBooksGet } from '../../actions/recordBooks';
@@ -16,7 +17,7 @@ class Sidenav extends Component {
   }
 
   render() {
-    const { currentUser, onLogoutClick, recordBooks } = this.props;
+    const { currentUser, onLinkClick, recordBooks } = this.props;
     return (
       <List>
         {currentUser && (
@@ -40,12 +41,19 @@ class Sidenav extends Component {
           );
         })}
 
-        <ListItem button>
-          <ListItemIcon>
-            <InboxIcon />
-          </ListItemIcon>
-          <ListItemText primary="New Record Book" />
-        </ListItem>
+        {currentUser &&
+          currentUser.attributes.admin && (
+            <Link to="/records/new" className="button-link">
+              <ListItem button onClick={() => onLinkClick()}>
+                <ListItemIcon>
+                  <AddIcon />
+                </ListItemIcon>
+                <ListItemText primary="Add Record Book" />
+              </ListItem>
+            </Link>
+          )}
+
+        <Divider />
 
         <ListItem button>
           <ListItemIcon>
@@ -73,7 +81,7 @@ class Sidenav extends Component {
             <Divider />
 
             <Link to="/logout" className="button-link">
-              <ListItem button onClick={() => onLogoutClick()}>
+              <ListItem button onClick={() => onLinkClick()}>
                 <ListItemText primary="Log Out" />
               </ListItem>
             </Link>
@@ -87,13 +95,13 @@ class Sidenav extends Component {
 const mapStateToProps = state => {
   return {
     currentUser: state.auth.currentUser,
-    recordBooks: state.recordBooks
+    recordBooks: state.recordBooks.recordBooks
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onLogoutClick: () => {
+    onLinkClick: () => {
       dispatch(sidenavToggle(false));
     },
     recordBooksGet: () => {

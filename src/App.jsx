@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import createMuiTheme from 'material-ui/styles/createMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
+import AddRecordBook from './components/AddRecordBook';
 import Header from './components/Header';
 import Login from './components/Login';
 import Logout from './components/Logout';
@@ -29,6 +30,7 @@ class App extends PureComponent {
                 <Route exact path="/" component={MemberChallengeList} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/logout" component={Logout} />
+                <Route exact path="/records/new" component={AddRecordBook} />
               </Switch>
             </div>
           </div>
