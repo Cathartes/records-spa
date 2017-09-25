@@ -1,12 +1,12 @@
-import { SIDENAV_TOGGLE, sideNavToggle } from './sideNav';
+import { SIDENAV_TOGGLE, sidenavToggle } from './sidenav';
 
-describe('sideNav actions', () => {
-  it('should create sideNavToggle', () => {
+describe('sidenav actions', () => {
+  it('should create sidenavToggle', () => {
     const isOpen = true;
     const expectedAction = {
       type: SIDENAV_TOGGLE,
       isOpen: isOpen
     };
-    expect(sideNavToggle(isOpen)).toEqual(expectedAction);
+    expect(sidenavToggle(isOpen)).toEqual(expectedAction);
   });
 });

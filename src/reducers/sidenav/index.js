@@ -1,1 +1,1 @@
-export { default } from './sideNav';
+export { default } from './sidenav';

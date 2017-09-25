@@ -1,1 +1,1 @@
-export * from './sideNav';
+export * from './sidenav';
