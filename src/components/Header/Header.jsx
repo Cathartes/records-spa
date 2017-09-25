@@ -18,7 +18,7 @@ import MenuIcon from 'material-ui-icons/Menu';
 import { sideNavToggle } from '../../actions/sideNav';
 import { snackbarClose, snackbarRemove } from '../../actions/snackbars';
 
-import SideNav from '../SideNav/SideNav';
+import SideNav from '../SideNav';
 
 const styles = theme => ({
   appTitle: {

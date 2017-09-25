@@ -4,10 +4,10 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import createMuiTheme from 'material-ui/styles/createMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import Header from './components/Header/Header';
-import Login from './components/Login/Login';
-import Logout from './components/Logout/Logout';
-import MemberChallengeList from './components/MemberChallengeList/MemberChallengeList';
+import Header from './components/Header';
+import Login from './components/Login';
+import Logout from './components/Logout';
+import MemberChallengeList from './components/MemberChallengeList';
 
 import './App.css';
 
