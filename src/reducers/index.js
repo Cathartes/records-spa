@@ -2,13 +2,13 @@ import { combineReducers } from 'redux';
 
 import auth from './auth';
 import challenges from './challenges';
-import sideNav from './sideNav';
+import sidenav from './sidenav';
 import snackbars from './snackbars';
 
 const appReducers = combineReducers({
   auth,
   challenges,
-  sideNav,
+  sidenav,
   snackbars
 });
 

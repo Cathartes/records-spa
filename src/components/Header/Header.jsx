@@ -15,10 +15,10 @@ import Typography from 'material-ui/Typography';
 
 import MenuIcon from 'material-ui-icons/Menu';
 
-import { sideNavToggle } from '../../actions/sideNav';
+import { sidenavToggle } from '../../actions/sidenav';
 import { snackbarClose, snackbarRemove } from '../../actions/snackbars';
 
-import SideNav from '../SideNav';
+import Sidenav from '../Sidenav';
 
 const styles = theme => ({
   appTitle: {
@@ -47,7 +47,7 @@ class Header extends PureComponent {
     const {
       classes,
       currentUser,
-      isSideNavOpen,
+      isSidenavOpen,
       onMenuIconClick,
       snackbars
     } = this.props;
@@ -64,10 +64,10 @@ class Header extends PureComponent {
             </IconButton>
 
             <Drawer
-              open={isSideNavOpen}
+              open={isSidenavOpen}
               onRequestClose={() => onMenuIconClick(false)}
             >
-              <SideNav />
+              <Sidenav />
             </Drawer>
 
             <Typography type="title" className={classNames(classes.appTitle)}>
@@ -114,15 +114,15 @@ class Header extends PureComponent {
 const mapStateToProps = state => {
   return {
     currentUser: state.auth.currentUser,
-    isSideNavOpen: state.sideNav.isOpen,
+    isSidenavOpen: state.sidenav.isOpen,
     snackbars: state.snackbars
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onMenuIconClick: isSideNavOpen => {
-      dispatch(sideNavToggle(isSideNavOpen));
+    onMenuIconClick: isSidenavOpen => {
+      dispatch(sidenavToggle(isSidenavOpen));
     },
     snackbarClose: id => {
       dispatch(snackbarClose(id));

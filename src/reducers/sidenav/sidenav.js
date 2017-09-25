@@ -1,10 +1,10 @@
-import { SIDENAV_TOGGLE } from '../../actions/sideNav';
+import { SIDENAV_TOGGLE } from '../../actions/sidenav';
 
 const initialState = {
   isOpen: false
 };
 
-const sideNavToggle = (state = initialState, action) => {
+const sidenavToggle = (state = initialState, action) => {
   switch (action.type) {
     case SIDENAV_TOGGLE:
       return Object.assign({}, state, { isOpen: action.isOpen });
@@ -13,4 +13,4 @@ const sideNavToggle = (state = initialState, action) => {
   }
 };
 
-export default sideNavToggle;
+export default sidenavToggle;

@@ -4,7 +4,7 @@ import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 
 import InboxIcon from 'material-ui-icons/Inbox';
 
-class SideNav extends PureComponent {
+class Sidenav extends PureComponent {
   render() {
     return (
       <List>
@@ -47,4 +47,4 @@ class SideNav extends PureComponent {
   }
 }
 
-export default SideNav;
+export default Sidenav;

@@ -1,8 +1,8 @@
-import { SIDENAV_TOGGLE } from '../../actions/sideNav';
+import { SIDENAV_TOGGLE } from '../../actions/sidenav';
 
-import reducer from './sideNav';
+import reducer from './sidenav';
 
-describe('sideNav reducer', () => {
+describe('sidenav reducer', () => {
   it('should return the initial state', () => {
     expect(reducer(undefined, {})).toEqual({ isOpen: false });
   });
