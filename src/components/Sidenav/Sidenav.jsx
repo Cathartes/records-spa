@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -7,11 +7,16 @@ import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 
 import InboxIcon from 'material-ui-icons/Inbox';
 
+import { recordBooksGet } from '../../actions/recordBooks';
 import { sidenavToggle } from '../../actions/sidenav';
 
-class Sidenav extends PureComponent {
+class Sidenav extends Component {
+  componentWillMount() {
+    this.props.recordBooksGet();
+  }
+
   render() {
-    const { currentUser, onLogoutClick } = this.props;
+    const { currentUser, onLogoutClick, recordBooks } = this.props;
     return (
       <List>
         {currentUser && (
@@ -24,12 +29,16 @@ class Sidenav extends PureComponent {
           </div>
         )}
 
-        <ListItem button>
-          <ListItemIcon>
-            <InboxIcon />
-          </ListItemIcon>
-          <ListItemText primary="Season 1" />
-        </ListItem>
+        {recordBooks.map(recordBook => {
+          return (
+            <ListItem button key={recordBook.id}>
+              <ListItemIcon>
+                <InboxIcon />
+              </ListItemIcon>
+              <ListItemText primary={recordBook.attributes.name} />
+            </ListItem>
+          );
+        })}
 
         <ListItem button>
           <ListItemIcon>
@@ -77,7 +86,8 @@ class Sidenav extends PureComponent {
 
 const mapStateToProps = state => {
   return {
-    currentUser: state.auth.currentUser
+    currentUser: state.auth.currentUser,
+    recordBooks: state.recordBooks
   };
 };
 
@@ -85,6 +95,9 @@ const mapDispatchToProps = dispatch => {
   return {
     onLogoutClick: () => {
       dispatch(sidenavToggle(false));
+    },
+    recordBooksGet: () => {
+      dispatch(recordBooksGet());
     }
   };
 };
