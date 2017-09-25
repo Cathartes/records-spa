@@ -4,7 +4,13 @@ import {
   RECORD_BOOKS_GET_REQUESTING,
   recordBooksGetRequesting,
   RECORD_BOOKS_GET_SUCCESS,
-  recordBooksGetSuccess
+  recordBooksGetSuccess,
+  RECORD_BOOKS_POST_ERROR,
+  recordBooksPostError,
+  RECORD_BOOKS_POST_REQUESTING,
+  recordBooksPostRequesting,
+  RECORD_BOOKS_POST_SUCCESS,
+  recordBooksPostSuccess
 } from './recordBooks';
 
 describe('recordBooks actions', () => {
@@ -33,5 +39,32 @@ describe('recordBooks actions', () => {
       recordBooks
     };
     expect(recordBooksGetSuccess(recordBooks)).toEqual(expectedAction);
+  });
+
+  it('should create recordBooksPostError', () => {
+    const isError = true;
+    const expectedAction = {
+      type: RECORD_BOOKS_POST_ERROR,
+      isError
+    };
+    expect(recordBooksPostError(isError)).toEqual(expectedAction);
+  });
+
+  it('should create recordBooksPostRequesting', () => {
+    const isRequesting = true;
+    const expectedAction = {
+      type: RECORD_BOOKS_POST_REQUESTING,
+      isRequesting
+    };
+    expect(recordBooksPostRequesting(isRequesting)).toEqual(expectedAction);
+  });
+
+  it('should create recordBooksPostSuccess', () => {
+    const recordBook = { test: 'Fake Record Book' };
+    const expectedAction = {
+      type: RECORD_BOOKS_POST_SUCCESS,
+      recordBook
+    };
+    expect(recordBooksPostSuccess(recordBook)).toEqual(expectedAction);
   });
 });
