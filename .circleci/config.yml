@@ -1,0 +1,102 @@
+version: 2
+jobs:
+  test:
+    working_directory: ~/records-spa
+
+    docker:
+      - image: circleci/node:8.4
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - records-spa-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
+          - records-spa-{{ checksum "package.json" }}
+          - records-spa-
+      - run:
+          name: Install NPM Dependencies
+          command: yarn install
+      - save_cache:
+          key: records-spa-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
+      - run:
+          name: Run Jest Test Suite
+          command: CI=true yarn test
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+
+
+  deploy_staging:
+    working_directory: ~/records-spa
+
+    docker:
+      - image: circleci/node:8.4
+
+    steps:
+      - checkout
+      - restore_cache:
+          key: records-spa-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install System Dependencies
+          command: sudo yarn global add firebase-tools
+      - run:
+          name: Install NPM Dependencies
+          command: yarn install
+      - save_cache:
+          key: records-spa-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
+      - run:
+          name: Build React Application
+          command: yarn build
+      - deploy:
+          name: Deploy "develop" to Firebase Application "records-spa-staging"
+          command: firebase deploy -P staging --token "$FIREBASE_TOKEN" --non-interactive
+
+  deploy_production:
+    working_directory: ~/records-spa
+
+    docker:
+      - image: circleci/node:8.4
+
+    steps:
+      - checkout
+      - restore_cache:
+          key: records-spa-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install System Dependencies
+          command: sudo yarn global add firebase-tools
+      - run:
+          name: Install NPM Dependencies
+          command: yarn install
+      - save_cache:
+          key: records-spa-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
+      - run:
+          name: Build React Application
+          command: yarn build
+      - deploy:
+          name: Deploy "develop" to Firebase Application "records-spa-production"
+          command: firebase deploy -P production --token "$FIREBASE_TOKEN" --non-interactive
+
+workflows:
+  version: 2
+  test_deploy:
+    jobs:
+      - test
+      - deploy_staging:
+          requires:
+            - test
+          filters:
+            branches:
+              only: develop
+      - deploy_production:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
