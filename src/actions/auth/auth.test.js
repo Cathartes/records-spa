@@ -7,8 +7,8 @@ import {
   loginPostRequesting,
   LOGIN_POST_SUCCESS,
   loginPostSuccess,
-  LOGOUT_DELETE,
-  logoutDelete
+  LOGOUT_DELETE_SUCCESS,
+  logoutDeleteSuccess
 } from './auth';
 
 describe('auth actions', () => {
@@ -39,10 +39,10 @@ describe('auth actions', () => {
     expect(loginPostSuccess(user)).toEqual(expectedAction);
   });
 
-  it('should create logoutDelete', () => {
+  it('should create logoutDeleteSuccess', () => {
     const expectedAction = {
-      type: LOGOUT_DELETE
+      type: LOGOUT_DELETE_SUCCESS
     };
-    expect(logoutDelete()).toEqual(expectedAction);
+    expect(logoutDeleteSuccess()).toEqual(expectedAction);
   });
 });

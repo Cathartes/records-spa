@@ -1,10 +1,11 @@
 import { callV1Api } from '../../helpers/api';
+import { recordBooksGet } from '../recordBooks';
 
 export const LOGIN_POST_ERROR = 'LOGIN_POST_ERROR';
 export const LOGIN_POST_REQUESTING = 'LOGIN_POST_REQUESTING';
 export const LOGIN_POST_SUCCESS = 'LOGIN_POST_SUCCESS';
 export const LOGIN_VALIDATE = 'LOGIN_VALIDATE';
-export const LOGOUT_DELETE = 'LOGOUT_DELETE';
+export const LOGOUT_DELETE_SUCCESS = 'LOGOUT_DELETE_SUCCESS';
 
 export const loginPostError = isError => {
   return {
@@ -55,7 +56,10 @@ export const loginPost = (email, password) => {
 
         return response.json();
       })
-      .then(user => dispatch(loginPostSuccess(user.data)))
+      .then(user => {
+        dispatch(loginPostSuccess(user.data));
+        dispatch(recordBooksGet());
+      })
       .catch(() => dispatch(loginPostError(true)));
   };
 };
@@ -83,7 +87,14 @@ export const logoutDelete = () => {
   localStorage.removeItem('X-USER-UID');
   localStorage.removeItem('X-USER-TOKEN');
 
+  return dispatch => {
+    dispatch(logoutDeleteSuccess());
+    dispatch(recordBooksGet());
+  };
+};
+
+export const logoutDeleteSuccess = () => {
   return {
-    type: LOGOUT_DELETE
+    type: LOGOUT_DELETE_SUCCESS
   };
 };

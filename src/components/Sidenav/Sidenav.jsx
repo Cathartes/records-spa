@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -8,14 +8,9 @@ import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import AddIcon from 'material-ui-icons/Add';
 import InboxIcon from 'material-ui-icons/Inbox';
 
-import { recordBooksGet } from '../../actions/recordBooks';
 import { sidenavToggle } from '../../actions/sidenav';
 
-class Sidenav extends Component {
-  componentWillMount() {
-    this.props.recordBooksGet();
-  }
-
+class Sidenav extends PureComponent {
   render() {
     const { currentUser, onLinkClick, recordBooks } = this.props;
     return (
@@ -91,9 +86,6 @@ const mapDispatchToProps = dispatch => {
   return {
     onLinkClick: () => {
       dispatch(sidenavToggle(false));
-    },
-    recordBooksGet: () => {
-      dispatch(recordBooksGet());
     }
   };
 };
