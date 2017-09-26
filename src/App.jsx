@@ -9,6 +9,7 @@ import Header from './components/Header';
 import Login from './components/Login';
 import Logout from './components/Logout';
 import MemberChallengeList from './components/MemberChallengeList';
+import UsersList from './components/UsersList';
 
 import './App.css';
 
@@ -31,6 +32,7 @@ class App extends PureComponent {
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/logout" component={Logout} />
                 <Route exact path="/records/new" component={AddRecordBook} />
+                <Route exact path="/members" component={UsersList} />
               </Switch>
             </div>
           </div>

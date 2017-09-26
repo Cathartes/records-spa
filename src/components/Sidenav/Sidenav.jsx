@@ -55,26 +55,14 @@ class Sidenav extends Component {
 
         <Divider />
 
-        <ListItem button>
-          <ListItemIcon>
-            <InboxIcon />
-          </ListItemIcon>
-          <ListItemText primary="Member List" />
-        </ListItem>
-
-        <ListItem button>
-          <ListItemIcon>
-            <InboxIcon />
-          </ListItemIcon>
-          <ListItemText primary="Challenges" />
-        </ListItem>
-
-        <ListItem button>
-          <ListItemIcon>
-            <InboxIcon />
-          </ListItemIcon>
-          <ListItemText primary="Record Timeline" />
-        </ListItem>
+        <Link to="/members" className="button-link">
+          <ListItem button onClick={() => onLinkClick()}>
+            <ListItemIcon>
+              <InboxIcon />
+            </ListItemIcon>
+            <ListItemText primary="Member List" />
+          </ListItem>
+        </Link>
 
         {currentUser && (
           <div>
