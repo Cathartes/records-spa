@@ -1,8 +1,11 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import createMuiTheme from 'material-ui/styles/createMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
+import { recordBooksGet } from './actions/recordBooks';
 
 import AddRecordBook from './components/AddRecordBook';
 import Header from './components/Header';
@@ -19,7 +22,11 @@ const theme = createMuiTheme({
   }
 });
 
-class App extends PureComponent {
+class App extends Component {
+  componentWillMount() {
+    this.props.recordBooksGet();
+  }
+
   render() {
     return (
       <MuiThemeProvider theme={theme}>
@@ -42,4 +49,16 @@ class App extends PureComponent {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {};
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    recordBooksGet: () => {
+      dispatch(recordBooksGet());
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
