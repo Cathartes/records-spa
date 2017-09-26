@@ -1,4 +1,6 @@
 import {
+  RECORD_BOOKS_COLLAPSE_TOGGLE,
+  recordBooksCollapseToggle,
   RECORD_BOOKS_GET_ERROR,
   recordBooksGetError,
   RECORD_BOOKS_GET_REQUESTING,
@@ -14,6 +16,15 @@ import {
 } from './recordBooks';
 
 describe('recordBooks actions', () => {
+  it('should create recordBooksCollapseToggle', () => {
+    const isOpen = true;
+    const expectedAction = {
+      type: RECORD_BOOKS_COLLAPSE_TOGGLE,
+      isOpen: isOpen
+    };
+    expect(recordBooksCollapseToggle(isOpen)).toEqual(expectedAction);
+  });
+
   it('should create recordBooksGetError', () => {
     const isError = true;
     const expectedAction = {

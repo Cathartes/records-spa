@@ -1,5 +1,7 @@
 import { callV1Api } from '../../helpers/api';
 
+export const RECORD_BOOKS_COLLAPSE_TOGGLE = 'RECORD_BOOKS_COLLAPSE_TOGGLE';
+
 export const RECORD_BOOKS_GET_ERROR = 'RECORD_BOOKS_GET_ERROR';
 export const RECORD_BOOKS_GET_REQUESTING = 'RECORD_BOOKS_GET_REQUESTING';
 export const RECORD_BOOKS_GET_SUCCESS = 'RECORD_BOOKS_GET_SUCCESS';
@@ -7,6 +9,13 @@ export const RECORD_BOOKS_GET_SUCCESS = 'RECORD_BOOKS_GET_SUCCESS';
 export const RECORD_BOOKS_POST_ERROR = 'RECORD_BOOKS_POST_ERROR';
 export const RECORD_BOOKS_POST_REQUESTING = 'RECORD_BOOKS_POST_REQUESTING';
 export const RECORD_BOOKS_POST_SUCCESS = 'RECORD_BOOKS_POST_SUCCESS';
+
+export const recordBooksCollapseToggle = isOpen => {
+  return {
+    type: RECORD_BOOKS_COLLAPSE_TOGGLE,
+    isOpen
+  };
+};
 
 export const recordBooksGetError = isError => {
   return {
