@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
@@ -31,21 +31,21 @@ const styles = theme => ({
   }
 });
 
-class Login extends Component {
-  email = null;
-  password = null;
-
-  handleEmailChange = event => {
-    this.email = event.target.value;
+class Login extends PureComponent {
+  state = {
+    email: null,
+    password: null
   };
 
-  handlePasswordChange = event => {
-    this.password = event.target.value;
+  handleTextChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
   };
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.loginPost(this.email, this.password);
+    this.props.loginPost(this.state.email, this.state.password);
   };
 
   render() {
@@ -63,20 +63,20 @@ class Login extends Component {
               <TextField
                 required
                 autoFocus
-                id="email"
+                name="email"
                 label="Email"
                 type="email"
-                onChange={this.handleEmailChange}
+                onChange={this.handleTextChange}
                 margin="normal"
                 fullWidth
                 className={classNames(classes.textField)}
               />
               <TextField
                 required
-                id="password"
+                name="password"
                 label="Password"
                 type="password"
-                onChange={this.handlePasswordChange}
+                onChange={this.handleTextChange}
                 margin="normal"
                 fullWidth
                 className={classNames(classes.textField)}
