@@ -1,4 +1,5 @@
 import {
+  RECORD_BOOKS_COLLAPSE_TOGGLE,
   RECORD_BOOKS_GET_REQUESTING,
   RECORD_BOOKS_GET_SUCCESS,
   RECORD_BOOKS_POST_REQUESTING,
@@ -10,10 +11,24 @@ import reducer from './recordBooks';
 describe('recordBooks reducer', () => {
   it('should return the initial state', () => {
     expect(reducer(undefined, {})).toEqual({
+      isRecordBooksCollapseOpen: false,
       recordBooks: [],
       recordBooksGetRequesting: false,
       recordBooksPostRequesting: false
     });
+  });
+
+  it('should handle RECORD_BOOKS_COLLAPSE_TOGGLE', () => {
+    const isOpen = true;
+    expect(
+      reducer(
+        {},
+        {
+          type: RECORD_BOOKS_COLLAPSE_TOGGLE,
+          isOpen: isOpen
+        }
+      )
+    ).toEqual({ isRecordBooksCollapseOpen: isOpen });
   });
 
   it('should handle RECORD_BOOKS_GET_REQUESTING', () => {

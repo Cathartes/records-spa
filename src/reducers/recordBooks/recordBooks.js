@@ -1,4 +1,5 @@
 import {
+  RECORD_BOOKS_COLLAPSE_TOGGLE,
   RECORD_BOOKS_GET_REQUESTING,
   RECORD_BOOKS_GET_SUCCESS,
   RECORD_BOOKS_POST_REQUESTING,
@@ -6,6 +7,7 @@ import {
 } from '../../actions/recordBooks';
 
 const initialState = {
+  isRecordBooksCollapseOpen: false,
   recordBooks: [],
   recordBooksGetRequesting: false,
   recordBooksPostRequesting: false
@@ -13,6 +15,10 @@ const initialState = {
 
 const recordBooks = (state = initialState, action) => {
   switch (action.type) {
+    case RECORD_BOOKS_COLLAPSE_TOGGLE:
+      return Object.assign({}, state, {
+        isRecordBooksCollapseOpen: action.isOpen
+      });
     case RECORD_BOOKS_GET_REQUESTING:
       return Object.assign({}, state, {
         recordBooksGetRequesting: action.isRequesting
