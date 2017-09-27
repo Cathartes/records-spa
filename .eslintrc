@@ -4,7 +4,6 @@
     "prettier"
   ],
   "rules": {
-    "prettier/prettier": "error",
-    "quotes": ["error", "single"]
+    "prettier/prettier": ["error", { "singleQuote": true }]
   }
 }
