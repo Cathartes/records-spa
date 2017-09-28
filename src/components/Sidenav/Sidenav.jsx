@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 import withStyles from 'material-ui/styles/withStyles';
 
 import Collapse from 'material-ui/transitions/Collapse';
-import Divider from 'material-ui/Divider';
 import List from 'material-ui/List';
 import ListItem from 'material-ui/List/ListItem';
 import ListItemIcon from 'material-ui/List/ListItemIcon';
@@ -41,17 +40,14 @@ class Sidenav extends PureComponent {
     return (
       <List>
         {currentUser && (
-          <div>
-            <ListItem>
-              <ListItemText primary={currentUser.attributes.email} />
-            </ListItem>
-
-            <Divider />
-          </div>
+          <ListItem divider>
+            <ListItemText primary={currentUser.attributes.email} />
+          </ListItem>
         )}
 
         <ListItem
           button
+          divider={!isRecordBooksCollapseOpen}
           onClick={() => onRecordBooksCollapseClick(!isRecordBooksCollapseOpen)}
         >
           <ListItemIcon>
@@ -66,21 +62,29 @@ class Sidenav extends PureComponent {
         </ListItem>
 
         <Collapse in={isRecordBooksCollapseOpen}>
-          {recordBooks.map(recordBook => {
+          {recordBooks.map((recordBook, index) => {
+            const showDivider = !recordBooks[index + 1];
             return (
-              <ListItem button key={recordBook.id}>
+              <ListItem button divider={showDivider} key={recordBook.id}>
                 <ListItemText inset primary={recordBook.attributes.name} />
               </ListItem>
             );
           })}
+
+          {recordBooks.length === 0 && (
+            <ListItem divider key={0}>
+              <ListItemText inset primary="No records found" />
+            </ListItem>
+          )}
         </Collapse>
 
         {currentUser &&
           currentUser.attributes.admin && (
             <ListItem
               button
-              onClick={() => onLinkClick()}
               component={Link}
+              divider
+              onClick={() => onLinkClick()}
               to="/records/new"
             >
               <ListItemIcon>
@@ -90,12 +94,11 @@ class Sidenav extends PureComponent {
             </ListItem>
           )}
 
-        <Divider />
-
         <ListItem
           button
-          onClick={() => onLinkClick()}
           component={Link}
+          divider={currentUser}
+          onClick={() => onLinkClick()}
           to="/members"
         >
           <ListItemIcon>
@@ -105,18 +108,17 @@ class Sidenav extends PureComponent {
         </ListItem>
 
         {currentUser && (
-          <div>
-            <Divider />
-
-            <Link to="/logout" className="button-link">
-              <ListItem button onClick={() => onLinkClick()}>
-                <ListItemIcon>
-                  <ClearIcon />
-                </ListItemIcon>
-                <ListItemText primary="Log Out" />
-              </ListItem>
-            </Link>
-          </div>
+          <ListItem
+            button
+            component={Link}
+            onClick={() => onLinkClick()}
+            to="/logout"
+          >
+            <ListItemIcon>
+              <ClearIcon />
+            </ListItemIcon>
+            <ListItemText primary="Log Out" />
+          </ListItem>
         )}
       </List>
     );
