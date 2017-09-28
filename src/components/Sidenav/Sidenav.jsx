@@ -77,26 +77,32 @@ class Sidenav extends PureComponent {
 
         {currentUser &&
           currentUser.attributes.admin && (
-            <Link to="/records/new" className="button-link">
-              <ListItem button onClick={() => onLinkClick()}>
-                <ListItemIcon>
-                  <AddIcon />
-                </ListItemIcon>
-                <ListItemText primary="Add Record Book" />
-              </ListItem>
-            </Link>
+            <ListItem
+              button
+              onClick={() => onLinkClick()}
+              component={Link}
+              to="/records/new"
+            >
+              <ListItemIcon>
+                <AddIcon />
+              </ListItemIcon>
+              <ListItemText primary="Add Record Book" />
+            </ListItem>
           )}
 
         <Divider />
 
-        <Link to="/members" className="button-link">
-          <ListItem button onClick={() => onLinkClick()}>
-            <ListItemIcon>
-              <AccountCircleIcon />
-            </ListItemIcon>
-            <ListItemText primary="Member List" />
-          </ListItem>
-        </Link>
+        <ListItem
+          button
+          onClick={() => onLinkClick()}
+          component={Link}
+          to="/members"
+        >
+          <ListItemIcon>
+            <AccountCircleIcon />
+          </ListItemIcon>
+          <ListItemText primary="Member List" />
+        </ListItem>
 
         {currentUser && (
           <div>

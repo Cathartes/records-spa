@@ -75,9 +75,9 @@ class Header extends PureComponent {
             </Typography>
 
             {!currentUser && (
-              <Link to="/login" className="button-link">
-                <Button>Log In</Button>
-              </Link>
+              <Button component={Link} to="/login">
+                Log In
+              </Button>
             )}
           </Toolbar>
         </AppBar>
