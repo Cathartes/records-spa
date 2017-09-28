@@ -12,6 +12,7 @@ import Header from './components/Header';
 import Login from './components/Login';
 import Logout from './components/Logout';
 import MemberChallengeList from './components/MemberChallengeList';
+import UsersAdd from './components/UsersAdd';
 import UsersList from './components/UsersList';
 
 import './App.css';
@@ -38,8 +39,9 @@ class App extends Component {
                 <Route exact path="/" component={MemberChallengeList} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/logout" component={Logout} />
-                <Route exact path="/records/new" component={AddRecordBook} />
                 <Route exact path="/members" component={UsersList} />
+                <Route exact path="/members/new" component={UsersAdd} />
+                <Route exact path="/records/new" component={AddRecordBook} />
               </Switch>
             </div>
           </div>

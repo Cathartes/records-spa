@@ -5,14 +5,14 @@ import { MemoryRouter as Router } from 'react-router-dom';
 
 import store from '../../helpers/storeTest';
 
-import UsersList from './UsersList';
+import UsersAdd from './UsersAdd';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(
     <Provider store={store}>
       <Router>
-        <UsersList />
+        <UsersAdd />
       </Router>
     </Provider>,
     div
