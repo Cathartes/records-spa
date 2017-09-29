@@ -7,11 +7,11 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import { recordBooksGet } from './actions/recordBooks';
 
-import AddRecordBook from './components/AddRecordBook';
 import Header from './components/Header';
 import Login from './components/Login';
 import Logout from './components/Logout';
 import MemberChallengeList from './components/MemberChallengeList';
+import RecordBooksAdd from './components/RecordBooksAdd';
 import UsersAdd from './components/UsersAdd';
 import UsersList from './components/UsersList';
 
@@ -41,7 +41,7 @@ class App extends Component {
                 <Route exact path="/logout" component={Logout} />
                 <Route exact path="/members" component={UsersList} />
                 <Route exact path="/members/new" component={UsersAdd} />
-                <Route exact path="/records/new" component={AddRecordBook} />
+                <Route exact path="/records/new" component={RecordBooksAdd} />
               </Switch>
             </div>
           </div>

@@ -11,12 +11,12 @@ import ListItem from 'material-ui/List/ListItem';
 import ListItemIcon from 'material-ui/List/ListItemIcon';
 import ListItemText from 'material-ui/List/ListItemText';
 
-import AccountCircleIcon from 'material-ui-icons/AccountCircle';
 import AddIcon from 'material-ui-icons/Add';
 import BookIcon from 'material-ui-icons/Book';
 import ClearIcon from 'material-ui-icons/Clear';
 import ExpandLessIcon from 'material-ui-icons/ExpandLess';
 import ExpandMoreIcon from 'material-ui-icons/ExpandMore';
+import PeopleIcon from 'material-ui-icons/People';
 
 import { recordBooksCollapseToggle } from '../../actions/recordBooks';
 import { sidenavToggle } from '../../actions/sidenav';
@@ -102,7 +102,7 @@ class Sidenav extends PureComponent {
           to="/members"
         >
           <ListItemIcon>
-            <AccountCircleIcon />
+            <PeopleIcon />
           </ListItemIcon>
           <ListItemText primary="Member List" />
         </ListItem>
