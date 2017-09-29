@@ -8,6 +8,7 @@ import withStyles from 'material-ui/styles/withStyles';
 import Button from 'material-ui/Button';
 import Card, { CardActions, CardContent } from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
+import Typography from 'material-ui/Typography';
 
 import { recordBooksPost } from '../../actions/recordBooks';
 
@@ -21,9 +22,16 @@ const styles = theme => ({
     display: 'flex',
     flexWrap: 'wrap'
   },
+  formTitle: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit
+  },
   submitButton: {
     marginLeft: 2.5 * theme.spacing.unit,
     marginRight: 2.5 * theme.spacing.unit
+  },
+  submitContainer: {
+    justifyContent: 'flex-end'
   },
   textField: {
     marginLeft: theme.spacing.unit,
@@ -31,7 +39,7 @@ const styles = theme => ({
   }
 });
 
-class AddRecordBook extends Component {
+class RecordBooksAdd extends Component {
   state = {
     name: null,
     startedSubmit: false
@@ -55,7 +63,11 @@ class AddRecordBook extends Component {
     const { classes, currentUser, recordBooksPostRequesting } = this.props;
     const { startedSubmit } = this.state;
 
-    if (!currentUser || (startedSubmit && !recordBooksPostRequesting)) {
+    if (
+      !currentUser ||
+      !currentUser.attributes.admin ||
+      (startedSubmit && !recordBooksPostRequesting)
+    ) {
       return <Redirect to={'/'} />;
     }
 
@@ -64,6 +76,13 @@ class AddRecordBook extends Component {
         <Card>
           <form onSubmit={this.handleSubmit} noValidate>
             <CardContent className={classNames(classes.form)}>
+              <Typography
+                className={classNames(classes.formTitle)}
+                type="title"
+              >
+                Add Record
+              </Typography>
+
               <TextField
                 required
                 autoFocus
@@ -75,7 +94,8 @@ class AddRecordBook extends Component {
                 className={classNames(classes.textField)}
               />
             </CardContent>
-            <CardActions>
+
+            <CardActions className={classNames(classes.submitContainer)}>
               <Button
                 raised
                 type="submit"
@@ -107,5 +127,5 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-  withStyles(styles)(AddRecordBook)
+  withStyles(styles)(RecordBooksAdd)
 );

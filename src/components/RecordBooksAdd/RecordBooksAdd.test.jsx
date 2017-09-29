@@ -5,14 +5,14 @@ import { MemoryRouter as Router } from 'react-router-dom';
 
 import store from '../../helpers/storeTest';
 
-import AddRecordBook from './AddRecordBook';
+import RecordBooksAdd from './RecordBooksAdd';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(
     <Provider store={store}>
       <Router>
-        <AddRecordBook />
+        <RecordBooksAdd />
       </Router>
     </Provider>,
     div
