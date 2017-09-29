@@ -1,5 +1,5 @@
 import { callV1Api } from '../../helpers/api';
-import { recordBooksGet } from '../recordBooks';
+import { recordBooksList } from '../recordBooks';
 
 export const LOGIN_POST_ERROR = 'LOGIN_POST_ERROR';
 export const LOGIN_POST_REQUESTING = 'LOGIN_POST_REQUESTING';
@@ -58,7 +58,7 @@ export const loginPost = (email, password) => {
       })
       .then(user => {
         dispatch(loginPostSuccess(user.data));
-        dispatch(recordBooksGet());
+        dispatch(recordBooksList());
       })
       .catch(() => dispatch(loginPostError(true)));
   };
@@ -89,7 +89,7 @@ export const logoutDelete = () => {
 
   return dispatch => {
     dispatch(logoutDeleteSuccess());
-    dispatch(recordBooksGet());
+    dispatch(recordBooksList());
   };
 };
 

@@ -1,21 +1,54 @@
 import {
+  RECORD_BOOKS_ADD_ERROR,
+  recordBooksAddError,
+  RECORD_BOOKS_ADD_REQUESTING,
+  recordBooksAddRequesting,
+  RECORD_BOOKS_ADD_SUCCESS,
+  recordBooksAddSuccess,
   RECORD_BOOKS_COLLAPSE_TOGGLE,
   recordBooksCollapseToggle,
-  RECORD_BOOKS_GET_ERROR,
-  recordBooksGetError,
-  RECORD_BOOKS_GET_REQUESTING,
-  recordBooksGetRequesting,
-  RECORD_BOOKS_GET_SUCCESS,
-  recordBooksGetSuccess,
-  RECORD_BOOKS_POST_ERROR,
-  recordBooksPostError,
-  RECORD_BOOKS_POST_REQUESTING,
-  recordBooksPostRequesting,
-  RECORD_BOOKS_POST_SUCCESS,
-  recordBooksPostSuccess
+  RECORD_BOOKS_LIST_ERROR,
+  recordBooksListError,
+  RECORD_BOOKS_LIST_REQUESTING,
+  recordBooksListRequesting,
+  RECORD_BOOKS_LIST_SUCCESS,
+  recordBooksListSuccess,
+  RECORD_BOOKS_VIEW_ERROR,
+  recordBooksViewError,
+  RECORD_BOOKS_VIEW_REQUESTING,
+  recordBooksViewRequesting,
+  RECORD_BOOKS_VIEW_SUCCESS,
+  recordBooksViewSuccess
 } from './recordBooks';
 
 describe('recordBooks actions', () => {
+  it('should create recordBooksAddError', () => {
+    const isError = true;
+    const expectedAction = {
+      type: RECORD_BOOKS_ADD_ERROR,
+      isError
+    };
+    expect(recordBooksAddError(isError)).toEqual(expectedAction);
+  });
+
+  it('should create recordBooksAddRequesting', () => {
+    const isRequesting = true;
+    const expectedAction = {
+      type: RECORD_BOOKS_ADD_REQUESTING,
+      isRequesting
+    };
+    expect(recordBooksAddRequesting(isRequesting)).toEqual(expectedAction);
+  });
+
+  it('should create recordBooksAddSuccess', () => {
+    const recordBook = { test: 'Fake Record Book' };
+    const expectedAction = {
+      type: RECORD_BOOKS_ADD_SUCCESS,
+      recordBook
+    };
+    expect(recordBooksAddSuccess(recordBook)).toEqual(expectedAction);
+  });
+
   it('should create recordBooksCollapseToggle', () => {
     const isOpen = true;
     const expectedAction = {
@@ -25,57 +58,57 @@ describe('recordBooks actions', () => {
     expect(recordBooksCollapseToggle(isOpen)).toEqual(expectedAction);
   });
 
-  it('should create recordBooksGetError', () => {
+  it('should create recordBooksListError', () => {
     const isError = true;
     const expectedAction = {
-      type: RECORD_BOOKS_GET_ERROR,
+      type: RECORD_BOOKS_LIST_ERROR,
       isError
     };
-    expect(recordBooksGetError(isError)).toEqual(expectedAction);
+    expect(recordBooksListError(isError)).toEqual(expectedAction);
   });
 
-  it('should create recordBooksGetRequesting', () => {
+  it('should create recordBooksListRequesting', () => {
     const isRequesting = true;
     const expectedAction = {
-      type: RECORD_BOOKS_GET_REQUESTING,
+      type: RECORD_BOOKS_LIST_REQUESTING,
       isRequesting
     };
-    expect(recordBooksGetRequesting(isRequesting)).toEqual(expectedAction);
+    expect(recordBooksListRequesting(isRequesting)).toEqual(expectedAction);
   });
 
-  it('should create recordBooksGetSuccess', () => {
+  it('should create recordBooksListSuccess', () => {
     const recordBooks = [{ test: 'Fake Record Book' }];
     const expectedAction = {
-      type: RECORD_BOOKS_GET_SUCCESS,
+      type: RECORD_BOOKS_LIST_SUCCESS,
       recordBooks
     };
-    expect(recordBooksGetSuccess(recordBooks)).toEqual(expectedAction);
+    expect(recordBooksListSuccess(recordBooks)).toEqual(expectedAction);
   });
 
-  it('should create recordBooksPostError', () => {
+  it('should create recordBooksViewError', () => {
     const isError = true;
     const expectedAction = {
-      type: RECORD_BOOKS_POST_ERROR,
+      type: RECORD_BOOKS_VIEW_ERROR,
       isError
     };
-    expect(recordBooksPostError(isError)).toEqual(expectedAction);
+    expect(recordBooksViewError(isError)).toEqual(expectedAction);
   });
 
-  it('should create recordBooksPostRequesting', () => {
+  it('should create recordBooksViewRequesting', () => {
     const isRequesting = true;
     const expectedAction = {
-      type: RECORD_BOOKS_POST_REQUESTING,
+      type: RECORD_BOOKS_VIEW_REQUESTING,
       isRequesting
     };
-    expect(recordBooksPostRequesting(isRequesting)).toEqual(expectedAction);
+    expect(recordBooksViewRequesting(isRequesting)).toEqual(expectedAction);
   });
 
-  it('should create recordBooksPostSuccess', () => {
+  it('should create recordBooksViewSuccess', () => {
     const recordBook = { test: 'Fake Record Book' };
     const expectedAction = {
-      type: RECORD_BOOKS_POST_SUCCESS,
+      type: RECORD_BOOKS_VIEW_SUCCESS,
       recordBook
     };
-    expect(recordBooksPostSuccess(recordBook)).toEqual(expectedAction);
+    expect(recordBooksViewSuccess(recordBook)).toEqual(expectedAction);
   });
 });

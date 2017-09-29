@@ -131,7 +131,7 @@ const mapStateToProps = state => {
   return {
     currentUser: state.auth.currentUser,
     isRecordBooksCollapseOpen: state.recordBooks.isRecordBooksCollapseOpen,
-    recordBooks: state.recordBooks.recordBooks
+    recordBooks: state.recordBooks.recordBooksList
   };
 };
 

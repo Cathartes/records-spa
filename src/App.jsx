@@ -12,12 +12,13 @@ import Login from './components/Login';
 import Logout from './components/Logout';
 import MemberChallengeList from './components/MemberChallengeList';
 import RecordBooksAdd from './components/RecordBooksAdd';
+import RecordBooksView from './components/RecordBooksView';
 import UsersAdd from './components/UsersAdd';
 import UsersList from './components/UsersList';
 
 import mainTheme from './config/themes/mainTheme';
 
-import { recordBooksGet } from './actions/recordBooks';
+import { recordBooksList } from './actions/recordBooks';
 
 const styles = theme => ({
   appContent: {
@@ -27,7 +28,7 @@ const styles = theme => ({
 
 class App extends Component {
   componentWillMount() {
-    this.props.recordBooksGet();
+    this.props.recordBooksList();
   }
 
   render() {
@@ -46,6 +47,7 @@ class App extends Component {
                 <Route exact path="/members" component={UsersList} />
                 <Route exact path="/members/new" component={UsersAdd} />
                 <Route exact path="/records/new" component={RecordBooksAdd} />
+                <Route exact path="/records/:id" component={RecordBooksView} />
               </Switch>
             </div>
           </div>
@@ -61,8 +63,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    recordBooksGet: () => {
-      dispatch(recordBooksGet());
+    recordBooksList: () => {
+      dispatch(recordBooksList());
     }
   };
 };
