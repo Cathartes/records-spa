@@ -4,32 +4,136 @@ import { connect } from 'react-redux';
 
 import withStyles from 'material-ui/styles/withStyles';
 
+import CircularProgress from 'material-ui/Progress/CircularProgress';
+import Paper from 'material-ui/Paper';
+import Table from 'material-ui/Table';
+import TableBody from 'material-ui/Table/TableBody';
+import TableCell from 'material-ui/Table/TableCell';
+import TableHead from 'material-ui/Table/TableHead';
+import TableRow from 'material-ui/Table/TableRow';
+import Typography from 'material-ui/Typography';
+
+import { completionsList } from '../../actions/completions';
+import { momentsList } from '../../actions/moments';
+import { participationsList } from '../../actions/participations';
 import { recordBooksView } from '../../actions/recordBooks';
 
-const styles = theme => ({});
+import MomentCompletionTableRow from '../MomentTableRow/MomentCompletionTableRow';
+import MomentNewMemberTableRow from '../MomentTableRow/MomentNewMemberTableRow';
+
+const styles = theme => ({
+  loadingContainer: {
+    display: 'flex',
+    padding: 30,
+    justifyContent: 'center'
+  },
+  recordBookTitle: {
+    padding: [10, 20]
+  }
+});
 
 class MemberChallengeList extends Component {
   componentWillMount() {
-    const { dispatch } = this.props;
-    dispatch(recordBooksView(1));
+    const { dispatch, match } = this.props;
+
+    dispatch(recordBooksView(match.params.id));
+
+    dispatch(completionsList({ recordBookId: match.params.id }));
+    dispatch(
+      momentsList({ recordBookId: match.params.id, include: ['trackable'] })
+    );
+    dispatch(
+      participationsList({
+        recordBookId: match.params.id,
+        include: ['team', 'user']
+      })
+    );
   }
 
   render() {
-    const { classes, recordBook, recordBookRequesting } = this.props;
+    const { classes, isLoading, moments, recordBook } = this.props;
     return (
       <div>
-        {recordBookRequesting && <div>Loading</div>}
+        <Paper>
+          <Typography
+            className={classNames(classes.recordBookTitle)}
+            type="headline"
+          >
+            {recordBook ? recordBook.attributes.name : 'Record Book'}
+          </Typography>
 
-        {recordBook && <div>{recordBook.attributes.name}</div>}
+          {isLoading ? (
+            <div className={classNames(classes.loadingContainer)}>
+              <CircularProgress color="accent" />
+            </div>
+          ) : (
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Type</TableCell>
+                  <TableCell>Time Occurred</TableCell>
+                  <TableCell>Name</TableCell>
+                  <TableCell>Points</TableCell>
+                </TableRow>
+              </TableHead>
+
+              <TableBody>
+                {moments.map(moment => {
+                  if (moment.attributes.moment_type === 'completion') {
+                    return (
+                      <MomentCompletionTableRow
+                        completion={this.completionForMoment(moment)}
+                        key={moment.id}
+                        moment={moment}
+                        user={this.userForMomentCompletion(moment)}
+                      />
+                    );
+                  } else {
+                    return (
+                      <MomentNewMemberTableRow
+                        key={moment.id}
+                        moment={moment}
+                        user={this.userForMomentNewMember(moment)}
+                      />
+                    );
+                  }
+                })}
+              </TableBody>
+            </Table>
+          )}
+        </Paper>
       </div>
     );
+  }
+
+  completionForMoment(moment) {
+    return moment.relationships.trackable.data;
+  }
+
+  userForMomentCompletion(moment) {
+    const trackable = moment.relationships.trackable.data;
+
+    const participation = this.props.participations.find(p => {
+      return p.id === trackable.relationships.participation.data.id;
+    });
+    return participation.relationships.user.data;
+  }
+
+  userForMomentNewMember(moment) {
+    return moment.relationships.trackable.data;
   }
 }
 
 const mapStateToProps = state => {
   return {
-    recordBook: state.recordBooks.recordBooksView,
-    recordBookRequesting: state.recordBooks.recordBooksViewRequesting
+    completions: state.completions.completionsList,
+    isLoading:
+      state.completions.completionsListRequesting ||
+      state.moments.momentsListRequesting ||
+      state.participations.participationsListRequesting,
+    moments: state.moments.momentsList,
+    participations: state.participations.participationsList,
+    recordBook: state.recordBooks.recordBooksView
   };
 };
 
