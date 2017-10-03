@@ -14,8 +14,8 @@
     "yarn": "^1.0.2"
   },
   "dependencies": {
-    "material-ui": "^1.0.0-beta.12",
-    "material-ui-icons": "^1.0.0-beta.10",
+    "material-ui": "^1.0.0-beta.13",
+    "material-ui-icons": "^1.0.0-beta.14",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-redux": "^5.0.6",
@@ -34,6 +34,6 @@
   },
   "devDependencies": {
     "eslint-plugin-prettier": "^2.3.1",
-    "prettier": "^1.7.2"
+    "prettier": "^1.7.4"
   }
 }
