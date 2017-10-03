@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { MemoryRouter as Router } from 'react-router-dom';
 
-import '../../helpers/localStorageTest';
-import store from '../../helpers/storeTest';
+import store from '../../config/store';
 
 import Header from './Header';
 

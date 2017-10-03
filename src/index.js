@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
 import registerServiceWorker from './registerServiceWorker';
-import store from './helpers/store';
+import store from './config/store';
 import { loginValidate } from './actions/auth';
 
 import App from './App';

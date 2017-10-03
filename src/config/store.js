@@ -9,6 +9,8 @@ const middlewares = [thunkMiddleware];
 if (process.env.NODE_ENV === 'development') {
   const loggerMiddleware = createLogger();
   middlewares.push(loggerMiddleware);
+} else if (process.env.NODE_ENV === 'test') {
+  require('./localStorageTest');
 }
 
 export default createStore(appReducers, applyMiddleware(...middlewares));
