@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import createMuiTheme from 'material-ui/styles/createMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
+import theme from './config/theme';
 
 import { recordBooksGet } from './actions/recordBooks';
 
@@ -16,12 +17,6 @@ import UsersAdd from './components/UsersAdd';
 import UsersList from './components/UsersList';
 
 import './App.css';
-
-const theme = createMuiTheme({
-  palette: {
-    type: 'dark'
-  }
-});
 
 class App extends Component {
   componentWillMount() {

@@ -1,5 +1,3 @@
-import '../../helpers/localStorageTest';
-
 import {
   LOGIN_POST_ERROR,
   loginPostError,

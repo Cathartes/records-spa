@@ -2,8 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
-import '../../helpers/localStorageTest';
-import store from '../../helpers/storeTest';
+import store from '../../config/store';
 
 import Login from './Login';
 
