@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import { connect } from 'react-redux';
 
 import withStyles from 'material-ui/styles/withStyles';
+import tableStyles from '../../styles/table';
 
 import Avatar from 'material-ui/Avatar';
 import List from 'material-ui/List';
@@ -17,21 +18,6 @@ import AccountBoxIcon from 'material-ui-icons/AccountBox';
 import FolderIcon from 'material-ui-icons/Folder';
 
 import { challengesGet } from '../../actions/challenges';
-
-const styles = theme => ({
-  paper: {
-    margin: theme.spacing.unit
-  },
-  listHeaderTitle: {
-    padding: '16px'
-  },
-  listHeaderBody: {
-    padding: '0 16px'
-  },
-  hr: {
-    width: 'calc(100% - 32px)'
-  }
-});
 
 class MemberChallengeList extends Component {
   componentDidMount() {
@@ -84,6 +70,10 @@ class MemberChallengeList extends Component {
     );
   }
 }
+
+const styles = theme => {
+  return tableStyles(theme);
+};
 
 const mapStateToProps = state => {
   return {

@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
+import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
+import withStyles from 'material-ui/styles/withStyles';
+
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
-import theme from './config/theme';
-
-import { recordBooksGet } from './actions/recordBooks';
 
 import Header from './components/Header';
 import Login from './components/Login';
@@ -16,7 +15,15 @@ import RecordBooksAdd from './components/RecordBooksAdd';
 import UsersAdd from './components/UsersAdd';
 import UsersList from './components/UsersList';
 
-import './App.css';
+import mainTheme from './config/themes/mainTheme';
+
+import { recordBooksGet } from './actions/recordBooks';
+
+const styles = theme => ({
+  appContent: {
+    paddingTop: 65
+  }
+});
 
 class App extends Component {
   componentWillMount() {
@@ -24,12 +31,14 @@ class App extends Component {
   }
 
   render() {
+    const { classes } = this.props;
+
     return (
-      <MuiThemeProvider theme={theme}>
+      <MuiThemeProvider theme={mainTheme}>
         <Router>
           <div>
             <Header />
-            <div className="App-content">
+            <div className={classNames(classes.appContent)}>
               <Switch>
                 <Route exact path="/" component={MemberChallengeList} />
                 <Route exact path="/login" component={Login} />
@@ -58,4 +67,6 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  withStyles(styles)(App)
+);
