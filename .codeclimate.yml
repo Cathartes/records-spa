@@ -1,4 +1,6 @@
 engines:
+  cssLint:
+    enabled: true
   duplication:
     enabled: true
     config:
@@ -6,11 +8,23 @@ engines:
       - javascript:
   eslint:
     enabled: true
-    channel: eslint-4
+    config:
+      extensions:
+      - .js
+      - .jsx
   fixme:
     enabled: true
 
 ratings:
   paths:
+  - "**.css"
   - "**.js"
   - "**.jsx"
+
+exclude_paths:
+- .*/**/*
+- public/**/*
+- firebase.json
+- package.json
+- README.md
+- yarn.lock

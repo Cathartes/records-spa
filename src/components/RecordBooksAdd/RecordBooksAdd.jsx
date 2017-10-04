@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import withStyles from 'material-ui/styles/withStyles';
+import formStyles from '../../styles/form';
 
 import Button from 'material-ui/Button';
 import Card, { CardActions, CardContent } from 'material-ui/Card';
@@ -11,33 +12,6 @@ import TextField from 'material-ui/TextField';
 import Typography from 'material-ui/Typography';
 
 import { recordBooksPost } from '../../actions/recordBooks';
-
-const styles = theme => ({
-  container: {
-    display: 'flex',
-    justifyContent: 'center',
-    padding: 20
-  },
-  form: {
-    display: 'flex',
-    flexWrap: 'wrap'
-  },
-  formTitle: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit
-  },
-  submitButton: {
-    marginLeft: 2.5 * theme.spacing.unit,
-    marginRight: 2.5 * theme.spacing.unit
-  },
-  submitContainer: {
-    justifyContent: 'flex-end'
-  },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit
-  }
-});
 
 class RecordBooksAdd extends Component {
   state = {
@@ -110,6 +84,10 @@ class RecordBooksAdd extends Component {
     );
   }
 }
+
+const styles = theme => {
+  return formStyles(theme);
+};
 
 const mapStateToProps = state => {
   return {

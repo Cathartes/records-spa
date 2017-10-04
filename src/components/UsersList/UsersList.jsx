@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import withStyles from 'material-ui/styles/withStyles';
+import tableStyles from '../../styles/table';
 
 import Avatar from 'material-ui/Avatar';
 import Button from 'material-ui/Button';
@@ -19,32 +20,6 @@ import AccountBoxIcon from 'material-ui-icons/AccountBox';
 import PersonAddIcon from 'material-ui-icons/PersonAdd';
 
 import { usersGet } from '../../actions/users';
-
-const styles = theme => ({
-  addButton: {
-    bottom: 0,
-    margin: 16,
-    position: 'absolute',
-    right: 0
-  },
-  paper: {
-    margin: theme.spacing.unit
-  },
-  listHeaderTitle: {
-    padding: '16px'
-  },
-  listHeaderBody: {
-    padding: '0 16px'
-  },
-  loadingContainer: {
-    display: 'flex',
-    padding: 30,
-    justifyContent: 'center'
-  },
-  hr: {
-    width: 'calc(100% - 32px)'
-  }
-});
 
 class UsersList extends Component {
   componentDidMount() {
@@ -111,6 +86,24 @@ class UsersList extends Component {
     );
   }
 }
+
+const styles = theme => {
+  const table = tableStyles(theme);
+  return {
+    ...table,
+    addButton: {
+      bottom: 0,
+      margin: 16,
+      position: 'absolute',
+      right: 0
+    },
+    loadingContainer: {
+      display: 'flex',
+      padding: 30,
+      justifyContent: 'center'
+    }
+  };
+};
 
 const mapStateToProps = state => {
   return {

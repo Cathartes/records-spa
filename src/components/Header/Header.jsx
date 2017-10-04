@@ -20,20 +20,6 @@ import { snackbarClose, snackbarRemove } from '../../actions/snackbars';
 
 import Sidenav from '../Sidenav';
 
-const styles = theme => ({
-  appTitle: {
-    flex: 1
-  },
-  currentUser: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit
-  },
-  snackbar: {
-    top: 64,
-    zIndex: 1000
-  }
-});
-
 class Header extends PureComponent {
   handleExited = id => {
     this.props.snackbarRemove(id);
@@ -100,6 +86,22 @@ class Header extends PureComponent {
     );
   }
 }
+
+const styles = theme => {
+  return {
+    appTitle: {
+      flex: 1
+    },
+    currentUser: {
+      marginLeft: theme.spacing.unit,
+      marginRight: theme.spacing.unit
+    },
+    snackbar: {
+      top: 64,
+      zIndex: 1000
+    }
+  };
+};
 
 const mapStateToProps = state => {
   return {

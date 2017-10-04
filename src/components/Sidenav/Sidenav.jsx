@@ -21,12 +21,6 @@ import PeopleIcon from 'material-ui-icons/People';
 import { recordBooksCollapseToggle } from '../../actions/recordBooks';
 import { sidenavToggle } from '../../actions/sidenav';
 
-const styles = theme => ({
-  expandIcon: {
-    color: 'white'
-  }
-});
-
 class Sidenav extends PureComponent {
   render() {
     const {
@@ -124,6 +118,14 @@ class Sidenav extends PureComponent {
     );
   }
 }
+
+const styles = theme => {
+  return {
+    expandIcon: {
+      color: 'white'
+    }
+  };
+};
 
 const mapStateToProps = state => {
   return {
