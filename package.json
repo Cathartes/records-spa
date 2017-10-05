@@ -16,8 +16,10 @@
   "dependencies": {
     "material-ui": "^1.0.0-beta.13",
     "material-ui-icons": "^1.0.0-beta.14",
+    "moment": "^2.18.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
+    "react-moment": "^0.6.5",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.14",

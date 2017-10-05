@@ -1,9 +1,9 @@
 import {
   RECORD_BOOKS_COLLAPSE_TOGGLE,
-  RECORD_BOOKS_GET_REQUESTING,
-  RECORD_BOOKS_GET_SUCCESS,
-  RECORD_BOOKS_POST_REQUESTING,
-  RECORD_BOOKS_POST_SUCCESS
+  RECORD_BOOKS_LIST_REQUESTING,
+  RECORD_BOOKS_LIST_SUCCESS,
+  RECORD_BOOKS_ADD_REQUESTING,
+  RECORD_BOOKS_ADD_SUCCESS
 } from '../../actions/recordBooks';
 
 import reducer from './recordBooks';
@@ -12,10 +12,38 @@ describe('recordBooks reducer', () => {
   it('should return the initial state', () => {
     expect(reducer(undefined, {})).toEqual({
       isRecordBooksCollapseOpen: false,
-      recordBooks: [],
-      recordBooksGetRequesting: false,
-      recordBooksPostRequesting: false
+      recordBooksAddRequesting: false,
+      recordBooksList: [],
+      recordBooksListRequesting: false,
+      recordBooksView: null,
+      recordBooksViewRequesting: false
     });
+  });
+
+  it('should handle RECORD_BOOKS_ADD_REQUESTING', () => {
+    const isRequesting = true;
+    expect(
+      reducer(
+        {},
+        {
+          type: RECORD_BOOKS_ADD_REQUESTING,
+          isRequesting
+        }
+      )
+    ).toEqual({ recordBooksAddRequesting: isRequesting });
+  });
+
+  it('should handle RECORD_BOOKS_ADD_SUCCESS', () => {
+    const recordBook = { test: 'Fake Record Book' };
+    expect(
+      reducer(
+        { recordBooksList: [] },
+        {
+          type: RECORD_BOOKS_ADD_SUCCESS,
+          recordBook
+        }
+      )
+    ).toEqual({ recordBooksList: [recordBook] });
   });
 
   it('should handle RECORD_BOOKS_COLLAPSE_TOGGLE', () => {
@@ -31,55 +59,29 @@ describe('recordBooks reducer', () => {
     ).toEqual({ isRecordBooksCollapseOpen: isOpen });
   });
 
-  it('should handle RECORD_BOOKS_GET_REQUESTING', () => {
+  it('should handle RECORD_BOOKS_LIST_REQUESTING', () => {
     const isRequesting = true;
     expect(
       reducer(
         {},
         {
-          type: RECORD_BOOKS_GET_REQUESTING,
+          type: RECORD_BOOKS_LIST_REQUESTING,
           isRequesting
         }
       )
-    ).toEqual({ recordBooksGetRequesting: isRequesting });
+    ).toEqual({ recordBooksListRequesting: isRequesting });
   });
 
-  it('should handle RECORD_BOOKS_GET_SUCCESS', () => {
+  it('should handle RECORD_BOOKS_LIST_SUCCESS', () => {
     const recordBooks = [{ test: 'Fake Record Book' }];
     expect(
       reducer(
         {},
         {
-          type: RECORD_BOOKS_GET_SUCCESS,
+          type: RECORD_BOOKS_LIST_SUCCESS,
           recordBooks
         }
       )
-    ).toEqual({ recordBooks: recordBooks });
-  });
-
-  it('should handle RECORD_BOOKS_POST_REQUESTING', () => {
-    const isRequesting = true;
-    expect(
-      reducer(
-        {},
-        {
-          type: RECORD_BOOKS_POST_REQUESTING,
-          isRequesting
-        }
-      )
-    ).toEqual({ recordBooksPostRequesting: isRequesting });
-  });
-
-  it('should handle RECORD_BOOKS_POST_SUCCESS', () => {
-    const recordBook = { test: 'Fake Record Book' };
-    expect(
-      reducer(
-        { recordBooks: [] },
-        {
-          type: RECORD_BOOKS_POST_SUCCESS,
-          recordBook
-        }
-      )
-    ).toEqual({ recordBooks: [recordBook] });
+    ).toEqual({ recordBooksList: recordBooks });
   });
 });

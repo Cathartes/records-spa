@@ -59,7 +59,14 @@ class Sidenav extends PureComponent {
           {recordBooks.map((recordBook, index) => {
             const showDivider = !recordBooks[index + 1];
             return (
-              <ListItem button divider={showDivider} key={recordBook.id}>
+              <ListItem
+                button
+                component={Link}
+                divider={showDivider}
+                key={recordBook.id}
+                onClick={() => onLinkClick()}
+                to={`/records/${recordBook.id}`}
+              >
                 <ListItemText inset primary={recordBook.attributes.name} />
               </ListItem>
             );
@@ -131,7 +138,7 @@ const mapStateToProps = state => {
   return {
     currentUser: state.auth.currentUser,
     isRecordBooksCollapseOpen: state.recordBooks.isRecordBooksCollapseOpen,
-    recordBooks: state.recordBooks.recordBooks
+    recordBooks: state.recordBooks.recordBooksList
   };
 };
 

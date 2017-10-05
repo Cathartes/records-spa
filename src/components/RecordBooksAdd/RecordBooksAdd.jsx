@@ -11,7 +11,7 @@ import Card, { CardActions, CardContent } from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 import Typography from 'material-ui/Typography';
 
-import { recordBooksPost } from '../../actions/recordBooks';
+import { recordBooksAdd } from '../../actions/recordBooks';
 
 class RecordBooksAdd extends Component {
   state = {
@@ -27,20 +27,20 @@ class RecordBooksAdd extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.recordBooksPost(this.state.name);
+    this.props.recordBooksAdd(this.state.name);
     this.setState({
       startedSubmit: true
     });
   };
 
   render() {
-    const { classes, currentUser, recordBooksPostRequesting } = this.props;
+    const { classes, currentUser, recordBooksAddRequesting } = this.props;
     const { startedSubmit } = this.state;
 
     if (
       !currentUser ||
       !currentUser.attributes.admin ||
-      (startedSubmit && !recordBooksPostRequesting)
+      (startedSubmit && !recordBooksAddRequesting)
     ) {
       return <Redirect to={'/'} />;
     }
@@ -92,14 +92,14 @@ const styles = theme => {
 const mapStateToProps = state => {
   return {
     currentUser: state.auth.currentUser,
-    recordBooksPostRequesting: state.recordBooks.recordBooksPostRequesting
+    recordBooksAddRequesting: state.recordBooks.recordBooksAddRequesting
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    recordBooksPost: name => {
-      dispatch(recordBooksPost(name));
+    recordBooksAdd: name => {
+      dispatch(recordBooksAdd(name));
     }
   };
 };

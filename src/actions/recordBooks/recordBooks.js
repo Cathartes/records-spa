@@ -2,13 +2,17 @@ import { callV1Api } from '../../helpers/api';
 
 export const RECORD_BOOKS_COLLAPSE_TOGGLE = 'RECORD_BOOKS_COLLAPSE_TOGGLE';
 
-export const RECORD_BOOKS_GET_ERROR = 'RECORD_BOOKS_GET_ERROR';
-export const RECORD_BOOKS_GET_REQUESTING = 'RECORD_BOOKS_GET_REQUESTING';
-export const RECORD_BOOKS_GET_SUCCESS = 'RECORD_BOOKS_GET_SUCCESS';
+export const RECORD_BOOKS_LIST_ERROR = 'RECORD_BOOKS_LIST_ERROR';
+export const RECORD_BOOKS_LIST_REQUESTING = 'RECORD_BOOKS_LIST_REQUESTING';
+export const RECORD_BOOKS_LIST_SUCCESS = 'RECORD_BOOKS_LIST_SUCCESS';
 
-export const RECORD_BOOKS_POST_ERROR = 'RECORD_BOOKS_POST_ERROR';
-export const RECORD_BOOKS_POST_REQUESTING = 'RECORD_BOOKS_POST_REQUESTING';
-export const RECORD_BOOKS_POST_SUCCESS = 'RECORD_BOOKS_POST_SUCCESS';
+export const RECORD_BOOKS_ADD_ERROR = 'RECORD_BOOKS_ADD_ERROR';
+export const RECORD_BOOKS_ADD_REQUESTING = 'RECORD_BOOKS_ADD_REQUESTING';
+export const RECORD_BOOKS_ADD_SUCCESS = 'RECORD_BOOKS_ADD_SUCCESS';
+
+export const RECORD_BOOKS_VIEW_ERROR = 'RECORD_BOOKS_VIEW_ERROR';
+export const RECORD_BOOKS_VIEW_REQUESTING = 'RECORD_BOOKS_VIEW_REQUESTING';
+export const RECORD_BOOKS_VIEW_SUCCESS = 'RECORD_BOOKS_VIEW_SUCCESS';
 
 export const recordBooksCollapseToggle = isOpen => {
   return {
@@ -17,30 +21,30 @@ export const recordBooksCollapseToggle = isOpen => {
   };
 };
 
-export const recordBooksGetError = isError => {
+export const recordBooksListError = isError => {
   return {
-    type: RECORD_BOOKS_GET_ERROR,
+    type: RECORD_BOOKS_LIST_ERROR,
     isError
   };
 };
 
-export const recordBooksGetRequesting = isRequesting => {
+export const recordBooksListRequesting = isRequesting => {
   return {
-    type: RECORD_BOOKS_GET_REQUESTING,
+    type: RECORD_BOOKS_LIST_REQUESTING,
     isRequesting
   };
 };
 
-export const recordBooksGetSuccess = recordBooks => {
+export const recordBooksListSuccess = recordBooks => {
   return {
-    type: RECORD_BOOKS_GET_SUCCESS,
+    type: RECORD_BOOKS_LIST_SUCCESS,
     recordBooks
   };
 };
 
-export const recordBooksGet = () => {
+export const recordBooksList = () => {
   return dispatch => {
-    dispatch(recordBooksGetRequesting(true));
+    dispatch(recordBooksListRequesting(true));
 
     callV1Api('record_books', 'GET')
       .then(response => {
@@ -48,39 +52,39 @@ export const recordBooksGet = () => {
           throw Error(response.statusText);
         }
 
-        dispatch(recordBooksGetRequesting(false));
+        dispatch(recordBooksListRequesting(false));
 
         return response.json();
       })
-      .then(recordBooks => dispatch(recordBooksGetSuccess(recordBooks.data)))
-      .catch(() => dispatch(recordBooksGetError(true)));
+      .then(recordBooks => dispatch(recordBooksListSuccess(recordBooks.data)))
+      .catch(() => dispatch(recordBooksListError(true)));
   };
 };
 
-export const recordBooksPostError = isError => {
+export const recordBooksAddError = isError => {
   return {
-    type: RECORD_BOOKS_POST_ERROR,
+    type: RECORD_BOOKS_ADD_ERROR,
     isError
   };
 };
 
-export const recordBooksPostRequesting = isRequesting => {
+export const recordBooksAddRequesting = isRequesting => {
   return {
-    type: RECORD_BOOKS_POST_REQUESTING,
+    type: RECORD_BOOKS_ADD_REQUESTING,
     isRequesting
   };
 };
 
-export const recordBooksPostSuccess = recordBook => {
+export const recordBooksAddSuccess = recordBook => {
   return {
-    type: RECORD_BOOKS_POST_SUCCESS,
+    type: RECORD_BOOKS_ADD_SUCCESS,
     recordBook
   };
 };
 
-export const recordBooksPost = name => {
+export const recordBooksAdd = name => {
   return dispatch => {
-    dispatch(recordBooksPostRequesting(true));
+    dispatch(recordBooksAddRequesting(true));
 
     const body = {
       data: {
@@ -96,11 +100,51 @@ export const recordBooksPost = name => {
           throw Error(response.statusText);
         }
 
-        dispatch(recordBooksPostRequesting(false));
+        dispatch(recordBooksAddRequesting(false));
 
         return response.json();
       })
-      .then(recordBooks => dispatch(recordBooksPostSuccess(recordBooks.data)))
-      .catch(() => dispatch(recordBooksPostError(true)));
+      .then(recordBooks => dispatch(recordBooksAddSuccess(recordBooks.data)))
+      .catch(() => dispatch(recordBooksAddError(true)));
+  };
+};
+
+export const recordBooksViewError = isError => {
+  return {
+    type: RECORD_BOOKS_VIEW_ERROR,
+    isError
+  };
+};
+
+export const recordBooksViewRequesting = isRequesting => {
+  return {
+    type: RECORD_BOOKS_VIEW_REQUESTING,
+    isRequesting
+  };
+};
+
+export const recordBooksViewSuccess = recordBook => {
+  return {
+    type: RECORD_BOOKS_VIEW_SUCCESS,
+    recordBook
+  };
+};
+
+export const recordBooksView = id => {
+  return dispatch => {
+    dispatch(recordBooksViewRequesting(true));
+
+    callV1Api(`record_books/${id}`, 'GET')
+      .then(response => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+
+        dispatch(recordBooksViewRequesting(false));
+
+        return response.json();
+      })
+      .then(recordBook => dispatch(recordBooksViewSuccess(recordBook.data)))
+      .catch(() => dispatch(recordBooksViewError(true)));
   };
 };
