@@ -21,17 +21,6 @@ import { recordBooksView } from '../../actions/recordBooks';
 import MomentCompletionTableRow from '../MomentTableRow/MomentCompletionTableRow';
 import MomentNewMemberTableRow from '../MomentTableRow/MomentNewMemberTableRow';
 
-const styles = theme => ({
-  loadingContainer: {
-    display: 'flex',
-    padding: 30,
-    justifyContent: 'center'
-  },
-  recordBookTitle: {
-    padding: [10, 20]
-  }
-});
-
 class MemberChallengeList extends Component {
   componentWillMount() {
     const { dispatch, match } = this.props;
@@ -74,6 +63,7 @@ class MemberChallengeList extends Component {
                   <TableCell>Time Occurred</TableCell>
                   <TableCell>Name</TableCell>
                   <TableCell>Points</TableCell>
+                  <TableCell>Team</TableCell>
                 </TableRow>
               </TableHead>
 
@@ -85,6 +75,9 @@ class MemberChallengeList extends Component {
                         completion={this.completionForMoment(moment)}
                         key={moment.id}
                         moment={moment}
+                        participation={this.participationForMomentCompletion(
+                          moment
+                        )}
                         user={this.userForMomentCompletion(moment)}
                       />
                     );
@@ -93,6 +86,9 @@ class MemberChallengeList extends Component {
                       <MomentNewMemberTableRow
                         key={moment.id}
                         moment={moment}
+                        participation={this.participationForMomentNewMember(
+                          moment
+                        )}
                         user={this.userForMomentNewMember(moment)}
                       />
                     );
@@ -110,12 +106,22 @@ class MemberChallengeList extends Component {
     return moment.relationships.trackable.data;
   }
 
-  userForMomentCompletion(moment) {
+  participationForMomentCompletion(moment) {
     const trackable = moment.relationships.trackable.data;
-
-    const participation = this.props.participations.find(p => {
+    return this.props.participations.find(p => {
       return p.id === trackable.relationships.participation.data.id;
     });
+  }
+
+  participationForMomentNewMember(moment) {
+    const trackable = moment.relationships.trackable.data;
+    return this.props.participations.find(p => {
+      return p.relationships.user.data.id === trackable.id;
+    });
+  }
+
+  userForMomentCompletion(moment) {
+    const participation = this.participationForMomentCompletion(moment);
     return participation.relationships.user.data;
   }
 
@@ -123,6 +129,17 @@ class MemberChallengeList extends Component {
     return moment.relationships.trackable.data;
   }
 }
+
+const styles = theme => ({
+  loadingContainer: {
+    display: 'flex',
+    padding: 30,
+    justifyContent: 'center'
+  },
+  recordBookTitle: {
+    padding: [10, 20]
+  }
+});
 
 const mapStateToProps = state => {
   return {

@@ -4,7 +4,10 @@ import reducer from './moments';
 
 describe('moments reducer', () => {
   it('should return the initial state', () => {
-    expect(reducer(undefined, {})).toEqual([]);
+    expect(reducer(undefined, {})).toEqual({
+      momentsList: [],
+      momentsListRequesting: false
+    });
   });
 
   it('should handle MOMENTS_LIST_SUCCESS', () => {
@@ -14,6 +17,6 @@ describe('moments reducer', () => {
         type: MOMENTS_LIST_SUCCESS,
         moments: moments
       })
-    ).toEqual(moments);
+    ).toEqual({ momentsList: moments });
   });
 });

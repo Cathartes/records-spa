@@ -4,7 +4,10 @@ import reducer from './completions';
 
 describe('completions reducer', () => {
   it('should return the initial state', () => {
-    expect(reducer(undefined, {})).toEqual([]);
+    expect(reducer(undefined, {})).toEqual({
+      completionsList: [],
+      completionsListRequesting: false
+    });
   });
 
   it('should handle COMPLETIONS_LIST_SUCCESS', () => {
@@ -14,6 +17,6 @@ describe('completions reducer', () => {
         type: COMPLETIONS_LIST_SUCCESS,
         completions: completions
       })
-    ).toEqual(completions);
+    ).toEqual({ completionsList: completions });
   });
 });
