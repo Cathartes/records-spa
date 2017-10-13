@@ -1,12 +1,22 @@
-import { LOGOUT_SUCCESS, SET_CURRENT_USER } from '../../actions/auth';
+import {
+  LOGIN_SUCCESS,
+  LOGOUT_SUCCESS,
+  SET_CURRENT_USER
+} from '../../actions/auth';
 
 import reducer from './auth';
+
+require('../../config/localStorageTest');
 
 describe('auth reducer', () => {
   it('should return the initial state', () => {
     expect(reducer(undefined, {})).toEqual({
       currentUser: null
     });
+  });
+
+  it('should handle LOGIN_SUCCESS', () => {
+    expect(reducer({}, { type: LOGIN_SUCCESS })).toEqual({});
   });
 
   it('should handle LOGOUT_SUCCESS', () => {
