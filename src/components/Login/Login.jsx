@@ -31,6 +31,7 @@ class Login extends PureComponent {
       .then(({ data }) => {
         if (data.login.token) {
           this.props.loginSuccess(data.login.token, data.login.uid);
+          this.props.setCurrentUser(data.login.user);
         }
       });
   };

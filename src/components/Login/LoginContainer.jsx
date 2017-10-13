@@ -1,7 +1,7 @@
 import { graphql } from 'react-apollo';
 import { connect } from 'react-redux';
 
-import { loginSuccess } from '../../actions/auth';
+import { loginSuccess, setCurrentUser } from '../../actions/auth';
 import loginMutation from './loginMutation';
 
 import Login from './Login';
@@ -16,6 +16,9 @@ const mapDispatchToProps = dispatch => {
   return {
     loginSuccess: (token, uid) => {
       dispatch(loginSuccess(token, uid));
+    },
+    setCurrentUser: user => {
+      dispatch(setCurrentUser(user));
     }
   };
 };

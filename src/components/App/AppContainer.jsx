@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { graphql } from 'react-apollo';
 
 import { setCurrentUser } from '../../actions/auth';
-import currentUser from './currentUser';
+import currentUserQuery from './currentUserQuery';
 
 import App from './App';
 
@@ -15,5 +15,5 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(() => Object(), mapDispatchToProps)(
-  graphql(currentUser)(App)
+  graphql(currentUserQuery)(App)
 );

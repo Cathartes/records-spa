@@ -5,6 +5,12 @@ const loginMutation = gql`
     login(email: $email, password: $password) {
       token
       uid
+      user {
+        admin
+        discordName
+        email
+        id
+      }
     }
   }
 `;
