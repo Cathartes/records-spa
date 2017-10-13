@@ -9,10 +9,12 @@ import RecordBooksAdd from './RecordBooksAdd';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
+  const props = { currentUser: { admin: true } };
+
   ReactDOM.render(
     <Provider store={store}>
       <Router>
-        <RecordBooksAdd />
+        <RecordBooksAdd {...props} />
       </Router>
     </Provider>,
     div

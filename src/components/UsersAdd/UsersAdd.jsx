@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import withStyles from 'material-ui/styles/withStyles';
@@ -12,8 +11,6 @@ import CardActions from 'material-ui/Card/CardActions';
 import CardContent from 'material-ui/Card/CardContent';
 import TextField from 'material-ui/TextField';
 import Typography from 'material-ui/Typography';
-
-import { usersPost } from '../../actions/users';
 
 class UsersAdd extends Component {
   state = {
@@ -38,7 +35,7 @@ class UsersAdd extends Component {
     const { classes, currentUser, usersPostRequesting } = this.props;
     const { startedSubmit } = this.state;
 
-    if (!currentUser || !currentUser.attributes.admin) {
+    if (!currentUser || !currentUser.admin) {
       return <Redirect to="/" />;
     } else if (startedSubmit && !usersPostRequesting) {
       return <Redirect to="/members" />;
@@ -88,21 +85,4 @@ const styles = theme => {
   return formStyles(theme);
 };
 
-const mapStateToProps = state => {
-  return {
-    currentUser: state.auth.currentUser,
-    usersPostRequesting: state.recordBooks.usersPostRequesting
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    usersPost: discordName => {
-      dispatch(usersPost(discordName));
-    }
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withStyles(styles)(UsersAdd)
-);
+export default withStyles(styles)(UsersAdd);

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import withStyles from 'material-ui/styles/withStyles';
@@ -10,8 +9,6 @@ import Button from 'material-ui/Button';
 import Card, { CardActions, CardContent } from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 import Typography from 'material-ui/Typography';
-
-import { recordBooksAdd } from '../../actions/recordBooks';
 
 class RecordBooksAdd extends Component {
   state = {
@@ -39,7 +36,7 @@ class RecordBooksAdd extends Component {
 
     if (
       !currentUser ||
-      !currentUser.attributes.admin ||
+      !currentUser.admin ||
       (startedSubmit && !recordBooksAddRequesting)
     ) {
       return <Redirect to={'/'} />;
@@ -89,21 +86,4 @@ const styles = theme => {
   return formStyles(theme);
 };
 
-const mapStateToProps = state => {
-  return {
-    currentUser: state.auth.currentUser,
-    recordBooksAddRequesting: state.recordBooks.recordBooksAddRequesting
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    recordBooksAdd: name => {
-      dispatch(recordBooksAdd(name));
-    }
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withStyles(styles)(RecordBooksAdd)
-);
+export default withStyles(styles)(RecordBooksAdd);

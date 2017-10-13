@@ -9,10 +9,12 @@ import Logout from './Logout';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
+  const props = { logoutSuccess: () => {}, snackbarAdd: () => {} };
+
   ReactDOM.render(
     <Provider store={store}>
       <Router>
-        <Logout />
+        <Logout {...props} />
       </Router>
     </Provider>,
     div

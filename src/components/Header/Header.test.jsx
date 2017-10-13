@@ -9,10 +9,12 @@ import Header from './Header';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
+  const props = { snackbars: [] };
+
   ReactDOM.render(
     <Provider store={store}>
       <Router>
-        <Header />
+        <Header {...props} />
       </Router>
     </Provider>,
     div

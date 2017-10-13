@@ -1,100 +1,28 @@
-import { callV1Api } from '../../helpers/api';
-import { recordBooksList } from '../recordBooks';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 
-export const LOGIN_POST_ERROR = 'LOGIN_POST_ERROR';
-export const LOGIN_POST_REQUESTING = 'LOGIN_POST_REQUESTING';
-export const LOGIN_POST_SUCCESS = 'LOGIN_POST_SUCCESS';
-export const LOGIN_VALIDATE = 'LOGIN_VALIDATE';
-export const LOGOUT_DELETE_SUCCESS = 'LOGOUT_DELETE_SUCCESS';
+export const loginSuccess = (token, uid) => {
+  localStorage.setItem('X-USER-TOKEN', token);
+  localStorage.setItem('X-USER-UID', uid);
 
-export const loginPostError = isError => {
   return {
-    type: LOGIN_POST_ERROR,
-    isError
+    type: LOGIN_SUCCESS
   };
 };
 
-export const loginPostRequesting = isRequesting => {
-  return {
-    type: LOGIN_POST_REQUESTING,
-    isRequesting
-  };
-};
-
-export const loginPostSuccess = user => {
-  return {
-    type: LOGIN_POST_SUCCESS,
-    user
-  };
-};
-
-export const loginPost = (email, password) => {
-  return dispatch => {
-    dispatch(loginPostRequesting(true));
-
-    const body = {
-      data: {
-        attributes: {
-          email: email,
-          password: password
-        }
-      }
-    };
-
-    callV1Api('sessions', 'POST', body)
-      .then(response => {
-        dispatch(loginPostRequesting(false));
-
-        if (!response.ok) {
-          throw response;
-        }
-
-        const uid = response.headers.get('X-USER-UID');
-        const token = response.headers.get('X-USER-TOKEN');
-        localStorage.setItem('X-USER-UID', uid);
-        localStorage.setItem('X-USER-TOKEN', token);
-
-        return response.json();
-      })
-      .then(user => {
-        dispatch(loginPostSuccess(user.data));
-        dispatch(recordBooksList());
-      })
-      .catch(() => dispatch(loginPostError(true)));
-  };
-};
-
-export const loginValidate = () => {
-  return dispatch => {
-    callV1Api('sessions', 'GET')
-      .then(response => {
-        if (!response.ok) {
-          throw response;
-        }
-
-        return response.json();
-      })
-      .then(user => dispatch(loginPostSuccess(user.data)))
-      .catch(response => {
-        if (response.status === 401) {
-          dispatch(logoutDelete());
-        }
-      });
-  };
-};
-
-export const logoutDelete = () => {
-  localStorage.removeItem('X-USER-UID');
+export const logoutSuccess = () => {
   localStorage.removeItem('X-USER-TOKEN');
+  localStorage.removeItem('X-USER-UID');
 
-  return dispatch => {
-    dispatch(logoutDeleteSuccess());
-    dispatch(recordBooksList());
+  return {
+    type: LOGOUT_SUCCESS
   };
 };
 
-export const logoutDeleteSuccess = () => {
+export const setCurrentUser = user => {
   return {
-    type: LOGOUT_DELETE_SUCCESS
+    type: SET_CURRENT_USER,
+    user
   };
 };

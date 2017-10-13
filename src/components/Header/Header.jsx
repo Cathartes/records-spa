@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import withStyles from 'material-ui/styles/withStyles';
@@ -14,9 +13,6 @@ import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 
 import MenuIcon from 'material-ui-icons/Menu';
-
-import { sidenavToggle } from '../../actions/sidenav';
-import { snackbarClose, snackbarRemove } from '../../actions/snackbars';
 
 import Sidenav from '../Sidenav';
 
@@ -103,28 +99,4 @@ const styles = theme => {
   };
 };
 
-const mapStateToProps = state => {
-  return {
-    currentUser: state.auth.currentUser,
-    isSidenavOpen: state.sidenav.isOpen,
-    snackbars: state.snackbars
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    onMenuIconClick: isSidenavOpen => {
-      dispatch(sidenavToggle(isSidenavOpen));
-    },
-    snackbarClose: id => {
-      dispatch(snackbarClose(id));
-    },
-    snackbarRemove: id => {
-      dispatch(snackbarRemove(id));
-    }
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withStyles(styles)(Header)
-);
+export default withStyles(styles)(Header);

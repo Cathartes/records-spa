@@ -9,10 +9,12 @@ import UsersAdd from './UsersAdd';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
+  const props = { currentUser: { admin: true } };
+
   ReactDOM.render(
     <Provider store={store}>
       <Router>
-        <UsersAdd />
+        <UsersAdd {...props} />
       </Router>
     </Provider>,
     div

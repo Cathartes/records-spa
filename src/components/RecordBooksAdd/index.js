@@ -1,1 +1,1 @@
-export { default } from './RecordBooksAdd';
+export { default } from './RecordBooksAddContainer';

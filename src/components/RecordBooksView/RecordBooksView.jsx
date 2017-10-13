@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import classNames from 'classnames';
-import { connect } from 'react-redux';
+
+import Moment from 'react-moment';
 
 import withStyles from 'material-ui/styles/withStyles';
 
@@ -13,49 +14,27 @@ import TableHead from 'material-ui/Table/TableHead';
 import TableRow from 'material-ui/Table/TableRow';
 import Typography from 'material-ui/Typography';
 
-import { completionsList } from '../../actions/completions';
-import { momentsList } from '../../actions/moments';
-import { participationsList } from '../../actions/participations';
-import { recordBooksView } from '../../actions/recordBooks';
+import AlphaIcon from '../../icons/Alpha';
+import BravoIcon from '../../icons/Bravo';
 
-import MomentCompletionTableRow from '../MomentTableRow/MomentCompletionTableRow';
-import MomentNewMemberTableRow from '../MomentTableRow/MomentNewMemberTableRow';
-
-class MemberChallengeList extends Component {
-  componentWillMount() {
-    const { dispatch, match } = this.props;
-
-    dispatch(recordBooksView(match.params.id));
-
-    dispatch(completionsList({ recordBookId: match.params.id }));
-    dispatch(
-      momentsList({ recordBookId: match.params.id, include: ['trackable'] })
-    );
-    dispatch(
-      participationsList({
-        recordBookId: match.params.id,
-        include: ['team', 'user']
-      })
-    );
-  }
-
+class RecordBooksView extends PureComponent {
   render() {
-    const { classes, isLoading, moments, recordBook } = this.props;
+    const { classes, data } = this.props;
     return (
-      <div>
-        <Paper>
-          <Typography
-            className={classNames(classes.recordBookTitle)}
-            type="headline"
-          >
-            {recordBook ? recordBook.attributes.name : 'Record Book'}
-          </Typography>
+      <Paper>
+        {data.loading ? (
+          <div className={classNames(classes.loadingContainer)}>
+            <CircularProgress color="accent" />
+          </div>
+        ) : (
+          <div>
+            <Typography
+              className={classNames(classes.recordBookTitle)}
+              type="headline"
+            >
+              {data.recordBook.name}
+            </Typography>
 
-          {isLoading ? (
-            <div className={classNames(classes.loadingContainer)}>
-              <CircularProgress color="accent" />
-            </div>
-          ) : (
             <Table>
               <TableHead>
                 <TableRow>
@@ -68,65 +47,62 @@ class MemberChallengeList extends Component {
               </TableHead>
 
               <TableBody>
-                {moments.map(moment => {
-                  if (moment.attributes.moment_type === 'completion') {
-                    return (
-                      <MomentCompletionTableRow
-                        completion={this.completionForMoment(moment)}
-                        key={moment.id}
-                        moment={moment}
-                        participation={this.participationForMomentCompletion(
-                          moment
-                        )}
-                        user={this.userForMomentCompletion(moment)}
-                      />
-                    );
-                  } else {
-                    return (
-                      <MomentNewMemberTableRow
-                        key={moment.id}
-                        moment={moment}
-                        participation={this.participationForMomentNewMember(
-                          moment
-                        )}
-                        user={this.userForMomentNewMember(moment)}
-                      />
-                    );
-                  }
+                {data.moments.map(moment => {
+                  return (
+                    <TableRow
+                      className={classNames(
+                        moment.completion &&
+                          this.backgroundClassFromStatus(
+                            moment.completion.status,
+                            classes
+                          )
+                      )}
+                      key={moment.id}
+                    >
+                      <TableCell className={classNames(classes.momentType)}>
+                        {moment.momentType.replace('_', ' ')}
+                      </TableCell>
+                      <TableCell>
+                        <Moment format="M/D h:mma">{moment.createdAt}</Moment>
+                      </TableCell>
+                      <TableCell>{moment.user.discordName}</TableCell>
+                      <TableCell>
+                        {moment.completion ? moment.completion.points : null}
+                      </TableCell>
+                      <TableCell>
+                        {this.iconForTeam(moment.participation.team.name)}
+                      </TableCell>
+                    </TableRow>
+                  );
                 })}
               </TableBody>
             </Table>
-          )}
-        </Paper>
-      </div>
+          </div>
+        )}
+      </Paper>
     );
   }
 
-  completionForMoment(moment) {
-    return moment.relationships.trackable.data;
+  backgroundClassFromStatus(completionStatus, classes) {
+    switch (completionStatus) {
+      case 'approved':
+        return classes.backgroundApproved;
+      case 'declined':
+        return classes.backgroundDeclined;
+      default:
+        return '';
+    }
   }
 
-  participationForMomentCompletion(moment) {
-    const trackable = moment.relationships.trackable.data;
-    return this.props.participations.find(p => {
-      return p.id === trackable.relationships.participation.data.id;
-    });
-  }
-
-  participationForMomentNewMember(moment) {
-    const trackable = moment.relationships.trackable.data;
-    return this.props.participations.find(p => {
-      return p.relationships.user.data.id === trackable.id;
-    });
-  }
-
-  userForMomentCompletion(moment) {
-    const participation = this.participationForMomentCompletion(moment);
-    return participation.relationships.user.data;
-  }
-
-  userForMomentNewMember(moment) {
-    return moment.relationships.trackable.data;
+  iconForTeam(teamName) {
+    switch (teamName) {
+      case 'Alpha Team':
+        return <AlphaIcon />;
+      case 'Bravo Team':
+        return <BravoIcon />;
+      default:
+        return null;
+    }
   }
 }
 
@@ -141,19 +117,4 @@ const styles = theme => ({
   }
 });
 
-const mapStateToProps = state => {
-  return {
-    completions: state.completions.completionsList,
-    isLoading:
-      state.completions.completionsListRequesting ||
-      state.moments.momentsListRequesting ||
-      state.participations.participationsListRequesting,
-    moments: state.moments.momentsList,
-    participations: state.participations.participationsList,
-    recordBook: state.recordBooks.recordBooksView
-  };
-};
-
-export default connect(mapStateToProps)(
-  withStyles(styles)(MemberChallengeList)
-);
+export default withStyles(styles)(RecordBooksView);

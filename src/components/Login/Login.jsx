@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
-import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import withStyles from 'material-ui/styles/withStyles';
@@ -10,8 +9,6 @@ import Button from 'material-ui/Button';
 import Card, { CardActions, CardContent } from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 import Typography from 'material-ui/Typography';
-
-import { loginPost } from '../../actions/auth';
 
 class Login extends PureComponent {
   state = {
@@ -27,7 +24,16 @@ class Login extends PureComponent {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.loginPost(this.state.email, this.state.password);
+    this.props
+      .mutate({
+        variables: { email: this.state.email, password: this.state.password }
+      })
+      .then(({ data }) => {
+        if (data.login.token) {
+          this.props.loginSuccess(data.login.token, data.login.uid);
+          this.props.setCurrentUser(data.login.user);
+        }
+      });
   };
 
   render() {
@@ -92,20 +98,4 @@ const styles = theme => {
   return formStyles(theme);
 };
 
-const mapStateToProps = state => {
-  return {
-    currentUser: state.auth.currentUser
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    loginPost: (email, password) => {
-      dispatch(loginPost(email, password));
-    }
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withStyles(styles)(Login)
-);
+export default withStyles(styles)(Login);

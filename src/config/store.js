@@ -3,8 +3,9 @@ import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 
 import appReducers from '../reducers/index';
+import client from './apolloClient';
 
-const middlewares = [thunkMiddleware];
+const middlewares = [thunkMiddleware, client.middleware()];
 
 if (process.env.NODE_ENV === 'development') {
   const loggerMiddleware = createLogger();
