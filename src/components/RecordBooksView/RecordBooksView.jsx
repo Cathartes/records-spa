@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
-import { gql, graphql } from 'react-apollo';
+import { graphql } from 'react-apollo';
 
 import Moment from 'react-moment';
 
@@ -17,6 +17,8 @@ import Typography from 'material-ui/Typography';
 
 import AlphaIcon from '../../icons/Alpha';
 import BravoIcon from '../../icons/Bravo';
+
+import recordBooksViewQuery from './recordBooksViewQuery';
 
 class MemberChallengeList extends PureComponent {
   render() {
@@ -118,33 +120,7 @@ const styles = theme => ({
   }
 });
 
-const recordBookViewQuery = gql`
-  query recordBookViewQuery($recordBookId: ID!) {
-    moments(recordBookId: $recordBookId) {
-      completion {
-        points
-        status
-      }
-      createdAt
-      id
-      momentType
-      participation {
-        team {
-          name
-        }
-      }
-      user {
-        discordName
-      }
-    }
-    recordBook(id: $recordBookId) {
-      id
-      name
-    }
-  }
-`;
-
-export default graphql(recordBookViewQuery, {
+export default graphql(recordBooksViewQuery, {
   options: props => ({
     variables: {
       recordBookId: props.match.params.id

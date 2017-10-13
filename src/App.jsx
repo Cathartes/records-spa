@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import classNames from 'classnames';
-import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import withStyles from 'material-ui/styles/withStyles';
@@ -18,19 +17,13 @@ import UsersList from './components/UsersList';
 
 import mainTheme from './config/themes/mainTheme';
 
-import { recordBooksList } from './actions/recordBooks';
-
 const styles = theme => ({
   appContent: {
     paddingTop: 65
   }
 });
 
-class App extends Component {
-  componentWillMount() {
-    this.props.recordBooksList();
-  }
-
+class App extends PureComponent {
   render() {
     const { classes } = this.props;
 
@@ -57,18 +50,4 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {};
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    recordBooksList: () => {
-      dispatch(recordBooksList());
-    }
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withStyles(styles)(App)
-);
+export default withStyles(styles)(App);

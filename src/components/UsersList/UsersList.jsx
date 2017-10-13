@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import classNames from 'classnames';
-import { connect } from 'react-redux';
+import { graphql } from 'react-apollo';
 import { Link } from 'react-router-dom';
 
 import withStyles from 'material-ui/styles/withStyles';
@@ -19,16 +19,11 @@ import Typography from 'material-ui/Typography';
 import AccountBoxIcon from 'material-ui-icons/AccountBox';
 import PersonAddIcon from 'material-ui-icons/PersonAdd';
 
-import { usersGet } from '../../actions/users';
+import usersListQuery from './usersListQuery';
 
-class UsersList extends Component {
-  componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(usersGet());
-  }
-
+class UsersList extends PureComponent {
   render() {
-    const { classes, users, usersGetRequesting } = this.props;
+    const { classes, data } = this.props;
     return (
       <div>
         <Paper className={classNames(classes.paper)}>
@@ -47,13 +42,13 @@ class UsersList extends Component {
           </Typography>
           <hr className={classNames(classes.hr)} />
 
-          {usersGetRequesting ? (
+          {data.loading ? (
             <div className={classNames(classes.loadingContainer)}>
               <CircularProgress color="accent" />
             </div>
           ) : (
             <List>
-              {users.map(user => {
+              {data.users.map(user => {
                 return (
                   <ListItem key={user.id}>
                     <ListItemAvatar>
@@ -62,8 +57,8 @@ class UsersList extends Component {
                       </Avatar>
                     </ListItemAvatar>
                     <ListItemText
-                      primary={user.attributes.discord_name.toUpperCase()}
-                      secondary={user.attributes.email}
+                      primary={user.discordName.toUpperCase()}
+                      secondary={user.email}
                     />
                   </ListItem>
                 );
@@ -105,11 +100,4 @@ const styles = theme => {
   };
 };
 
-const mapStateToProps = state => {
-  return {
-    users: state.users.users,
-    usersGetRequesting: state.users.usersGetRequesting
-  };
-};
-
-export default connect(mapStateToProps)(withStyles(styles)(UsersList));
+export default graphql(usersListQuery)(withStyles(styles)(UsersList));

@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
+import { graphql } from 'react-apollo';
 import { Link } from 'react-router-dom';
 
 import withStyles from 'material-ui/styles/withStyles';
@@ -18,6 +19,7 @@ import ExpandLessIcon from 'material-ui-icons/ExpandLess';
 import ExpandMoreIcon from 'material-ui-icons/ExpandMore';
 import PeopleIcon from 'material-ui-icons/People';
 
+import recordBooksListQuery from './recordBooksListQuery';
 import { recordBooksCollapseToggle } from '../../actions/recordBooks';
 import { sidenavToggle } from '../../actions/sidenav';
 
@@ -26,10 +28,10 @@ class Sidenav extends PureComponent {
     const {
       classes,
       currentUser,
+      data,
       isRecordBooksCollapseOpen,
       onLinkClick,
-      onRecordBooksCollapseClick,
-      recordBooks
+      onRecordBooksCollapseClick
     } = this.props;
     return (
       <List>
@@ -55,29 +57,31 @@ class Sidenav extends PureComponent {
           )}
         </ListItem>
 
-        <Collapse in={isRecordBooksCollapseOpen}>
-          {recordBooks.map((recordBook, index) => {
-            const showDivider = !recordBooks[index + 1];
-            return (
-              <ListItem
-                button
-                component={Link}
-                divider={showDivider}
-                key={recordBook.id}
-                onClick={() => onLinkClick()}
-                to={`/records/${recordBook.id}`}
-              >
-                <ListItemText inset primary={recordBook.attributes.name} />
-              </ListItem>
-            );
-          })}
+        {!data.loading && (
+          <Collapse in={isRecordBooksCollapseOpen}>
+            {data.recordBooks.map((recordBook, index) => {
+              const showDivider = !data.recordBooks[index + 1];
+              return (
+                <ListItem
+                  button
+                  component={Link}
+                  divider={showDivider}
+                  key={recordBook.id}
+                  onClick={() => onLinkClick()}
+                  to={`/records/${recordBook.id}`}
+                >
+                  <ListItemText inset primary={recordBook.name} />
+                </ListItem>
+              );
+            })}
 
-          {recordBooks.length === 0 && (
-            <ListItem divider key={0}>
-              <ListItemText inset primary="No records found" />
-            </ListItem>
-          )}
-        </Collapse>
+            {data.recordBooks.length === 0 && (
+              <ListItem divider key={0}>
+                <ListItemText inset primary="No records found" />
+              </ListItem>
+            )}
+          </Collapse>
+        )}
 
         {currentUser &&
           currentUser.attributes.admin && (
@@ -137,8 +141,7 @@ const styles = theme => {
 const mapStateToProps = state => {
   return {
     currentUser: state.auth.currentUser,
-    isRecordBooksCollapseOpen: state.recordBooks.isRecordBooksCollapseOpen,
-    recordBooks: state.recordBooks.recordBooksList
+    isRecordBooksCollapseOpen: state.recordBooks.isRecordBooksCollapseOpen
   };
 };
 
@@ -154,5 +157,5 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-  withStyles(styles)(Sidenav)
+  graphql(recordBooksListQuery)(withStyles(styles)(Sidenav))
 );
