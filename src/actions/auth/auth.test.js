@@ -7,6 +7,8 @@ import {
   setCurrentUser
 } from './auth';
 
+require('../../config/localStorageTest');
+
 describe('auth actions', () => {
   it('should create loginSuccess', () => {
     const expectedAction = {

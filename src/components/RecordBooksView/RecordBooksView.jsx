@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
-import { graphql } from 'react-apollo';
 
 import Moment from 'react-moment';
 
@@ -18,9 +17,7 @@ import Typography from 'material-ui/Typography';
 import AlphaIcon from '../../icons/Alpha';
 import BravoIcon from '../../icons/Bravo';
 
-import recordBooksViewQuery from './recordBooksViewQuery';
-
-class MemberChallengeList extends PureComponent {
+class RecordBooksView extends PureComponent {
   render() {
     const { classes, data } = this.props;
     return (
@@ -120,10 +117,4 @@ const styles = theme => ({
   }
 });
 
-export default graphql(recordBooksViewQuery, {
-  options: props => ({
-    variables: {
-      recordBookId: props.match.params.id
-    }
-  })
-})(withStyles(styles)(MemberChallengeList));
+export default withStyles(styles)(RecordBooksView);

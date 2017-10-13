@@ -1,1 +1,1 @@
-export { default } from './RecordBooksView';
+export { default } from './RecordBooksViewContainer';

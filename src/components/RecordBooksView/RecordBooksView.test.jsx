@@ -8,7 +8,11 @@ import RecordBooksView from './RecordBooksView';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  const props = { match: { params: {} } };
+  const props = {
+    data: { loading: false, moments: [], recordBook: {} },
+    match: { params: {} }
+  };
+
   ReactDOM.render(
     <Provider store={store}>
       <RecordBooksView {...props} />

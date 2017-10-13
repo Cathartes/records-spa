@@ -1,7 +1,5 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
-import { connect } from 'react-redux';
-import { graphql } from 'react-apollo';
 import { Link } from 'react-router-dom';
 
 import withStyles from 'material-ui/styles/withStyles';
@@ -18,10 +16,6 @@ import ClearIcon from 'material-ui-icons/Clear';
 import ExpandLessIcon from 'material-ui-icons/ExpandLess';
 import ExpandMoreIcon from 'material-ui-icons/ExpandMore';
 import PeopleIcon from 'material-ui-icons/People';
-
-import recordBooksListQuery from './recordBooksListQuery';
-import { recordBooksCollapseToggle } from '../../actions/recordBooks';
-import { sidenavToggle } from '../../actions/sidenav';
 
 class Sidenav extends PureComponent {
   render() {
@@ -138,24 +132,4 @@ const styles = theme => {
   };
 };
 
-const mapStateToProps = state => {
-  return {
-    currentUser: state.auth.currentUser,
-    isRecordBooksCollapseOpen: state.recordBooks.isRecordBooksCollapseOpen
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    onLinkClick: () => {
-      dispatch(sidenavToggle(false));
-    },
-    onRecordBooksCollapseClick: isRecordBooksCollapseOpen => {
-      dispatch(recordBooksCollapseToggle(isRecordBooksCollapseOpen));
-    }
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(
-  graphql(recordBooksListQuery)(withStyles(styles)(Sidenav))
-);
+export default withStyles(styles)(Sidenav);

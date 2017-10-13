@@ -1,7 +1,5 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
-import { connect } from 'react-redux';
-import { graphql } from 'react-apollo';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import withStyles from 'material-ui/styles/withStyles';
@@ -17,9 +15,6 @@ import UsersAdd from '../UsersAdd';
 import UsersList from '../UsersList';
 
 import mainTheme from '../../config/themes/mainTheme';
-
-import { setCurrentUser } from '../../actions/auth';
-import currentUser from './currentUser';
 
 class App extends PureComponent {
   componentDidUpdate() {
@@ -60,14 +55,4 @@ const styles = theme => ({
   }
 });
 
-const mapDispatchToProps = dispatch => {
-  return {
-    setCurrentUser: user => {
-      dispatch(setCurrentUser(user));
-    }
-  };
-};
-
-export default connect(() => Object(), mapDispatchToProps)(
-  graphql(currentUser)(withStyles(styles)(App))
-);
+export default withStyles(styles)(App);

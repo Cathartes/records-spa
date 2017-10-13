@@ -1,7 +1,5 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
-import { graphql } from 'react-apollo';
-import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import withStyles from 'material-ui/styles/withStyles';
@@ -11,9 +9,6 @@ import Button from 'material-ui/Button';
 import Card, { CardActions, CardContent } from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 import Typography from 'material-ui/Typography';
-
-import { loginSuccess } from '../../actions/auth';
-import loginMutation from './loginMutation';
 
 class Login extends PureComponent {
   state = {
@@ -102,20 +97,4 @@ const styles = theme => {
   return formStyles(theme);
 };
 
-const mapStateToProps = state => {
-  return {
-    currentUser: state.auth.currentUser
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    loginSuccess: (token, uid) => {
-      dispatch(loginSuccess(token, uid));
-    }
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(
-  graphql(loginMutation)(withStyles(styles)(Login))
-);
+export default withStyles(styles)(Login);

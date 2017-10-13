@@ -9,10 +9,12 @@ import UsersList from './UsersList';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
+  const props = { data: { loading: false, users: [] } };
+
   ReactDOM.render(
     <Provider store={store}>
       <Router>
-        <UsersList />
+        <UsersList {...props} />
       </Router>
     </Provider>,
     div

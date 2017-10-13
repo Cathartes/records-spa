@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
-import { graphql } from 'react-apollo';
 import { Link } from 'react-router-dom';
 
 import withStyles from 'material-ui/styles/withStyles';
@@ -18,8 +17,6 @@ import Typography from 'material-ui/Typography';
 
 import AccountBoxIcon from 'material-ui-icons/AccountBox';
 import PersonAddIcon from 'material-ui-icons/PersonAdd';
-
-import usersListQuery from './usersListQuery';
 
 class UsersList extends PureComponent {
   render() {
@@ -100,4 +97,4 @@ const styles = theme => {
   };
 };
 
-export default graphql(usersListQuery)(withStyles(styles)(UsersList));
+export default withStyles(styles)(UsersList);
