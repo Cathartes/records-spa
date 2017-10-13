@@ -38,7 +38,7 @@ class UsersAdd extends Component {
     const { classes, currentUser, usersPostRequesting } = this.props;
     const { startedSubmit } = this.state;
 
-    if (!currentUser || !currentUser.attributes.admin) {
+    if (!currentUser || !currentUser.admin) {
       return <Redirect to="/" />;
     } else if (startedSubmit && !usersPostRequesting) {
       return <Redirect to="/members" />;

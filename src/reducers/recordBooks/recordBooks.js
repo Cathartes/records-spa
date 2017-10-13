@@ -1,20 +1,12 @@
 import {
   RECORD_BOOKS_ADD_REQUESTING,
   RECORD_BOOKS_ADD_SUCCESS,
-  RECORD_BOOKS_COLLAPSE_TOGGLE,
-  RECORD_BOOKS_LIST_REQUESTING,
-  RECORD_BOOKS_LIST_SUCCESS,
-  RECORD_BOOKS_VIEW_REQUESTING,
-  RECORD_BOOKS_VIEW_SUCCESS
+  RECORD_BOOKS_COLLAPSE_TOGGLE
 } from '../../actions/recordBooks';
 
 const initialState = {
   isRecordBooksCollapseOpen: false,
-  recordBooksAddRequesting: false,
-  recordBooksList: [],
-  recordBooksListRequesting: false,
-  recordBooksView: null,
-  recordBooksViewRequesting: false
+  recordBooksAddRequesting: false
 };
 
 const recordBooks = (state = initialState, action) => {
@@ -32,20 +24,6 @@ const recordBooks = (state = initialState, action) => {
       return Object.assign({}, state, {
         isRecordBooksCollapseOpen: action.isOpen
       });
-
-    case RECORD_BOOKS_LIST_REQUESTING:
-      return Object.assign({}, state, {
-        recordBooksListRequesting: action.isRequesting
-      });
-    case RECORD_BOOKS_LIST_SUCCESS:
-      return Object.assign({}, state, { recordBooksList: action.recordBooks });
-
-    case RECORD_BOOKS_VIEW_REQUESTING:
-      return Object.assign({}, state, {
-        recordBooksViewRequesting: action.isRequesting
-      });
-    case RECORD_BOOKS_VIEW_SUCCESS:
-      return Object.assign({}, state, { recordBooksView: action.recordBook });
 
     default:
       return state;

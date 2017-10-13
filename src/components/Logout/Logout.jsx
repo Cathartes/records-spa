@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import { logoutDelete } from '../../actions/auth';
+import { logoutSuccess } from '../../actions/auth';
 import { snackbarAdd } from '../../actions/snackbars';
 
-class Logout extends Component {
+class Logout extends PureComponent {
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(logoutDelete());
+    dispatch(logoutSuccess());
     dispatch(snackbarAdd('Successfully logged out!'));
   }
 

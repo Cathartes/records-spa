@@ -4,13 +4,13 @@ import { Provider } from 'react-redux';
 
 import store from '../../config/store';
 
-import MemberChallengeList from './MemberChallengeList';
+import App from './App';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(
     <Provider store={store}>
-      <MemberChallengeList />
+      <App />
     </Provider>,
     div
   );

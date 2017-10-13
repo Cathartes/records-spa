@@ -37,7 +37,7 @@ class Sidenav extends PureComponent {
       <List>
         {currentUser && (
           <ListItem divider>
-            <ListItemText primary={currentUser.attributes.email} />
+            <ListItemText primary={currentUser.email} />
           </ListItem>
         )}
 
@@ -84,7 +84,7 @@ class Sidenav extends PureComponent {
         )}
 
         {currentUser &&
-          currentUser.attributes.admin && (
+          currentUser.admin && (
             <ListItem
               button
               component={Link}

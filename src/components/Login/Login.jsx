@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
+import { graphql } from 'react-apollo';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
@@ -11,7 +12,8 @@ import Card, { CardActions, CardContent } from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 import Typography from 'material-ui/Typography';
 
-import { loginPost } from '../../actions/auth';
+import { loginSuccess } from '../../actions/auth';
+import loginMutation from './loginMutation';
 
 class Login extends PureComponent {
   state = {
@@ -27,7 +29,15 @@ class Login extends PureComponent {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.loginPost(this.state.email, this.state.password);
+    this.props
+      .mutate({
+        variables: { email: this.state.email, password: this.state.password }
+      })
+      .then(({ data }) => {
+        if (data.login.token) {
+          this.props.loginSuccess(data.login.token, data.login.uid);
+        }
+      });
   };
 
   render() {
@@ -100,12 +110,12 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    loginPost: (email, password) => {
-      dispatch(loginPost(email, password));
+    loginSuccess: (token, uid) => {
+      dispatch(loginSuccess(token, uid));
     }
   };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-  withStyles(styles)(Login)
+  graphql(loginMutation)(withStyles(styles)(Login))
 );

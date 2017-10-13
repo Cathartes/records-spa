@@ -39,7 +39,7 @@ class RecordBooksAdd extends Component {
 
     if (
       !currentUser ||
-      !currentUser.attributes.admin ||
+      !currentUser.admin ||
       (startedSubmit && !recordBooksAddRequesting)
     ) {
       return <Redirect to={'/'} />;

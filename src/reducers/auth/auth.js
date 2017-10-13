@@ -1,8 +1,4 @@
-import {
-  LOGIN_POST_REQUESTING,
-  LOGIN_POST_SUCCESS,
-  LOGOUT_DELETE_SUCCESS
-} from '../../actions/auth';
+import { LOGOUT_SUCCESS, SET_CURRENT_USER } from '../../actions/auth';
 
 const initialState = {
   currentUser: null
@@ -10,14 +6,10 @@ const initialState = {
 
 const auth = (state = initialState, action) => {
   switch (action.type) {
-    case LOGIN_POST_REQUESTING:
-      return Object.assign({}, state, {
-        loginPostRequesting: action.isRequesting
-      });
-    case LOGIN_POST_SUCCESS:
-      return Object.assign({}, state, { currentUser: action.user });
-    case LOGOUT_DELETE_SUCCESS:
+    case LOGOUT_SUCCESS:
       return Object.assign({}, state, { currentUser: null });
+    case SET_CURRENT_USER:
+      return Object.assign({}, state, { currentUser: action.user });
     default:
       return state;
   }

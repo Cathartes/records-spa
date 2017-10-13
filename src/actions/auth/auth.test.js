@@ -1,46 +1,31 @@
 import {
-  LOGIN_POST_ERROR,
-  loginPostError,
-  LOGIN_POST_REQUESTING,
-  loginPostRequesting,
-  LOGIN_POST_SUCCESS,
-  loginPostSuccess,
-  LOGOUT_DELETE_SUCCESS,
-  logoutDeleteSuccess
+  LOGIN_SUCCESS,
+  loginSuccess,
+  LOGOUT_SUCCESS,
+  logoutSuccess,
+  SET_CURRENT_USER,
+  setCurrentUser
 } from './auth';
 
 describe('auth actions', () => {
-  it('should create loginPostError', () => {
-    const isError = true;
+  it('should create loginSuccess', () => {
     const expectedAction = {
-      type: LOGIN_POST_ERROR,
-      isError
+      type: LOGIN_SUCCESS
     };
-    expect(loginPostError(isError)).toEqual(expectedAction);
+    expect(loginSuccess()).toEqual(expectedAction);
   });
 
-  it('should create loginPostRequesting', () => {
-    const isRequesting = true;
+  it('should create logoutSuccess', () => {
     const expectedAction = {
-      type: LOGIN_POST_REQUESTING,
-      isRequesting
+      type: LOGOUT_SUCCESS
     };
-    expect(loginPostRequesting(isRequesting)).toEqual(expectedAction);
+    expect(logoutSuccess()).toEqual(expectedAction);
   });
 
-  it('should create loginPostSuccess', () => {
-    const user = [{ test: 'Fake User' }];
+  it('should create setCurrentUser', () => {
     const expectedAction = {
-      type: LOGIN_POST_SUCCESS,
-      user
+      type: SET_CURRENT_USER
     };
-    expect(loginPostSuccess(user)).toEqual(expectedAction);
-  });
-
-  it('should create logoutDeleteSuccess', () => {
-    const expectedAction = {
-      type: LOGOUT_DELETE_SUCCESS
-    };
-    expect(logoutDeleteSuccess()).toEqual(expectedAction);
+    expect(setCurrentUser()).toEqual(expectedAction);
   });
 });
