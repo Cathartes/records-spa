@@ -15,10 +15,14 @@ import recordBooksListQuery from '../../queries/recordBooksListQuery';
 class RecordBooksAdd extends Component {
   state = {
     name: null,
+    startTime: null,
+    endTime: null,
+    rushStartTime: null,
+    rushEndTime: null,
     shouldRedirect: false
   };
 
-  handleTextChange = event => {
+  handleInputChange = event => {
     this.setState({
       [event.target.name]: event.target.value
     });
@@ -28,7 +32,13 @@ class RecordBooksAdd extends Component {
     event.preventDefault();
     this.props
       .mutate({
-        variables: { name: this.state.name },
+        variables: {
+          name: this.state.name,
+          startTime: this.state.startTime,
+          endTime: this.state.endTime,
+          rushStartTime: this.state.rushStartTime,
+          rushEndTime: this.state.rushEndTime
+        },
         refetchQueries: [{ query: recordBooksListQuery }]
       })
       .then(({ data }) => {
@@ -48,7 +58,7 @@ class RecordBooksAdd extends Component {
       <div className={classNames(classes.container)}>
         <Card>
           <form onSubmit={this.handleSubmit} noValidate>
-            <CardContent className={classNames(classes.form)}>
+            <CardContent>
               <Typography
                 className={classNames(classes.formTitle)}
                 type="title"
@@ -61,11 +71,55 @@ class RecordBooksAdd extends Component {
                 autoFocus
                 name="name"
                 label="Name"
-                onChange={this.handleTextChange}
+                onChange={this.handleInputChange}
                 margin="normal"
                 fullWidth
                 className={classNames(classes.textField)}
               />
+
+              <div className={classNames(classes.dateInputContainer)}>
+                <TextField
+                  name="startTime"
+                  label="Start Date"
+                  type="datetime-local"
+                  onChange={this.handleInputChange}
+                  margin="normal"
+                  className={classNames(classes.dateInput, classes.textField)}
+                  InputLabelProps={{ shrink: true }}
+                />
+
+                <TextField
+                  name="endTime"
+                  label="End Date"
+                  type="datetime-local"
+                  onChange={this.handleInputChange}
+                  margin="normal"
+                  className={classNames(classes.dateInput, classes.textField)}
+                  InputLabelProps={{ shrink: true }}
+                />
+              </div>
+
+              <div className={classNames(classes.dateInputContainer)}>
+                <TextField
+                  name="rushStartTime"
+                  label="Rush Start Date"
+                  type="datetime-local"
+                  onChange={this.handleInputChange}
+                  margin="normal"
+                  className={classNames(classes.dateInput, classes.textField)}
+                  InputLabelProps={{ shrink: true }}
+                />
+
+                <TextField
+                  name="rushEndTime"
+                  label="Rush End Date"
+                  type="datetime-local"
+                  onChange={this.handleInputChange}
+                  margin="normal"
+                  className={classNames(classes.dateInput, classes.textField)}
+                  InputLabelProps={{ shrink: true }}
+                />
+              </div>
             </CardContent>
 
             <CardActions className={classNames(classes.submitContainer)}>
@@ -85,7 +139,19 @@ class RecordBooksAdd extends Component {
 }
 
 const styles = theme => {
-  return formStyles(theme);
+  const form = formStyles(theme);
+  return {
+    ...form,
+    dateInputContainer: {
+      display: 'flex',
+      flex: 1,
+      flexWrap: 'wrap'
+    },
+    dateInput: {
+      flex: 1,
+      minWidth: 200
+    }
+  };
 };
 
 export default withStyles(styles)(RecordBooksAdd);

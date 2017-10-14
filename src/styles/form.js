@@ -4,10 +4,6 @@ const styles = theme => ({
     justifyContent: 'center',
     padding: 20
   },
-  form: {
-    display: 'flex',
-    flexWrap: 'wrap'
-  },
   formTitle: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit
