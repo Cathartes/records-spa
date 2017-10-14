@@ -20,8 +20,13 @@ const recordBooksViewQuery = gql`
       }
     }
     recordBook(id: $recordBookId) {
+      endTime
       id
       name
+      published
+      rushEndTime
+      rushStartTime
+      startTime
     }
   }
 `;
