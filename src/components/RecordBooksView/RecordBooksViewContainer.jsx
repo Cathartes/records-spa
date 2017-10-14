@@ -1,6 +1,6 @@
 import { graphql } from 'react-apollo';
 
-import recordBooksViewQuery from './recordBooksViewQuery';
+import recordBooksViewQuery from '../../queries/recordBooksViewQuery';
 
 import RecordBooksView from './RecordBooksView';
 
