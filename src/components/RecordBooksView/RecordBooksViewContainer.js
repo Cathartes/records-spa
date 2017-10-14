@@ -1,5 +1,6 @@
 import { graphql } from 'react-apollo';
 
+import updateRecordBookMutation from '../../mutations/updateRecordBookMutation';
 import recordBooksViewQuery from '../../queries/recordBooksViewQuery';
 
 import RecordBooksView from './RecordBooksView';
@@ -10,4 +11,4 @@ export default graphql(recordBooksViewQuery, {
       recordBookId: props.match.params.id
     }
   })
-})(RecordBooksView);
+})(graphql(updateRecordBookMutation)(RecordBooksView));

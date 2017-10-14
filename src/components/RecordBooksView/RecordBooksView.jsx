@@ -1,14 +1,19 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 
+import Moment from 'react-moment';
+
 import withStyles from 'material-ui/styles/withStyles';
 
 import AppBar from 'material-ui/AppBar';
+import Button from 'material-ui/Button';
 import CircularProgress from 'material-ui/Progress/CircularProgress';
 import Paper from 'material-ui/Paper';
 import Tabs from 'material-ui/Tabs';
 import Tab from 'material-ui/Tabs/Tab';
 import Typography from 'material-ui/Typography';
+
+import recordBooksViewQuery from '../../queries/recordBooksViewQuery';
 
 import MomentsList from '../MomentsList';
 import ParticipationsList from '../ParticipationsList';
@@ -18,6 +23,27 @@ class RecordBooksView extends PureComponent {
 
   changeTab = (event, value) => {
     this.setState({ currentTab: value });
+  };
+
+  onPublishClick = () => {
+    const recordBook = this.props.data.recordBook;
+    this.props.mutate({
+      variables: {
+        id: recordBook.id,
+        name: recordBook.name,
+        published: true,
+        startTime: recordBook.startTime,
+        endTime: recordBook.endTime,
+        rushStartTime: recordBook.rushStartTime,
+        rushEndTime: recordBook.rushEndTime
+      },
+      refetchQueries: [
+        {
+          query: recordBooksViewQuery,
+          variables: { recordBookId: recordBook.id }
+        }
+      ]
+    });
   };
 
   render() {
@@ -56,13 +82,29 @@ class RecordBooksView extends PureComponent {
             {currentTab === 2 && (
               <div>
                 <Typography type="subheading">Start Time</Typography>
-                <span>{data.recordBook.startTime}</span>
+                <Moment format="M/D/YYYY @ h:mma">
+                  {data.recordBook.startTime}
+                </Moment>
                 <Typography type="subheading">End Time</Typography>
-                <span>{data.recordBook.endTime}</span>
+                <Moment format="M/D/YYYY @ h:mma">
+                  {data.recordBook.endTime}
+                </Moment>
                 <Typography type="subheading">Rush Start Time</Typography>
-                <span>{data.recordBook.rushStartTime}</span>
+                <Moment format="M/D/YYYY @ h:mma">
+                  {data.recordBook.rushStartTime}
+                </Moment>
                 <Typography type="subheading">Rush End Time</Typography>
-                <span>{data.recordBook.rushEndTime}</span>
+                <Moment format="M/D/YYYY @ h:mma">
+                  {data.recordBook.rushEndTime}
+                </Moment>
+
+                <Button
+                  disabled={data.recordBook.published}
+                  onClick={() => this.onPublishClick()}
+                  raised
+                >
+                  {data.recordBook.published ? 'Published' : 'Publish'}
+                </Button>
               </div>
             )}
           </div>
