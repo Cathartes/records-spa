@@ -7,14 +7,16 @@ import {
   setCurrentUser
 } from './auth';
 
-require('../../config/localStorageTest');
-
 describe('auth actions', () => {
   it('should create loginSuccess', () => {
+    const token = 'Fake Token';
+    const uid = 'Fake UID';
     const expectedAction = {
-      type: LOGIN_SUCCESS
+      type: LOGIN_SUCCESS,
+      token,
+      uid
     };
-    expect(loginSuccess()).toEqual(expectedAction);
+    expect(loginSuccess(token, uid)).toEqual(expectedAction);
   });
 
   it('should create logoutSuccess', () => {
@@ -25,9 +27,11 @@ describe('auth actions', () => {
   });
 
   it('should create setCurrentUser', () => {
+    const user = { test: 'Fake User' };
     const expectedAction = {
-      type: SET_CURRENT_USER
+      type: SET_CURRENT_USER,
+      user
     };
-    expect(setCurrentUser()).toEqual(expectedAction);
+    expect(setCurrentUser(user)).toEqual(expectedAction);
   });
 });
