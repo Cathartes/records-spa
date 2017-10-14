@@ -1,8 +1,6 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 
-import Moment from 'react-moment';
-
 import withStyles from 'material-ui/styles/withStyles';
 
 import AppBar from 'material-ui/AppBar';
@@ -10,22 +8,13 @@ import CircularProgress from 'material-ui/Progress/CircularProgress';
 import Paper from 'material-ui/Paper';
 import Tabs from 'material-ui/Tabs';
 import Tab from 'material-ui/Tabs/Tab';
-import Table from 'material-ui/Table';
-import TableBody from 'material-ui/Table/TableBody';
-import TableCell from 'material-ui/Table/TableCell';
-import TableHead from 'material-ui/Table/TableHead';
-import TableRow from 'material-ui/Table/TableRow';
 import Typography from 'material-ui/Typography';
 
-import AlphaIcon from '../../icons/Alpha';
-import BravoIcon from '../../icons/Bravo';
-
+import MomentsList from '../MomentsList';
 import ParticipationsList from '../ParticipationsList';
 
 class RecordBooksView extends PureComponent {
-  state = {
-    currentTab: 0
-  };
+  state = { currentTab: this.props.currentTab || 0 };
 
   changeTab = (event, value) => {
     this.setState({ currentTab: value });
@@ -58,50 +47,7 @@ class RecordBooksView extends PureComponent {
               </Tabs>
             </AppBar>
 
-            {currentTab === 0 && (
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Type</TableCell>
-                    <TableCell>Time Occurred</TableCell>
-                    <TableCell>Name</TableCell>
-                    <TableCell>Points</TableCell>
-                    <TableCell>Team</TableCell>
-                  </TableRow>
-                </TableHead>
-
-                <TableBody>
-                  {data.moments.map(moment => {
-                    return (
-                      <TableRow
-                        className={classNames(
-                          moment.completion &&
-                            this.backgroundClassFromStatus(
-                              moment.completion.status,
-                              classes
-                            )
-                        )}
-                        key={moment.id}
-                      >
-                        <TableCell className={classNames(classes.momentType)}>
-                          {moment.momentType.replace('_', ' ')}
-                        </TableCell>
-                        <TableCell>
-                          <Moment format="M/D h:mma">{moment.createdAt}</Moment>
-                        </TableCell>
-                        <TableCell>{moment.user.discordName}</TableCell>
-                        <TableCell>
-                          {moment.completion ? moment.completion.points : null}
-                        </TableCell>
-                        <TableCell>
-                          {this.iconForTeam(moment.participation.team.name)}
-                        </TableCell>
-                      </TableRow>
-                    );
-                  })}
-                </TableBody>
-              </Table>
-            )}
+            {currentTab === 0 && <MomentsList recordBookId={match.params.id} />}
 
             {currentTab === 1 && (
               <ParticipationsList recordBookId={match.params.id} />
@@ -123,28 +69,6 @@ class RecordBooksView extends PureComponent {
         )}
       </Paper>
     );
-  }
-
-  backgroundClassFromStatus(completionStatus, classes) {
-    switch (completionStatus) {
-      case 'approved':
-        return classes.backgroundApproved;
-      case 'declined':
-        return classes.backgroundDeclined;
-      default:
-        return '';
-    }
-  }
-
-  iconForTeam(teamName) {
-    switch (teamName) {
-      case 'Alpha Team':
-        return <AlphaIcon />;
-      case 'Bravo Team':
-        return <BravoIcon />;
-      default:
-        return null;
-    }
   }
 }
 

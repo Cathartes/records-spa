@@ -8,10 +8,7 @@ import ParticipationsList from './ParticipationsList';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  const props = {
-    data: { loading: false, participations: [] },
-    match: { params: {} }
-  };
+  const props = { data: { loading: false, participations: [] } };
 
   ReactDOM.render(
     <Provider store={store}>
