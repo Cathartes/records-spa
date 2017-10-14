@@ -1,22 +1,14 @@
+import { graphql } from 'react-apollo';
 import { connect } from 'react-redux';
 
-// import { usersPost } from '../../actions/users';
+import createUserMutation from '../../mutations/createUserMutation';
 
 import UsersAdd from './UsersAdd';
 
 const mapStateToProps = state => {
   return {
-    currentUser: state.auth.currentUser,
-    usersPostRequesting: state.recordBooks.usersPostRequesting
+    currentUser: state.auth.currentUser
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    // usersPost: discordName => {
-    //   dispatch(usersPost(discordName));
-    // }
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(UsersAdd);
+export default connect(mapStateToProps)(graphql(createUserMutation)(UsersAdd));

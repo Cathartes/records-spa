@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { graphql } from 'react-apollo';
 
-import recordBooksListQuery from './recordBooksListQuery';
+import recordBooksListQuery from '../../queries/recordBooksListQuery';
 import { recordBooksCollapseToggle } from '../../actions/recordBooks';
 import { sidenavToggle } from '../../actions/sidenav';
 

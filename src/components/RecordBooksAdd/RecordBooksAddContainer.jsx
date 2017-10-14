@@ -1,21 +1,16 @@
+import { graphql } from 'react-apollo';
 import { connect } from 'react-redux';
 
-// import { recordBooksAdd } from '../../actions/recordBooks';
+import createRecordBookMutation from '../../mutations/createRecordBookMutation';
 
 import RecordBooksAdd from './RecordBooksAdd';
 
 const mapStateToProps = state => {
   return {
-    currentUser: state.auth.currentUser,
-    recordBooksAddRequesting: state.recordBooks.recordBooksAddRequesting
+    currentUser: state.auth.currentUser
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    // recordBooksAdd: name => {
-    //   dispatch(recordBooksAdd(name));
-    // }
-  };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(RecordBooksAdd);
+export default connect(mapStateToProps)(
+  graphql(createRecordBookMutation)(RecordBooksAdd)
+);

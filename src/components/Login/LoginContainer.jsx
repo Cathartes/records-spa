@@ -2,7 +2,7 @@ import { graphql } from 'react-apollo';
 import { connect } from 'react-redux';
 
 import { loginSuccess, setCurrentUser } from '../../actions/auth';
-import loginMutation from './loginMutation';
+import loginMutation from '../../mutations/loginMutation';
 
 import Login from './Login';
 

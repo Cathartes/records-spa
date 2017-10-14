@@ -10,10 +10,12 @@ import Card, { CardActions, CardContent } from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
 import Typography from 'material-ui/Typography';
 
+import recordBooksListQuery from '../../queries/recordBooksListQuery';
+
 class RecordBooksAdd extends Component {
   state = {
     name: null,
-    startedSubmit: false
+    shouldRedirect: false
   };
 
   handleTextChange = event => {
@@ -24,21 +26,21 @@ class RecordBooksAdd extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.recordBooksAdd(this.state.name);
-    this.setState({
-      startedSubmit: true
-    });
+    this.props
+      .mutate({
+        variables: { name: this.state.name },
+        refetchQueries: [{ query: recordBooksListQuery }]
+      })
+      .then(({ data }) => {
+        this.setState({ shouldRedirect: true });
+      });
   };
 
   render() {
-    const { classes, currentUser, recordBooksAddRequesting } = this.props;
-    const { startedSubmit } = this.state;
+    const { classes, currentUser } = this.props;
+    const { shouldRedirect } = this.state;
 
-    if (
-      !currentUser ||
-      !currentUser.admin ||
-      (startedSubmit && !recordBooksAddRequesting)
-    ) {
+    if (!currentUser || !currentUser.admin || shouldRedirect) {
       return <Redirect to={'/'} />;
     }
 

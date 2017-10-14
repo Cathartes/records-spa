@@ -1,6 +1,6 @@
 import { graphql } from 'react-apollo';
 
-import usersListQuery from './usersListQuery';
+import usersListQuery from '../../queries/usersListQuery';
 
 import UsersList from './UsersList';
 

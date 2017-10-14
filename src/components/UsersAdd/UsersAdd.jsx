@@ -12,9 +12,12 @@ import CardContent from 'material-ui/Card/CardContent';
 import TextField from 'material-ui/TextField';
 import Typography from 'material-ui/Typography';
 
+import usersListQuery from '../../queries/usersListQuery';
+
 class UsersAdd extends Component {
   state = {
-    discordName: null
+    discordName: null,
+    shouldRedirect: false
   };
 
   handleTextChange = event => {
@@ -25,19 +28,23 @@ class UsersAdd extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.usersPost(this.state.discordName);
-    this.setState({
-      startedSubmit: true
-    });
+    this.props
+      .mutate({
+        variables: { discordName: this.state.discordName },
+        refetchQueries: [{ query: usersListQuery }]
+      })
+      .then(({ data }) => {
+        this.setState({ shouldRedirect: true });
+      });
   };
 
   render() {
-    const { classes, currentUser, usersPostRequesting } = this.props;
-    const { startedSubmit } = this.state;
+    const { classes, currentUser } = this.props;
+    const { shouldRedirect } = this.state;
 
     if (!currentUser || !currentUser.admin) {
       return <Redirect to="/" />;
-    } else if (startedSubmit && !usersPostRequesting) {
+    } else if (shouldRedirect) {
       return <Redirect to="/members" />;
     }
 

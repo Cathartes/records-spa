@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { graphql } from 'react-apollo';
 
 import { setCurrentUser } from '../../actions/auth';
-import currentUserQuery from './currentUserQuery';
+import currentUserQuery from '../../queries/currentUserQuery';
 
 import App from './App';
 
