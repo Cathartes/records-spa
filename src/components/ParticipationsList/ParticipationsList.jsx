@@ -38,11 +38,12 @@ class ParticipationsList extends PureComponent {
                 return (
                   <TableRow key={participation.id}>
                     <TableCell className={classNames(classes.membershipType)}>
-                      {participation.user.membershipType.replace('_', ' ')}
+                      {participation.user.membershipType}
                     </TableCell>
                     <TableCell>{participation.user.discordName}</TableCell>
                     <TableCell>
-                      {this.iconForTeam(participation.team.name)}
+                      {participation.team &&
+                        this.iconForTeam(participation.team.name)}
                     </TableCell>
                   </TableRow>
                 );
