@@ -9,6 +9,7 @@ const recordBooksViewQuery = gql`
       }
       user {
         discordName
+        id
         membershipType
       }
     }

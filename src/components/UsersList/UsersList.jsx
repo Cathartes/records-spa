@@ -1,94 +1,86 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
-import { Link } from 'react-router-dom';
 
 import withStyles from 'material-ui/styles/withStyles';
-import tableStyles from '../../styles/table';
 
 import Avatar from 'material-ui/Avatar';
-import Button from 'material-ui/Button';
 import CircularProgress from 'material-ui/Progress/CircularProgress';
+import Checkbox from 'material-ui/Checkbox';
 import List from 'material-ui/List';
 import ListItem from 'material-ui/List/ListItem';
 import ListItemAvatar from 'material-ui/List/ListItemAvatar';
 import ListItemText from 'material-ui/List/ListItemText';
-import Paper from 'material-ui/Paper';
-import Typography from 'material-ui/Typography';
 
 import AccountBoxIcon from 'material-ui-icons/AccountBox';
-import PersonAddIcon from 'material-ui-icons/PersonAdd';
 
 class UsersList extends PureComponent {
+  constructor(props) {
+    super(props);
+    if (props.selectList) {
+      props.resetSelected();
+    }
+  }
+
+  onUserClick = userId => () => {
+    if (this.props.selectList) {
+      this.props.toggleSelected(userId);
+    }
+  };
+
   render() {
-    const { classes, data } = this.props;
+    const {
+      classes,
+      data,
+      disabledUsers,
+      selectedUsers,
+      selectList
+    } = this.props;
+
     return (
       <div>
-        <Paper className={classNames(classes.paper)}>
-          <Typography
-            className={classNames(classes.listHeaderTitle)}
-            type="subheading"
-          >
-            MEMBER LIST
-          </Typography>
-          <Typography
-            className={classNames(classes.listHeaderBody)}
-            paragraph={true}
-            type="body1"
-          >
-            List of all Cathartes clan members & applicants
-          </Typography>
-          <hr className={classNames(classes.hr)} />
+        {data.loading ? (
+          <div className={classNames(classes.loadingContainer)}>
+            <CircularProgress color="accent" />
+          </div>
+        ) : (
+          <List>
+            {data.users.map(user => {
+              const disabled = disabledUsers.indexOf(user.id) !== -1;
+              const checked = disabled || selectedUsers.indexOf(user.id) !== -1;
 
-          {data.loading ? (
-            <div className={classNames(classes.loadingContainer)}>
-              <CircularProgress color="accent" />
-            </div>
-          ) : (
-            <List>
-              {data.users.map(user => {
-                return (
-                  <ListItem key={user.id}>
+              return (
+                <ListItem
+                  button={selectList}
+                  disabled={disabled}
+                  onClick={this.onUserClick(user.id)}
+                  key={user.id}
+                >
+                  {selectList ? (
+                    <Checkbox checked={checked} disableRipple tabIndex={-1} />
+                  ) : (
                     <ListItemAvatar>
                       <Avatar>
                         <AccountBoxIcon />
                       </Avatar>
                     </ListItemAvatar>
-                    <ListItemText
-                      primary={user.discordName.toUpperCase()}
-                      secondary={user.email}
-                    />
-                  </ListItem>
-                );
-              })}
-            </List>
-          )}
-        </Paper>
+                  )}
 
-        <Button
-          aria-label="Add Member"
-          color="accent"
-          className={classNames(classes.addButton)}
-          component={Link}
-          fab
-          to="/members/new"
-        >
-          <PersonAddIcon />
-        </Button>
+                  <ListItemText
+                    primary={user.discordName.toUpperCase()}
+                    secondary={user.email}
+                  />
+                </ListItem>
+              );
+            })}
+          </List>
+        )}
       </div>
     );
   }
 }
 
 const styles = theme => {
-  const table = tableStyles(theme);
   return {
-    ...table,
-    addButton: {
-      bottom: 0,
-      margin: 16,
-      position: 'absolute',
-      right: 0
-    },
     loadingContainer: {
       display: 'flex',
       padding: 30,

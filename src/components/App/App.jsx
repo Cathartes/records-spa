@@ -6,13 +6,14 @@ import withStyles from 'material-ui/styles/withStyles';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
+import MembersPage from '../../pages/MembersPage';
+
 import Header from '../Header';
 import Login from '../Login';
 import Logout from '../Logout';
 import RecordBooksAdd from '../RecordBooksAdd';
 import RecordBooksView from '../RecordBooksView';
 import UsersAdd from '../UsersAdd';
-import UsersList from '../UsersList';
 
 import mainTheme from '../../config/themes/mainTheme';
 
@@ -36,7 +37,7 @@ class App extends PureComponent {
                 <Route exact path="/" />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/logout" component={Logout} />
-                <Route exact path="/members" component={UsersList} />
+                <Route exact path="/members" component={MembersPage} />
                 <Route exact path="/members/new" component={UsersAdd} />
                 <Route exact path="/records/new" component={RecordBooksAdd} />
                 <Route exact path="/records/:id" component={RecordBooksView} />
