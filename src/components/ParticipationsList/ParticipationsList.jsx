@@ -10,16 +10,17 @@ import DialogActions from 'material-ui/Dialog/DialogActions';
 import DialogContent from 'material-ui/Dialog/DialogContent';
 import DialogContentText from 'material-ui/Dialog/DialogContentText';
 import DialogTitle from 'material-ui/Dialog/DialogTitle';
-import Table from 'material-ui/Table';
-import TableBody from 'material-ui/Table/TableBody';
-import TableCell from 'material-ui/Table/TableCell';
-import TableHead from 'material-ui/Table/TableHead';
-import TableRow from 'material-ui/Table/TableRow';
+import List from 'material-ui/List';
+import ListItem from 'material-ui/List/ListItem';
+import ListItemIcon from 'material-ui/List/ListItemIcon';
+import ListItemText from 'material-ui/List/ListItemText';
 
 import PersonAddIcon from 'material-ui-icons/PersonAdd';
 
 import AlphaIcon from '../../icons/Alpha';
 import BravoIcon from '../../icons/Bravo';
+
+import capitalize from '../../helpers/capitalize';
 
 import participationsListQuery from '../../queries/participationsListQuery';
 
@@ -58,32 +59,25 @@ class ParticipationsList extends PureComponent {
             <CircularProgress color="accent" />
           </div>
         ) : (
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Type</TableCell>
-                <TableCell>Name</TableCell>
-                <TableCell>Team</TableCell>
-              </TableRow>
-            </TableHead>
-
-            <TableBody>
-              {data.participations.map(participation => {
-                return (
-                  <TableRow key={participation.id}>
-                    <TableCell className={classNames(classes.membershipType)}>
-                      {participation.user.membershipType}
-                    </TableCell>
-                    <TableCell>{participation.user.discordName}</TableCell>
-                    <TableCell>
+          <List>
+            {data.participations.map(participation => {
+              return (
+                <ListItem key={participation.id}>
+                  <ListItemIcon>
+                    <div>
                       {participation.team &&
                         this.iconForTeam(participation.team.name)}
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
+                    </div>
+                  </ListItemIcon>
+
+                  <ListItemText
+                    primary={participation.user.discordName}
+                    secondary={capitalize(participation.user.membershipType)}
+                  />
+                </ListItem>
+              );
+            })}
+          </List>
         )}
 
         <Button
@@ -139,7 +133,7 @@ const styles = theme => ({
   addButton: {
     bottom: 0,
     margin: 16,
-    position: 'absolute',
+    position: 'fixed',
     right: 0
   },
   dialogContainer: {
