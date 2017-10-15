@@ -59,7 +59,7 @@ const styles = theme => {
     addButton: {
       bottom: 0,
       margin: 16,
-      position: 'absolute',
+      position: 'fixed',
       right: 0
     },
     loadingContainer: {

@@ -45,7 +45,8 @@ class UsersList extends PureComponent {
         ) : (
           <List>
             {data.users.map(user => {
-              const disabled = disabledUsers.indexOf(user.id) !== -1;
+              const disabled =
+                selectList && disabledUsers.indexOf(user.id) !== -1;
               const checked = disabled || selectedUsers.indexOf(user.id) !== -1;
 
               return (
