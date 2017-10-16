@@ -109,7 +109,6 @@ class CompletionsAdd extends Component {
               )}
 
               <TextField
-                autoFocus
                 fullWidth
                 label="Rank"
                 margin="normal"
@@ -119,7 +118,6 @@ class CompletionsAdd extends Component {
               />
 
               <TextField
-                autoFocus
                 fullWidth
                 label="Points"
                 margin="normal"
