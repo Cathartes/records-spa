@@ -9,8 +9,8 @@ const styles = theme => ({
     marginRight: theme.spacing.unit
   },
   submitButton: {
-    marginLeft: 2.5 * theme.spacing.unit,
-    marginRight: 2.5 * theme.spacing.unit
+    marginLeft: 1.5 * theme.spacing.unit,
+    marginRight: 1.5 * theme.spacing.unit
   },
   submitContainer: {
     justifyContent: 'flex-end'

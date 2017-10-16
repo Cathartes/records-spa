@@ -27,7 +27,7 @@ import participationsListQuery from '../../queries/participationsListQuery';
 import UsersList from '../UsersList';
 
 class ParticipationsList extends PureComponent {
-  state = { dialogOpen: false, selectedParticipants: [] };
+  state = { dialogOpen: false };
 
   addParticipants = () => {
     this.props.selectedUsers.forEach(userId => {
@@ -146,9 +146,6 @@ const styles = theme => ({
   },
   membershipType: {
     textTransform: 'capitalize'
-  },
-  recordBookTitle: {
-    padding: [10, 20]
   }
 });
 

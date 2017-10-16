@@ -8,6 +8,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import MembersPage from '../../pages/MembersPage';
 
+import CompletionsAdd from '../CompletionsAdd';
 import Header from '../Header';
 import Login from '../Login';
 import Logout from '../Logout';
@@ -35,6 +36,11 @@ class App extends PureComponent {
             <div className={classNames(classes.appContent)}>
               <Switch>
                 <Route exact path="/" />
+                <Route
+                  exact
+                  path="/records/:recordBookId/completions/new"
+                  component={CompletionsAdd}
+                />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/logout" component={Logout} />
                 <Route exact path="/members" component={MembersPage} />

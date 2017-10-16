@@ -1,16 +1,20 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
+import { Link } from 'react-router-dom';
 
 import Moment from 'react-moment';
 
 import withStyles from 'material-ui/styles/withStyles';
 
+import Button from 'material-ui/Button';
 import CircularProgress from 'material-ui/Progress/CircularProgress';
 import Table from 'material-ui/Table';
 import TableBody from 'material-ui/Table/TableBody';
 import TableCell from 'material-ui/Table/TableCell';
 import TableHead from 'material-ui/Table/TableHead';
 import TableRow from 'material-ui/Table/TableRow';
+
+import AddIcon from 'material-ui-icons/Add';
 
 import AlphaIcon from '../../icons/Alpha';
 import BravoIcon from '../../icons/Bravo';
@@ -53,12 +57,17 @@ class MomentsList extends PureComponent {
                     <TableCell>
                       <Moment format="M/D h:mma">{moment.createdAt}</Moment>
                     </TableCell>
-                    <TableCell>{moment.user.discordName}</TableCell>
+                    <TableCell>
+                      {moment.participation.user.discordName}
+                    </TableCell>
                     <TableCell>
                       {moment.completion ? moment.completion.points : null}
                     </TableCell>
                     <TableCell>
-                      {this.iconForTeam(moment.participation.team.name)}
+                      <div>
+                        {moment.participation.team &&
+                          this.iconForTeam(moment.participation.team.name)}
+                      </div>
                     </TableCell>
                   </TableRow>
                 );
@@ -66,6 +75,17 @@ class MomentsList extends PureComponent {
             </TableBody>
           </Table>
         )}
+
+        <Button
+          aria-label="Add Completion"
+          color="accent"
+          component={Link}
+          className={classNames(classes.addButton)}
+          fab
+          to={`/records/${this.props.recordBookId}/completions/new`}
+        >
+          <AddIcon />
+        </Button>
       </div>
     );
   }
@@ -94,6 +114,12 @@ class MomentsList extends PureComponent {
 }
 
 const styles = theme => ({
+  addButton: {
+    bottom: 0,
+    margin: 16,
+    position: 'fixed',
+    right: 0
+  },
   loadingContainer: {
     display: 'flex',
     padding: 30,
@@ -101,9 +127,6 @@ const styles = theme => ({
   },
   momentType: {
     textTransform: 'capitalize'
-  },
-  recordBookTitle: {
-    padding: [10, 20]
   }
 });
 

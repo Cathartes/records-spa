@@ -14,9 +14,9 @@ const momentsListQuery = gql`
         team {
           name
         }
-      }
-      user {
-        discordName
+        user {
+          discordName
+        }
       }
     }
   }
