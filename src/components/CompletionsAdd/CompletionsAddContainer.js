@@ -1,5 +1,5 @@
-import { graphql } from 'react-apollo';
 import { connect } from 'react-redux';
+import { compose, graphql } from 'react-apollo';
 
 import createCompletionMutation from '../../mutations/createCompletionMutation';
 import completionsAddQuery from '../../queries/completionsAddQuery';
@@ -12,12 +12,14 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(
+export default compose(
   graphql(completionsAddQuery, {
     options: props => ({
       variables: {
         recordBookId: props.match.params.recordBookId
       }
     })
-  })(graphql(createCompletionMutation)(CompletionsAdd))
-);
+  }),
+  graphql(createCompletionMutation),
+  connect(mapStateToProps)
+)(CompletionsAdd);

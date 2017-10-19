@@ -1,5 +1,5 @@
-import { graphql } from 'react-apollo';
 import { connect } from 'react-redux';
+import { compose, graphql } from 'react-apollo';
 
 import createRecordBookMutation from '../../mutations/createRecordBookMutation';
 
@@ -11,6 +11,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(
-  graphql(createRecordBookMutation)(RecordBooksAdd)
-);
+export default compose(
+  graphql(createRecordBookMutation),
+  connect(mapStateToProps)
+)(RecordBooksAdd);

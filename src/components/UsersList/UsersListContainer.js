@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { graphql } from 'react-apollo';
+import { compose, graphql } from 'react-apollo';
 
 import {
   usersListSelectReset,
@@ -24,6 +24,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  graphql(usersListQuery)(UsersList)
-);
+export default compose(
+  graphql(usersListQuery),
+  connect(mapStateToProps, mapDispatchToProps)
+)(UsersList);

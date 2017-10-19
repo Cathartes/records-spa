@@ -1,4 +1,4 @@
-import { graphql } from 'react-apollo';
+import { compose, graphql } from 'react-apollo';
 import { connect } from 'react-redux';
 
 import createUserMutation from '../../mutations/createUserMutation';
@@ -11,4 +11,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(graphql(createUserMutation)(UsersAdd));
+export default compose(graphql(createUserMutation), connect(mapStateToProps))(
+  UsersAdd
+);

@@ -1,5 +1,5 @@
-import { graphql } from 'react-apollo';
 import { connect } from 'react-redux';
+import { compose, graphql } from 'react-apollo';
 
 import { loginSuccess, setCurrentUser } from '../../actions/auth';
 import loginMutation from '../../mutations/loginMutation';
@@ -23,6 +23,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  graphql(loginMutation)(Login)
-);
+export default compose(
+  graphql(loginMutation),
+  connect(mapStateToProps, mapDispatchToProps)
+)(Login);

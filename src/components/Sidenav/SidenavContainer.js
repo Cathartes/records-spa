@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { graphql } from 'react-apollo';
+import { compose, graphql } from 'react-apollo';
 
 import recordBooksListQuery from '../../queries/recordBooksListQuery';
 import { recordBooksCollapseToggle } from '../../actions/recordBooks';
@@ -25,6 +25,7 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  graphql(recordBooksListQuery)(Sidenav)
-);
+export default compose(
+  graphql(recordBooksListQuery),
+  connect(mapStateToProps, mapDispatchToProps)
+)(Sidenav);
