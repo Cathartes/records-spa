@@ -16,7 +16,8 @@ const theme = createMuiTheme({
       A100: '#facccb',
       A200: '#fce3e2',
       A400: '#fefafa',
-      A700: '#9c1310'
+      A700: '#9c1310',
+      contrastDefaultColor: 'dark'
     },
     secondary: {
       50: '#000000',
@@ -32,7 +33,8 @@ const theme = createMuiTheme({
       A100: '#303038',
       A200: '#24242a',
       A400: '#18181c',
-      A700: '#5f5f6f'
+      A700: '#5f5f6f',
+      contrastDefaultColor: 'light'
     },
     type: 'dark'
   }
