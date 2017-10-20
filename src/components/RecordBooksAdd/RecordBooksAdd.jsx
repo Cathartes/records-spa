@@ -55,78 +55,68 @@ class RecordBooksAdd extends Component {
     }
 
     return (
-      <div className={classNames(classes.container)}>
+      <div className={classNames(classes.formContainer)}>
         <Card>
           <form onSubmit={this.handleSubmit} noValidate>
             <CardContent>
-              <Typography
-                className={classNames(classes.formTitle)}
-                type="title"
-              >
-                Add Record
-              </Typography>
+              <Typography type="title">Add Record</Typography>
 
               <TextField
-                required
                 autoFocus
-                name="name"
-                label="Name"
-                onChange={this.handleInputChange}
-                margin="normal"
                 fullWidth
-                className={classNames(classes.textField)}
+                label="Name"
+                margin="normal"
+                name="name"
+                onChange={this.handleInputChange}
+                required
               />
 
               <div className={classNames(classes.dateInputContainer)}>
                 <TextField
-                  name="startTime"
-                  label="Start Date"
-                  type="datetime-local"
-                  onChange={this.handleInputChange}
-                  margin="normal"
-                  className={classNames(classes.dateInput, classes.textField)}
                   InputLabelProps={{ shrink: true }}
+                  label="Start Date"
+                  margin="normal"
+                  name="startTime"
+                  onChange={this.handleInputChange}
+                  type="datetime-local"
                 />
 
                 <TextField
-                  name="endTime"
-                  label="End Date"
-                  type="datetime-local"
-                  onChange={this.handleInputChange}
-                  margin="normal"
-                  className={classNames(classes.dateInput, classes.textField)}
                   InputLabelProps={{ shrink: true }}
+                  label="End Date"
+                  margin="normal"
+                  name="endTime"
+                  onChange={this.handleInputChange}
+                  type="datetime-local"
                 />
               </div>
 
               <div className={classNames(classes.dateInputContainer)}>
                 <TextField
-                  name="rushStartTime"
-                  label="Rush Start Date"
-                  type="datetime-local"
-                  onChange={this.handleInputChange}
-                  margin="normal"
-                  className={classNames(classes.dateInput, classes.textField)}
                   InputLabelProps={{ shrink: true }}
+                  label="Rush Start Date"
+                  margin="normal"
+                  name="rushStartTime"
+                  onChange={this.handleInputChange}
+                  type="datetime-local"
                 />
 
                 <TextField
-                  name="rushEndTime"
-                  label="Rush End Date"
-                  type="datetime-local"
-                  onChange={this.handleInputChange}
-                  margin="normal"
-                  className={classNames(classes.dateInput, classes.textField)}
                   InputLabelProps={{ shrink: true }}
+                  label="Rush End Date"
+                  margin="normal"
+                  name="rushEndTime"
+                  onChange={this.handleInputChange}
+                  type="datetime-local"
                 />
               </div>
             </CardContent>
 
             <CardActions className={classNames(classes.submitContainer)}>
               <Button
+                className={classNames(classes.submitButton)}
                 raised
                 type="submit"
-                className={classNames(classes.submitButton)}
               >
                 Submit
               </Button>

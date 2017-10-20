@@ -1,12 +1,8 @@
 const styles = theme => ({
-  container: {
+  formContainer: {
     display: 'flex',
     justifyContent: 'center',
     padding: 20
-  },
-  formTitle: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit
   },
   submitButton: {
     marginLeft: 1.5 * theme.spacing.unit,
@@ -14,10 +10,6 @@ const styles = theme => ({
   },
   submitContainer: {
     justifyContent: 'flex-end'
-  },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit
   }
 });
 

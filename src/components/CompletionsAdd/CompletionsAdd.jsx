@@ -57,7 +57,7 @@ class CompletionsAdd extends Component {
     }
 
     return (
-      <div className={classNames(classes.container)}>
+      <div className={classNames(classes.formContainer)}>
         <Card>
           <form onSubmit={this.handleSubmit} noValidate>
             <CardContent>

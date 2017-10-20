@@ -44,45 +44,39 @@ class Login extends PureComponent {
     }
 
     return (
-      <div className={classNames(classes.container)}>
+      <div className={classNames(classes.formContainer)}>
         <Card>
           <form onSubmit={this.handleSubmit} noValidate>
-            <CardContent className={classNames(classes.form)}>
-              <Typography
-                className={classNames(classes.formTitle)}
-                type="title"
-              >
-                Log In
-              </Typography>
+            <CardContent>
+              <Typography type="title">Log In</Typography>
 
               <TextField
-                required
                 autoFocus
-                name="email"
+                fullWidth
                 label="Email"
-                type="email"
-                onChange={this.handleTextChange}
                 margin="normal"
-                fullWidth
-                className={classNames(classes.textField)}
-              />
-              <TextField
+                name="email"
+                onChange={this.handleTextChange}
                 required
-                name="password"
-                label="Password"
-                type="password"
-                onChange={this.handleTextChange}
-                margin="normal"
+                type="email"
+              />
+
+              <TextField
                 fullWidth
-                className={classNames(classes.textField)}
+                label="Password"
+                margin="normal"
+                name="password"
+                onChange={this.handleTextChange}
+                required
+                type="password"
               />
             </CardContent>
 
             <CardActions className={classNames(classes.submitContainer)}>
               <Button
+                className={classNames(classes.submitButton)}
                 raised
                 type="submit"
-                className={classNames(classes.submitButton)}
               >
                 Submit
               </Button>

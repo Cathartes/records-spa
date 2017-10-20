@@ -49,20 +49,14 @@ class UsersAdd extends Component {
     }
 
     return (
-      <div className={classNames(classes.container)}>
+      <div className={classNames(classes.formContainer)}>
         <Card>
           <form onSubmit={this.handleSubmit} noValidate>
-            <CardContent className={classNames(classes.form)}>
-              <Typography
-                className={classNames(classes.formTitle)}
-                type="title"
-              >
-                Add Member
-              </Typography>
+            <CardContent>
+              <Typography type="title">Add Member</Typography>
 
               <TextField
                 autoFocus
-                className={classNames(classes.textField)}
                 fullWidth
                 label="Discord Name"
                 margin="normal"
