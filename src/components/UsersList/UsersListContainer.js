@@ -25,6 +25,8 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default compose(
-  graphql(usersListQuery),
+  graphql(usersListQuery, {
+    options: props => ({ variables: { membershipType: props.membershipType } })
+  }),
   connect(mapStateToProps, mapDispatchToProps)
 )(UsersList);

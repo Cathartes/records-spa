@@ -30,11 +30,30 @@ class MembersPage extends PureComponent {
             paragraph={true}
             type="body1"
           >
-            List of all Cathartes clan members & applicants
+            List of all Cathartes clan members
           </Typography>
           <hr className={classNames(classes.hr)} />
 
-          <UsersList />
+          <UsersList membershipType="member" />
+        </Paper>
+
+        <Paper className={classNames(classes.paper)}>
+          <Typography
+            className={classNames(classes.listHeaderTitle)}
+            type="subheading"
+          >
+            APPLICANT LIST
+          </Typography>
+          <Typography
+            className={classNames(classes.listHeaderBody)}
+            paragraph={true}
+            type="body1"
+          >
+            List of all Cathartes clan applicants
+          </Typography>
+          <hr className={classNames(classes.hr)} />
+
+          <UsersList membershipType="applicant" />
         </Paper>
 
         <Button

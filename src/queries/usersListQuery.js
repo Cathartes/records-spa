@@ -1,8 +1,8 @@
 import { gql } from 'react-apollo';
 
 const usersListQuery = gql`
-  query usersListQuery {
-    users {
+  query usersListQuery($membershipType: UserMembershipTypeEnum) {
+    users(membershipType: $membershipType) {
       discordName
       email
       id
