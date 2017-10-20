@@ -58,7 +58,12 @@ class App extends PureComponent {
 
 const styles = theme => ({
   appContent: {
-    paddingTop: 65
+    [theme.breakpoints.up('sm')]: {
+      paddingTop: 64
+    },
+    [theme.breakpoints.down('sm')]: {
+      paddingTop: 56
+    }
   }
 });
 
