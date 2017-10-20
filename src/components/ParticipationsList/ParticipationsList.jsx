@@ -4,7 +4,6 @@ import classNames from 'classnames';
 import withStyles from 'material-ui/styles/withStyles';
 
 import Button from 'material-ui/Button';
-import CircularProgress from 'material-ui/Progress/CircularProgress';
 import Dialog from 'material-ui/Dialog';
 import DialogActions from 'material-ui/Dialog/DialogActions';
 import DialogContent from 'material-ui/Dialog/DialogContent';
@@ -24,6 +23,7 @@ import capitalize from '../../helpers/capitalize';
 
 import participationsListQuery from '../../queries/participationsListQuery';
 
+import LoadingCircle from '../LoadingCircle';
 import UsersList from '../UsersList';
 
 class ParticipationsList extends PureComponent {
@@ -55,9 +55,7 @@ class ParticipationsList extends PureComponent {
     return (
       <div>
         {data.loading ? (
-          <div className={classNames(classes.loadingContainer)}>
-            <CircularProgress color="accent" />
-          </div>
+          <LoadingCircle />
         ) : (
           <List>
             {data.participations.map(participation => {
@@ -138,11 +136,6 @@ const styles = theme => ({
   },
   dialogContainer: {
     overflow: 'auto'
-  },
-  loadingContainer: {
-    display: 'flex',
-    padding: 30,
-    justifyContent: 'center'
   },
   membershipType: {
     textTransform: 'capitalize'

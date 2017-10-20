@@ -7,7 +7,6 @@ import Moment from 'react-moment';
 import withStyles from 'material-ui/styles/withStyles';
 
 import Button from 'material-ui/Button';
-import CircularProgress from 'material-ui/Progress/CircularProgress';
 import Table from 'material-ui/Table';
 import TableBody from 'material-ui/Table/TableBody';
 import TableCell from 'material-ui/Table/TableCell';
@@ -19,6 +18,8 @@ import AddIcon from 'material-ui-icons/Add';
 import AlphaIcon from '../../icons/Alpha';
 import BravoIcon from '../../icons/Bravo';
 
+import LoadingCircle from '../LoadingCircle';
+
 class MomentsList extends PureComponent {
   render() {
     const { classes, data } = this.props;
@@ -26,9 +27,7 @@ class MomentsList extends PureComponent {
     return (
       <div>
         {data.loading ? (
-          <div className={classNames(classes.loadingContainer)}>
-            <CircularProgress color="accent" />
-          </div>
+          <LoadingCircle />
         ) : (
           <Table>
             <TableHead>
@@ -119,11 +118,6 @@ const styles = theme => ({
     margin: 16,
     position: 'fixed',
     right: 0
-  },
-  loadingContainer: {
-    display: 'flex',
-    padding: 30,
-    justifyContent: 'center'
   },
   momentType: {
     textTransform: 'capitalize'

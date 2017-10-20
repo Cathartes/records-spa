@@ -1,10 +1,6 @@
 import React, { PureComponent } from 'react';
-import classNames from 'classnames';
-
-import withStyles from 'material-ui/styles/withStyles';
 
 import Avatar from 'material-ui/Avatar';
-import CircularProgress from 'material-ui/Progress/CircularProgress';
 import Checkbox from 'material-ui/Checkbox';
 import List from 'material-ui/List';
 import ListItem from 'material-ui/List/ListItem';
@@ -12,6 +8,8 @@ import ListItemAvatar from 'material-ui/List/ListItemAvatar';
 import ListItemText from 'material-ui/List/ListItemText';
 
 import AccountBoxIcon from 'material-ui-icons/AccountBox';
+
+import LoadingCircle from '../LoadingCircle';
 
 class UsersList extends PureComponent {
   constructor(props) {
@@ -28,20 +26,12 @@ class UsersList extends PureComponent {
   };
 
   render() {
-    const {
-      classes,
-      data,
-      disabledUsers,
-      selectedUsers,
-      selectList
-    } = this.props;
+    const { data, disabledUsers, selectedUsers, selectList } = this.props;
 
     return (
       <div>
         {data.loading ? (
-          <div className={classNames(classes.loadingContainer)}>
-            <CircularProgress color="accent" />
-          </div>
+          <LoadingCircle />
         ) : (
           <List>
             {data.users.map(user => {
@@ -80,14 +70,4 @@ class UsersList extends PureComponent {
   }
 }
 
-const styles = theme => {
-  return {
-    loadingContainer: {
-      display: 'flex',
-      padding: 30,
-      justifyContent: 'center'
-    }
-  };
-};
-
-export default withStyles(styles)(UsersList);
+export default UsersList;

@@ -7,7 +7,6 @@ import withStyles from 'material-ui/styles/withStyles';
 
 import AppBar from 'material-ui/AppBar';
 import Button from 'material-ui/Button';
-import CircularProgress from 'material-ui/Progress/CircularProgress';
 import Paper from 'material-ui/Paper';
 import Tabs from 'material-ui/Tabs';
 import Tab from 'material-ui/Tabs/Tab';
@@ -15,6 +14,7 @@ import Typography from 'material-ui/Typography';
 
 import recordBooksViewQuery from '../../queries/recordBooksViewQuery';
 
+import LoadingCircle from '../LoadingCircle';
 import MomentsList from '../MomentsList';
 import ParticipationsList from '../ParticipationsList';
 
@@ -53,9 +53,7 @@ class RecordBooksView extends PureComponent {
     return (
       <Paper>
         {data.loading ? (
-          <div className={classNames(classes.loadingContainer)}>
-            <CircularProgress color="accent" />
-          </div>
+          <LoadingCircle />
         ) : (
           <div>
             <AppBar position="static" color="default">
@@ -115,11 +113,6 @@ class RecordBooksView extends PureComponent {
 }
 
 const styles = theme => ({
-  loadingContainer: {
-    display: 'flex',
-    padding: 30,
-    justifyContent: 'center'
-  },
   recordBookTitle: {
     padding: [10, 20]
   }

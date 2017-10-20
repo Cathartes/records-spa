@@ -61,11 +61,6 @@ const styles = theme => {
       margin: 16,
       position: 'fixed',
       right: 0
-    },
-    loadingContainer: {
-      display: 'flex',
-      padding: 30,
-      justifyContent: 'center'
     }
   };
 };
