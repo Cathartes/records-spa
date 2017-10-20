@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { sidenavToggle } from '../../actions/sidenav';
+import { sidenavToggle } from '../../actions/ui';
 import { snackbarClose, snackbarRemove } from '../../actions/snackbars';
 
 import Header from './Header';
@@ -8,8 +8,8 @@ import Header from './Header';
 const mapStateToProps = state => {
   return {
     currentUser: state.auth.currentUser,
-    isSidenavOpen: state.sidenav.isOpen,
-    snackbars: state.snackbars
+    snackbars: state.snackbars,
+    isSidenavOpen: state.ui.isSidenavOpen
   };
 };
 
