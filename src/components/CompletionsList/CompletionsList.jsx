@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
-import { Link } from 'react-router-dom';
 
 import Moment from 'react-moment';
 
@@ -18,11 +17,25 @@ import AddIcon from 'material-ui-icons/Add';
 import AlphaIcon from '../../icons/Alpha';
 import BravoIcon from '../../icons/Bravo';
 
+import CompletionsAdd from '../../containers/CompletionsAdd';
+import CompletionsEdit from '../../containers/CompletionsEdit';
+
 import LoadingCircle from '../LoadingCircle';
 
 class CompletionsList extends PureComponent {
+  state = { addCompletion: false, editCompletion: null };
+
+  setAddCompletion = addCompletion => event => {
+    this.setState({ addCompletion: addCompletion });
+  };
+
+  setEditCompletion = completion => event => {
+    this.setState({ editCompletion: completion });
+  };
+
   render() {
-    const { classes, data } = this.props;
+    const { classes, data, recordBookId } = this.props;
+    const { addCompletion, editCompletion } = this.state;
 
     return (
       <div className={classNames(classes.tableContainer)}>
@@ -44,7 +57,11 @@ class CompletionsList extends PureComponent {
             <TableBody>
               {data.completions.map(completion => {
                 return (
-                  <TableRow key={completion.id}>
+                  <TableRow
+                    hover
+                    key={completion.id}
+                    onClick={this.setEditCompletion(completion)}
+                  >
                     <TableCell>{completion.challenge.name}</TableCell>
                     <TableCell>
                       {completion.participation.user.discordName}
@@ -70,13 +87,37 @@ class CompletionsList extends PureComponent {
         <Button
           aria-label="Add Completion"
           color="accent"
-          component={Link}
           className={classNames(classes.addButton)}
           fab
-          to={`/records/${this.props.recordBookId}/completions/new`}
+          onClick={this.setAddCompletion(true)}
         >
           <AddIcon />
         </Button>
+
+        {!data.loading &&
+          recordBookId &&
+          addCompletion && (
+            <CompletionsAdd
+              challenges={data.challenges}
+              open
+              onRequestClose={this.setAddCompletion(false)}
+              participations={data.participations}
+              recordBookId={recordBookId}
+            />
+          )}
+
+        {!data.loading &&
+          recordBookId &&
+          editCompletion && (
+            <CompletionsEdit
+              challenges={data.challenges}
+              completion={editCompletion}
+              open
+              onRequestClose={this.setEditCompletion(null)}
+              participations={data.participations}
+              recordBookId={recordBookId}
+            />
+          )}
       </div>
     );
   }
