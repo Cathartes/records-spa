@@ -70,7 +70,7 @@ class ParticipationsList extends PureComponent {
 
                   <ListItemText
                     primary={participation.user.discordName}
-                    secondary={capitalize(participation.user.membershipType)}
+                    secondary={capitalize(participation.membershipType)}
                   />
                 </ListItem>
               );
