@@ -14,7 +14,7 @@ import Login from '../Login';
 import Logout from '../Logout';
 import RecordBooksAdd from '../RecordBooksAdd';
 import RecordBooksView from '../RecordBooksView';
-import UsersAdd from '../UsersAdd';
+import UsersAdd from '../../containers/UsersAdd';
 
 import mainTheme from '../../config/themes/mainTheme';
 

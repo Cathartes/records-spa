@@ -16,6 +16,7 @@ import UsersList from '../../components/UsersList';
 class MembersPage extends PureComponent {
   render() {
     const { classes } = this.props;
+
     return (
       <div>
         <Paper className={classNames(classes.paper)}>
@@ -58,8 +59,8 @@ class MembersPage extends PureComponent {
 
         <Button
           aria-label="Add Member"
-          color="accent"
           className={classNames(classes.addButton)}
+          color="accent"
           component={Link}
           fab
           to="/members/new"

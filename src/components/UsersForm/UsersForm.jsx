@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { Redirect } from 'react-router-dom';
 
 import withStyles from 'material-ui/styles/withStyles';
 import formStyles from '../../styles/form';
@@ -17,13 +17,12 @@ import Select from 'material-ui/Select';
 import TextField from 'material-ui/TextField';
 import Typography from 'material-ui/Typography';
 
-import usersListQuery from '../../queries/usersListQuery';
-
-class UsersAdd extends Component {
+class UsersForm extends PureComponent {
   state = {
-    discordName: null,
-    membershipType: 'applicant',
-    shouldRedirect: false
+    discordName: this.props.user ? this.props.user.discordName : null,
+    membershipType: this.props.user
+      ? this.props.user.membershipType
+      : 'applicant'
   };
 
   handleInputChange = name => event => {
@@ -32,28 +31,12 @@ class UsersAdd extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props
-      .mutate({
-        variables: {
-          discordName: this.state.discordName,
-          membershipType: this.state.membershipType
-        },
-        refetchQueries: [{ query: usersListQuery }]
-      })
-      .then(({ data }) => {
-        this.setState({ shouldRedirect: true });
-      });
+    this.props.onFormSubmit(this.state);
   };
 
   render() {
-    const { classes, currentUser } = this.props;
-    const { membershipType, shouldRedirect } = this.state;
-
-    if (!currentUser || !currentUser.admin) {
-      return <Redirect to="/" />;
-    } else if (shouldRedirect) {
-      return <Redirect to="/members" />;
-    }
+    const { classes, submitText } = this.props;
+    const { membershipType } = this.state;
 
     return (
       <div className={classNames(classes.formContainer)}>
@@ -74,7 +57,7 @@ class UsersAdd extends Component {
 
               <FormControl fullWidth margin="normal">
                 <InputLabel htmlFor="membership-type-select" required>
-                  Challenge
+                  Membership Type
                 </InputLabel>
                 <Select
                   input={<Input id="membership-type-select" />}
@@ -93,7 +76,7 @@ class UsersAdd extends Component {
                 raised
                 type="submit"
               >
-                Submit
+                {submitText}
               </Button>
             </CardActions>
           </form>
@@ -103,8 +86,18 @@ class UsersAdd extends Component {
   }
 }
 
+UsersForm.propTypes = {
+  onFormSubmit: PropTypes.func.isRequired,
+  submitText: PropTypes.string.isRequired,
+  user: PropTypes.object
+};
+
+UsersForm.defaultProps = {
+  submitText: 'Submit'
+};
+
 const styles = theme => {
   return formStyles(theme);
 };
 
-export default withStyles(styles)(UsersAdd);
+export default withStyles(styles)(UsersForm);
