@@ -17,6 +17,7 @@ import Select from 'material-ui/Select';
 import TextField from 'material-ui/TextField';
 import Typography from 'material-ui/Typography';
 
+import challengesListQuery from '../../queries/challengesListQuery';
 import momentsListQuery from '../../queries/momentsListQuery';
 
 class CompletionsAdd extends Component {
@@ -37,6 +38,10 @@ class CompletionsAdd extends Component {
           rank: parseInt(this.state.rank, 10) || null
         },
         refetchQueries: [
+          {
+            query: challengesListQuery,
+            variables: { recordBookId: this.props.match.params.recordBookId }
+          },
           {
             query: momentsListQuery,
             variables: { recordBookId: this.props.match.params.recordBookId }

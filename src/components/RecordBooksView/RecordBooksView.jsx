@@ -14,6 +14,8 @@ import Typography from 'material-ui/Typography';
 
 import recordBooksViewQuery from '../../queries/recordBooksViewQuery';
 
+import ChallengesListContainer from '../../containers/ChallengesListContainer';
+
 import LoadingCircle from '../LoadingCircle';
 import MomentsList from '../MomentsList';
 import ParticipationsList from '../ParticipationsList';
@@ -66,6 +68,7 @@ class RecordBooksView extends PureComponent {
 
               <Tabs value={currentTab} onChange={this.changeTab} centered>
                 <Tab label="Moments" />
+                <Tab label="Challenges" />
                 <Tab label="Participants" />
                 <Tab label="Details" />
               </Tabs>
@@ -74,10 +77,14 @@ class RecordBooksView extends PureComponent {
             {currentTab === 0 && <MomentsList recordBookId={match.params.id} />}
 
             {currentTab === 1 && (
-              <ParticipationsList recordBookId={match.params.id} />
+              <ChallengesListContainer recordBookId={match.params.id} />
             )}
 
             {currentTab === 2 && (
+              <ParticipationsList recordBookId={match.params.id} />
+            )}
+
+            {currentTab === 3 && (
               <div>
                 <Typography type="subheading">Start Time</Typography>
                 <Moment format="M/D/YYYY @ h:mma">

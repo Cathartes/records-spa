@@ -11,7 +11,7 @@ class LoadingCircle extends PureComponent {
 
     return (
       <div className={classNames(classes.loadingContainer)}>
-        <CircularProgress color="accent" />
+        <CircularProgress />
       </div>
     );
   }
