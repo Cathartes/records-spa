@@ -1,25 +1,21 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
-
-import withStyles from 'material-ui/styles/withStyles';
-import formStyles from '../../styles/form';
 
 import Button from 'material-ui/Button';
-import Card from 'material-ui/Card';
-import CardActions from 'material-ui/Card/CardActions';
-import CardContent from 'material-ui/Card/CardContent';
+import Dialog from 'material-ui/Dialog';
+import DialogActions from 'material-ui/Dialog/DialogActions';
+import DialogContent from 'material-ui/Dialog/DialogContent';
+import DialogTitle from 'material-ui/Dialog/DialogTitle';
 import FormControl from 'material-ui/Form/FormControl';
 import Input from 'material-ui/Input';
 import InputLabel from 'material-ui/Input/InputLabel';
 import MenuItem from 'material-ui/Menu/MenuItem';
 import Select from 'material-ui/Select';
 import TextField from 'material-ui/TextField';
-import Typography from 'material-ui/Typography';
 
 class UsersForm extends PureComponent {
   state = {
-    discordName: this.props.user ? this.props.user.discordName : null,
+    discordName: this.props.user ? this.props.user.discordName : '',
     membershipType: this.props.user
       ? this.props.user.membershipType
       : 'applicant'
@@ -35,53 +31,47 @@ class UsersForm extends PureComponent {
   };
 
   render() {
-    const { classes, submitText } = this.props;
-    const { membershipType } = this.state;
+    const { open, onRequestClose, submitText, titleText } = this.props;
+    const { discordName, membershipType } = this.state;
 
     return (
-      <div className={classNames(classes.formContainer)}>
-        <Card>
-          <form onSubmit={this.handleSubmit} noValidate>
-            <CardContent>
-              <Typography type="title">Add Member</Typography>
+      <Dialog open={open} onRequestClose={onRequestClose}>
+        <form onSubmit={this.handleSubmit} noValidate>
+          <DialogTitle>{titleText}</DialogTitle>
+          <DialogContent>
+            <TextField
+              autoFocus
+              fullWidth
+              label="Discord Name"
+              margin="dense"
+              name="discordName"
+              onChange={this.handleInputChange('discordName')}
+              required
+              value={discordName}
+            />
 
-              <TextField
-                autoFocus
-                fullWidth
-                label="Discord Name"
-                margin="normal"
-                name="discordName"
-                onChange={this.handleInputChange('discordName')}
-                required
-              />
-
-              <FormControl fullWidth margin="normal">
-                <InputLabel htmlFor="membership-type-select" required>
-                  Membership Type
-                </InputLabel>
-                <Select
-                  input={<Input id="membership-type-select" />}
-                  onChange={this.handleInputChange('membershipType')}
-                  value={membershipType}
-                >
-                  <MenuItem value="applicant">Applicant</MenuItem>
-                  <MenuItem value="member">Member</MenuItem>
-                </Select>
-              </FormControl>
-            </CardContent>
-
-            <CardActions className={classNames(classes.submitContainer)}>
-              <Button
-                className={classNames(classes.submitButton)}
-                raised
-                type="submit"
+            <FormControl fullWidth margin="dense">
+              <InputLabel htmlFor="membership-type-select" required>
+                Membership Type
+              </InputLabel>
+              <Select
+                input={<Input id="membership-type-select" />}
+                onChange={this.handleInputChange('membershipType')}
+                value={membershipType}
               >
-                {submitText}
-              </Button>
-            </CardActions>
-          </form>
-        </Card>
-      </div>
+                <MenuItem value="applicant">Applicant</MenuItem>
+                <MenuItem value="member">Member</MenuItem>
+              </Select>
+            </FormControl>
+          </DialogContent>
+
+          <DialogActions>
+            <Button raised type="submit">
+              {submitText}
+            </Button>
+          </DialogActions>
+        </form>
+      </Dialog>
     );
   }
 }
@@ -89,6 +79,7 @@ class UsersForm extends PureComponent {
 UsersForm.propTypes = {
   onFormSubmit: PropTypes.func.isRequired,
   submitText: PropTypes.string.isRequired,
+  titleText: PropTypes.string.isRequired,
   user: PropTypes.object
 };
 
@@ -96,8 +87,4 @@ UsersForm.defaultProps = {
   submitText: 'Submit'
 };
 
-const styles = theme => {
-  return formStyles(theme);
-};
-
-export default withStyles(styles)(UsersForm);
+export default UsersForm;

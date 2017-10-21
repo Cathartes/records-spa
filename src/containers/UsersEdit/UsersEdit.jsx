@@ -3,15 +3,16 @@ import PropTypes from 'prop-types';
 import { graphql } from 'react-apollo';
 
 import usersListQuery from '../../queries/usersListQuery';
-import createUserMutation from '../../mutations/createUserMutation';
+import updateUserMutation from '../../mutations/updateUserMutation';
 
 import UsersForm from '../../components/UsersForm';
 
-class UsersAdd extends PureComponent {
+class UsersEdit extends PureComponent {
   onFormSubmit = state => {
     this.props
       .mutate({
         variables: {
+          id: this.props.user.id,
           discordName: state.discordName,
           membershipType: state.membershipType
         },
@@ -26,16 +27,17 @@ class UsersAdd extends PureComponent {
     return (
       <UsersForm
         onFormSubmit={this.onFormSubmit}
-        submitText="Add"
-        titleText="Add Member"
+        submitText="Update"
+        titleText="Update Member"
         {...this.props}
       />
     );
   }
 }
 
-UsersAdd.propTypes = {
-  onRequestClose: PropTypes.func.isRequired
+UsersEdit.propTypes = {
+  onRequestClose: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired
 };
 
-export default graphql(createUserMutation)(UsersAdd);
+export default graphql(updateUserMutation)(UsersEdit);

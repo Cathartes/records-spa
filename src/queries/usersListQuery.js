@@ -6,6 +6,7 @@ const usersListQuery = gql`
       discordName
       email
       id
+      membershipType
     }
   }
 `;

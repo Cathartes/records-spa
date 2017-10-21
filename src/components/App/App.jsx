@@ -14,7 +14,6 @@ import Login from '../Login';
 import Logout from '../Logout';
 import RecordBooksAdd from '../RecordBooksAdd';
 import RecordBooksView from '../RecordBooksView';
-import UsersAdd from '../../containers/UsersAdd';
 
 import mainTheme from '../../config/themes/mainTheme';
 
@@ -44,7 +43,6 @@ class App extends PureComponent {
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/logout" component={Logout} />
                 <Route exact path="/members" component={MembersPage} />
-                <Route exact path="/members/new" component={UsersAdd} />
                 <Route exact path="/records/new" component={RecordBooksAdd} />
                 <Route exact path="/records/:id" component={RecordBooksView} />
               </Switch>
