@@ -17,7 +17,7 @@ import recordBooksViewQuery from '../../queries/recordBooksViewQuery';
 import ChallengesListContainer from '../../containers/ChallengesListContainer';
 
 import LoadingCircle from '../LoadingCircle';
-import MomentsList from '../MomentsList';
+import CompletionsList from '../CompletionsList';
 import ParticipationsList from '../ParticipationsList';
 
 class RecordBooksView extends PureComponent {
@@ -74,7 +74,9 @@ class RecordBooksView extends PureComponent {
               </Tabs>
             </AppBar>
 
-            {currentTab === 0 && <MomentsList recordBookId={match.params.id} />}
+            {currentTab === 0 && (
+              <CompletionsList recordBookId={match.params.id} />
+            )}
 
             {currentTab === 1 && (
               <ChallengesListContainer recordBookId={match.params.id} />

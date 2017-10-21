@@ -20,9 +20,10 @@ import BravoIcon from '../../icons/Bravo';
 
 import LoadingCircle from '../LoadingCircle';
 
-class MomentsList extends PureComponent {
+class CompletionsList extends PureComponent {
   render() {
     const { classes, data } = this.props;
+    console.log(data);
 
     return (
       <div>
@@ -41,31 +42,33 @@ class MomentsList extends PureComponent {
             </TableHead>
 
             <TableBody>
-              {data.moments.map(moment => {
+              {data.completions.map(completion => {
                 return (
                   <TableRow
                     className={classNames(
-                      moment.completion &&
-                        this.backgroundClassFromStatus(moment.completion.status)
+                      completion.completion &&
+                        this.backgroundClassFromStatus(
+                          completion.completion.status
+                        )
                     )}
-                    key={moment.id}
+                    key={completion.id}
                   >
-                    <TableCell className={classNames(classes.momentType)}>
-                      {moment.momentType.replace('_', ' ')}
+                    <TableCell>{completion.challenge.name}</TableCell>
+                    <TableCell>
+                      <Moment format="M/D h:mma">{completion.createdAt}</Moment>
                     </TableCell>
                     <TableCell>
-                      <Moment format="M/D h:mma">{moment.createdAt}</Moment>
+                      {completion.participation.user.discordName}
                     </TableCell>
                     <TableCell>
-                      {moment.participation.user.discordName}
-                    </TableCell>
-                    <TableCell>
-                      {moment.completion ? moment.completion.points : null}
+                      {completion.completion
+                        ? completion.completion.points
+                        : null}
                     </TableCell>
                     <TableCell>
                       <div>
-                        {moment.participation.team &&
-                          this.iconForTeam(moment.participation.team.name)}
+                        {completion.participation.team &&
+                          this.iconForTeam(completion.participation.team.name)}
                       </div>
                     </TableCell>
                   </TableRow>
@@ -118,10 +121,7 @@ const styles = theme => ({
     margin: 16,
     position: 'fixed',
     right: 0
-  },
-  momentType: {
-    textTransform: 'capitalize'
   }
 });
 
-export default withStyles(styles)(MomentsList);
+export default withStyles(styles)(CompletionsList);

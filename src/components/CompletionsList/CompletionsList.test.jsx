@@ -5,16 +5,16 @@ import { MemoryRouter as Router } from 'react-router-dom';
 
 import store from '../../config/store';
 
-import MomentsList from './MomentsList';
+import CompletionsList from './CompletionsList';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  const props = { data: { loading: false, moments: [] } };
+  const props = { data: { loading: false, completions: [] } };
 
   ReactDOM.render(
     <Provider store={store}>
       <Router>
-        <MomentsList {...props} />
+        <CompletionsList {...props} />
       </Router>
     </Provider>,
     div

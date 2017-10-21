@@ -18,7 +18,7 @@ import TextField from 'material-ui/TextField';
 import Typography from 'material-ui/Typography';
 
 import challengesListQuery from '../../queries/challengesListQuery';
-import momentsListQuery from '../../queries/momentsListQuery';
+import completionsListQuery from '../../queries/completionsListQuery';
 
 class CompletionsAdd extends Component {
   state = { challengeId: '0', participationId: '0', points: null, rank: null };
@@ -43,7 +43,7 @@ class CompletionsAdd extends Component {
             variables: { recordBookId: this.props.match.params.recordBookId }
           },
           {
-            query: momentsListQuery,
+            query: completionsListQuery,
             variables: { recordBookId: this.props.match.params.recordBookId }
           }
         ]
