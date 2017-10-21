@@ -7,10 +7,14 @@ import ChallengesList from '../../components/ChallengesList';
 
 class ChallengesListContainer extends PureComponent {
   render() {
-    const { data } = this.props;
+    const { data, recordBookId } = this.props;
 
     return (
-      <ChallengesList challenges={data.challenges} loading={data.loading} />
+      <ChallengesList
+        challenges={data.challenges}
+        loading={data.loading}
+        recordBookId={recordBookId}
+      />
     );
   }
 }
