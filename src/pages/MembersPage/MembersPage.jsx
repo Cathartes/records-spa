@@ -19,7 +19,6 @@ import usersListQuery from '../../queries/usersListQuery';
 import UsersAdd from '../../containers/UsersAdd';
 import UsersEdit from '../../containers/UsersEdit';
 
-import DeleteMember from '../../components/DeleteMember';
 import LoadingCircle from '../../components/LoadingCircle';
 
 class MembersPage extends PureComponent {
@@ -64,10 +63,7 @@ class MembersPage extends PureComponent {
             <LoadingCircle />
           ) : (
             <div>
-              {this.renderUsersList(
-                this.filterUsers(data.users, 'member'),
-                data.refetch
-              )}
+              {this.renderUsersList(this.filterUsers(data.users, 'member'))}
             </div>
           )}
         </Paper>
@@ -92,10 +88,7 @@ class MembersPage extends PureComponent {
             <LoadingCircle />
           ) : (
             <div>
-              {this.renderUsersList(
-                this.filterUsers(data.users, 'applicant'),
-                data.refetch
-              )}
+              {this.renderUsersList(this.filterUsers(data.users, 'applicant'))}
             </div>
           )}
         </Paper>
@@ -117,13 +110,14 @@ class MembersPage extends PureComponent {
             open
             onRequestClose={this.setEditUser(null)}
             user={editUser}
+            refetch={data.refetch}
           />
         )}
       </div>
     );
   }
 
-  renderUsersList(users, refetch) {
+  renderUsersList(users) {
     return (
       <List>
         {users.map(user => {
@@ -145,11 +139,6 @@ class MembersPage extends PureComponent {
                   primary={user.discordName.toUpperCase()}
                   secondary={user.email}
                 />
-                {user.admin ? (
-                  <div />
-                ) : (
-                  <DeleteMember id={user.id} refetch={refetch} />
-                )}
               </ListItem>
             );
           }

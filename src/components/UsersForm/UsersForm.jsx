@@ -13,12 +13,15 @@ import MenuItem from 'material-ui/Menu/MenuItem';
 import Select from 'material-ui/Select';
 import TextField from 'material-ui/TextField';
 
+import DeleteMember from '../DeleteMember';
+
 class UsersForm extends PureComponent {
   state = {
     discordName: this.props.user ? this.props.user.discordName : '',
     membershipType: this.props.user
       ? this.props.user.membershipType
-      : 'applicant'
+      : 'applicant',
+    confirmDelete: false
   };
 
   handleInputChange = name => event => {
@@ -31,9 +34,16 @@ class UsersForm extends PureComponent {
   };
 
   render() {
-    const { open, onRequestClose, submitText, titleText } = this.props;
+    const {
+      open,
+      onRequestClose,
+      submitText,
+      titleText,
+      user,
+      refetch
+    } = this.props;
     const { discordName, membershipType } = this.state;
-
+    console.log(this.props);
     return (
       <Dialog open={open} onRequestClose={onRequestClose}>
         <form onSubmit={this.handleSubmit} noValidate>
@@ -66,6 +76,11 @@ class UsersForm extends PureComponent {
           </DialogContent>
 
           <DialogActions>
+            <DeleteMember
+              user={user}
+              refetch={refetch}
+              closeDialog={onRequestClose}
+            />
             <Button raised type="submit">
               {submitText}
             </Button>
