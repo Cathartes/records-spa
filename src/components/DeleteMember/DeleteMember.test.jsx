@@ -1,3 +1,5 @@
 import DeleteMember from './DeleteMember';
 
-expect(JSON.stringify(DeleteMember)).toMatchSnapshot();
+it('renders without crashing', () => {
+  expect(JSON.stringify(DeleteMember)).toMatchSnapshot();
+});

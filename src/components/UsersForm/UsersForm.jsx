@@ -43,7 +43,6 @@ class UsersForm extends PureComponent {
       refetch
     } = this.props;
     const { discordName, membershipType } = this.state;
-    console.log(this.props);
     return (
       <Dialog open={open} onRequestClose={onRequestClose}>
         <form onSubmit={this.handleSubmit} noValidate>
@@ -95,7 +94,8 @@ UsersForm.propTypes = {
   onFormSubmit: PropTypes.func.isRequired,
   submitText: PropTypes.string.isRequired,
   titleText: PropTypes.string.isRequired,
-  user: PropTypes.object
+  user: PropTypes.object,
+  refetch: PropTypes.func
 };
 
 UsersForm.defaultProps = {
