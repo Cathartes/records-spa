@@ -1,21 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { MemoryRouter as Router } from 'react-router-dom';
 
 import store from '../../config/store';
 
-import CompletionsAdd from './CompletionsAdd';
+import CompletionsEdit from './CompletionsEdit';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  const props = { currentUser: { admin: true }, data: { loading: true } };
+  const completion = {};
+  const onRequestClose = () => {};
+  const recordBookId = '0';
 
   ReactDOM.render(
     <Provider store={store}>
-      <Router>
-        <CompletionsAdd {...props} />
-      </Router>
+      <CompletionsEdit
+        completion={completion}
+        onRequestClose={onRequestClose}
+        recordBookId={recordBookId}
+      />
     </Provider>,
     div
   );
