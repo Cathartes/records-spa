@@ -7,10 +7,7 @@ import tableStyles from '../../styles/table';
 
 import Avatar from 'material-ui/Avatar';
 import Button from 'material-ui/Button';
-import List from 'material-ui/List';
-import ListItem from 'material-ui/List/ListItem';
-import ListItemAvatar from 'material-ui/List/ListItemAvatar';
-import ListItemText from 'material-ui/List/ListItemText';
+import List, { ListItem, ListItemAvatar, ListItemText } from 'material-ui/List';
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 
@@ -22,6 +19,7 @@ import usersListQuery from '../../queries/usersListQuery';
 import UsersAdd from '../../containers/UsersAdd';
 import UsersEdit from '../../containers/UsersEdit';
 
+import DeleteMember from '../../components/DeleteMember';
 import LoadingCircle from '../../components/LoadingCircle';
 
 class MembersPage extends PureComponent {
@@ -66,7 +64,10 @@ class MembersPage extends PureComponent {
             <LoadingCircle />
           ) : (
             <div>
-              {this.renderUsersList(this.filterUsers(data.users, 'member'))}
+              {this.renderUsersList(
+                this.filterUsers(data.users, 'member'),
+                data.refetch
+              )}
             </div>
           )}
         </Paper>
@@ -91,7 +92,10 @@ class MembersPage extends PureComponent {
             <LoadingCircle />
           ) : (
             <div>
-              {this.renderUsersList(this.filterUsers(data.users, 'applicant'))}
+              {this.renderUsersList(
+                this.filterUsers(data.users, 'applicant'),
+                data.refetch
+              )}
             </div>
           )}
         </Paper>
@@ -119,24 +123,36 @@ class MembersPage extends PureComponent {
     );
   }
 
-  renderUsersList(users) {
+  renderUsersList(users, refetch) {
     return (
       <List>
         {users.map(user => {
-          return (
-            <ListItem button key={user.id} onClick={this.setEditUser(user)}>
-              <ListItemAvatar>
-                <Avatar>
-                  <AccountBoxIcon />
-                </Avatar>
-              </ListItemAvatar>
+          if (
+            user.currentUserStatus === 'archived' ||
+            user.currentUserStatus === 'deleted'
+          ) {
+            return null;
+          } else {
+            return (
+              <ListItem button key={user.id} onClick={this.setEditUser(user)}>
+                <ListItemAvatar>
+                  <Avatar>
+                    <AccountBoxIcon />
+                  </Avatar>
+                </ListItemAvatar>
 
-              <ListItemText
-                primary={user.discordName.toUpperCase()}
-                secondary={user.email}
-              />
-            </ListItem>
-          );
+                <ListItemText
+                  primary={user.discordName.toUpperCase()}
+                  secondary={user.email}
+                />
+                {user.admin ? (
+                  <div />
+                ) : (
+                  <DeleteMember id={user.id} refetch={refetch} />
+                )}
+              </ListItem>
+            );
+          }
         })}
       </List>
     );
