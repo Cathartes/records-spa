@@ -23,19 +23,19 @@ import LoadingCircle from '../LoadingCircle';
 class CompletionsList extends PureComponent {
   render() {
     const { classes, data } = this.props;
-    console.log(data);
 
     return (
-      <div>
+      <div className={classNames(classes.tableContainer)}>
         {data.loading ? (
           <LoadingCircle />
         ) : (
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Type</TableCell>
+                <TableCell>Challenge Name</TableCell>
+                <TableCell>Member</TableCell>
                 <TableCell>Time Occurred</TableCell>
-                <TableCell>Name</TableCell>
+                <TableCell>Rank</TableCell>
                 <TableCell>Points</TableCell>
                 <TableCell>Team</TableCell>
               </TableRow>
@@ -44,27 +44,16 @@ class CompletionsList extends PureComponent {
             <TableBody>
               {data.completions.map(completion => {
                 return (
-                  <TableRow
-                    className={classNames(
-                      completion.completion &&
-                        this.backgroundClassFromStatus(
-                          completion.completion.status
-                        )
-                    )}
-                    key={completion.id}
-                  >
+                  <TableRow key={completion.id}>
                     <TableCell>{completion.challenge.name}</TableCell>
-                    <TableCell>
-                      <Moment format="M/D h:mma">{completion.createdAt}</Moment>
-                    </TableCell>
                     <TableCell>
                       {completion.participation.user.discordName}
                     </TableCell>
                     <TableCell>
-                      {completion.completion
-                        ? completion.completion.points
-                        : null}
+                      <Moment format="M/D h:mma">{completion.createdAt}</Moment>
                     </TableCell>
+                    <TableCell>{completion.rank}</TableCell>
+                    <TableCell>{completion.points}</TableCell>
                     <TableCell>
                       <div>
                         {completion.participation.team &&
@@ -92,17 +81,6 @@ class CompletionsList extends PureComponent {
     );
   }
 
-  backgroundClassFromStatus(completionStatus) {
-    switch (completionStatus) {
-      case 'approved':
-        return this.props.classes.backgroundApproved;
-      case 'declined':
-        return this.props.classes.backgroundDeclined;
-      default:
-        return '';
-    }
-  }
-
   iconForTeam(teamName) {
     switch (teamName) {
       case 'Alpha Team':
@@ -121,6 +99,9 @@ const styles = theme => ({
     margin: 16,
     position: 'fixed',
     right: 0
+  },
+  tableContainer: {
+    overflow: 'hidden'
   }
 });
 

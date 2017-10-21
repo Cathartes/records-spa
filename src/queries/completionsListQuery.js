@@ -9,6 +9,7 @@ const completionsListQuery = gql`
       createdAt
       id
       points
+      rank
       status
       participation {
         team {
