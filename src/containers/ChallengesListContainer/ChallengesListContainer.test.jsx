@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
+import { ApolloProvider } from 'react-apollo';
 
+import apolloClient from '../../config/apolloClient';
 import store from '../../config/store';
 
 import ChallengesListContainer from './ChallengesListContainer';
@@ -10,9 +11,9 @@ it('renders without crashing', () => {
   const div = document.createElement('div');
 
   ReactDOM.render(
-    <Provider store={store}>
+    <ApolloProvider client={apolloClient} store={store}>
       <ChallengesListContainer />
-    </Provider>,
+    </ApolloProvider>,
     div
   );
 });

@@ -8,10 +8,12 @@ import UsersEdit from './UsersEdit';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
+  const onRequestClose = () => {};
+  const user = {};
 
   ReactDOM.render(
     <Provider store={store}>
-      <UsersEdit />
+      <UsersEdit onRequestClose={onRequestClose} user={user} />
     </Provider>,
     div
   );
