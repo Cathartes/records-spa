@@ -72,7 +72,7 @@ class ChallengesList extends PureComponent {
         )}
 
         <Button
-          aria-label="Add Member"
+          aria-label="Add Challenge"
           className={classNames(classes.addButton)}
           color="accent"
           fab
