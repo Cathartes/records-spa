@@ -9,6 +9,7 @@ import DialogActions from 'material-ui/Dialog/DialogActions';
 import DialogContent from 'material-ui/Dialog/DialogContent';
 import DialogContentText from 'material-ui/Dialog/DialogContentText';
 import DialogTitle from 'material-ui/Dialog/DialogTitle';
+import IconButton from 'material-ui/IconButton';
 import List from 'material-ui/List';
 import ListItem from 'material-ui/List/ListItem';
 import ListItemIcon from 'material-ui/List/ListItemIcon';
@@ -31,7 +32,7 @@ class ParticipationsList extends PureComponent {
 
   addParticipants = () => {
     this.props.selectedUsers.forEach(userId => {
-      this.props.mutate({
+      this.props.createParticipationMutate({
         variables: { recordBookId: this.props.recordBookId, userId: userId },
         refetchQueries: [
           {
@@ -48,6 +49,33 @@ class ParticipationsList extends PureComponent {
     this.setState({ dialogOpen: !this.state.dialogOpen });
   };
 
+  toggleTeam = participation => event => {
+    let newTeamId = null;
+    switch (participation.teamId) {
+      case 1:
+        newTeamId = 2;
+        break;
+      case 2:
+        newTeamId = null;
+        break;
+      default:
+        newTeamId = 1;
+        break;
+    }
+    console.log(participation.teamId);
+    console.log(newTeamId);
+
+    this.props.updateParticipationMutate({
+      variables: { id: participation.id, teamId: newTeamId },
+      refetchQueries: [
+        {
+          query: participationsListQuery,
+          variables: { recordBookId: this.props.recordBookId }
+        }
+      ]
+    });
+  };
+
   render() {
     const { classes, data } = this.props;
     const { dialogOpen } = this.state;
@@ -61,11 +89,11 @@ class ParticipationsList extends PureComponent {
             {data.participations.map(participation => {
               return (
                 <ListItem key={participation.id}>
-                  <ListItemIcon>
-                    <div>
+                  <ListItemIcon onClick={this.toggleTeam(participation)}>
+                    <IconButton aria-label="Change Team">
                       {participation.team &&
                         this.iconForTeam(participation.team.name)}
-                    </div>
+                    </IconButton>
                   </ListItemIcon>
 
                   <ListItemText
