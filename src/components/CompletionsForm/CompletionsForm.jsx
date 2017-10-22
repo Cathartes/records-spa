@@ -88,25 +88,29 @@ class UsersForm extends PureComponent {
               </Select>
             </FormControl>
 
-            <TextField
-              fullWidth
-              label="Rank"
-              margin="normal"
-              name="rank"
-              onChange={this.handleInputChange('rank')}
-              type="number"
-              value={rank}
-            />
+            {completion && (
+              <div>
+                <TextField
+                  fullWidth
+                  label="Rank"
+                  margin="normal"
+                  name="rank"
+                  onChange={this.handleInputChange('rank')}
+                  type="number"
+                  value={rank}
+                />
 
-            <TextField
-              fullWidth
-              label="Points"
-              margin="normal"
-              name="points"
-              onChange={this.handleInputChange('points')}
-              type="number"
-              value={points}
-            />
+                <TextField
+                  fullWidth
+                  label="Points"
+                  margin="normal"
+                  name="points"
+                  onChange={this.handleInputChange('points')}
+                  type="number"
+                  value={points}
+                />
+              </div>
+            )}
           </DialogContent>
 
           <DialogActions>
