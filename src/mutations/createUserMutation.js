@@ -13,8 +13,7 @@ const createUserMutation = gql`
       password: $password
       membershipType: $membershipType
     ) {
-      id
-      discordName
+      uid
     }
   }
 `;

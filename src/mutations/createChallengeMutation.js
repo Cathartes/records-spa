@@ -2,7 +2,7 @@ import { gql } from 'react-apollo';
 
 const createChallengeMutation = gql`
   mutation createChallengeMutation(
-    $recordBookId: ID!
+    $recordBookId: Int!
     $maxCompletions: Int!
     $name: String!
     $pointsCompletion: Int!
@@ -19,7 +19,7 @@ const createChallengeMutation = gql`
       pointsSecond: $pointsSecond
       pointsThird: $pointsThird
     ) {
-      id
+      uid
     }
   }
 `;

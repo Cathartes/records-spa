@@ -2,7 +2,7 @@ import { gql } from 'react-apollo';
 
 const updateChallengeMutation = gql`
   mutation updateChallengeMutation(
-    $id: ID!
+    $id: Int!
     $maxCompletions: Int
     $name: String
     $pointsCompletion: Int
@@ -19,7 +19,7 @@ const updateChallengeMutation = gql`
       pointsSecond: $pointsSecond
       pointsThird: $pointsThird
     ) {
-      id
+      uid
     }
   }
 `;

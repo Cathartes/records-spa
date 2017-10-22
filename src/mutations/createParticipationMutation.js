@@ -2,16 +2,16 @@ import { gql } from 'react-apollo';
 
 const createParticipationMutation = gql`
   mutation createParticipationMutation(
-    $recordBookId: ID!
-    $userId: ID!
-    $teamId: ID
+    $recordBookId: Int!
+    $userId: Int!
+    $teamId: Int
   ) {
     createParticipation(
       recordBookId: $recordBookId
       userId: $userId
       teamId: $teamId
     ) {
-      id
+      uid
     }
   }
 `;

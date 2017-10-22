@@ -2,8 +2,8 @@ import { gql } from 'react-apollo';
 
 const createCompletionMutation = gql`
   mutation createCompletionMutation(
-    $challengeId: ID!
-    $participationId: ID!
+    $challengeId: Int!
+    $participationId: Int!
     $points: Int
     $rank: Int
     $status: CompletionStatus
@@ -15,7 +15,7 @@ const createCompletionMutation = gql`
       rank: $rank
       status: $status
     ) {
-      id
+      uid
     }
   }
 `;

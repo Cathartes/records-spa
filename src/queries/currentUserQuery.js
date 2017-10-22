@@ -7,6 +7,7 @@ const currentUserQuery = gql`
       discordName
       email
       id
+      uid
     }
   }
 `;

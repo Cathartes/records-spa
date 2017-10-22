@@ -1,7 +1,7 @@
 import { gql } from 'react-apollo';
 
 const recordBooksViewQuery = gql`
-  query recordBooksViewQuery($recordBookId: ID!) {
+  query recordBooksViewQuery($recordBookId: Int!) {
     recordBook(id: $recordBookId) {
       endTime
       id
@@ -10,6 +10,7 @@ const recordBooksViewQuery = gql`
       rushEndTime
       rushStartTime
       startTime
+      uid
     }
   }
 `;
