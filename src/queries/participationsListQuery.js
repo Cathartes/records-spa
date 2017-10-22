@@ -8,6 +8,7 @@ const recordBooksViewQuery = gql`
       team {
         name
       }
+      teamId
       uid
       user {
         discordName
