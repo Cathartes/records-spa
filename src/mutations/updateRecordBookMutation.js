@@ -5,6 +5,7 @@ const updateRecordBookMutation = gql`
     $id: Int!
     $name: String
     $published: Boolean
+    $rushWeekActive: Boolean
     $startTime: String
     $endTime: String
     $rushStartTime: String
@@ -14,6 +15,7 @@ const updateRecordBookMutation = gql`
       id: $id
       name: $name
       published: $published
+      rushWeekActive: $rushWeekActive
       startTime: $startTime
       endTime: $endTime
       rushStartTime: $rushStartTime

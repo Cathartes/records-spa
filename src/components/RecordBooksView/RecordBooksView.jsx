@@ -6,10 +6,12 @@ import Moment from 'react-moment';
 import withStyles from 'material-ui/styles/withStyles';
 
 import AppBar from 'material-ui/AppBar';
-import Button from 'material-ui/Button';
+import Card, { CardContent } from 'material-ui/Card';
+import Divider from 'material-ui/Divider';
+import { FormControlLabel } from 'material-ui/Form';
 import Paper from 'material-ui/Paper';
-import Tabs from 'material-ui/Tabs';
-import Tab from 'material-ui/Tabs/Tab';
+import Switch from 'material-ui/Switch';
+import Tabs, { Tab } from 'material-ui/Tabs';
 import Typography from 'material-ui/Typography';
 
 import recordBooksViewQuery from '../../queries/recordBooksViewQuery';
@@ -27,17 +29,12 @@ class RecordBooksView extends PureComponent {
     this.setState({ currentTab: value });
   };
 
-  onPublishClick = () => {
+  onPublish = event => {
     const recordBook = this.props.data.recordBook;
     this.props.mutate({
       variables: {
         id: recordBook.id,
-        name: recordBook.name,
-        published: true,
-        startTime: recordBook.startTime,
-        endTime: recordBook.endTime,
-        rushStartTime: recordBook.rushStartTime,
-        rushEndTime: recordBook.rushEndTime
+        published: !recordBook.published
       },
       refetchQueries: [
         {
@@ -48,6 +45,51 @@ class RecordBooksView extends PureComponent {
     });
   };
 
+  onRushWeekActivate = event => {
+    const recordBook = this.props.data.recordBook;
+    this.props.mutate({
+      variables: {
+        id: recordBook.id,
+        rushWeekActive: !recordBook.rushWeekActive
+      },
+      refetchQueries: [
+        {
+          query: recordBooksViewQuery,
+          variables: { recordBookId: recordBook.id }
+        }
+      ]
+    });
+  };
+
+  renderTimeRow(subheading, datetime) {
+    const { classes } = this.props;
+
+    return (
+      <div className={classNames(classes.cardTextContainer)}>
+        <Typography
+          className={classNames(classes.cardTextStart)}
+          type="subheading"
+        >
+          Start Time
+        </Typography>
+
+        <Typography
+          className={classNames(classes.cardTextMid)}
+          type="subheading"
+        >
+          <Moment format="M/D/YYYY">{datetime}</Moment>
+        </Typography>
+
+        <Typography
+          className={classNames(classes.cardTextEnd)}
+          type="subheading"
+        >
+          <Moment format="h:mma">{datetime}</Moment>
+        </Typography>
+      </div>
+    );
+  }
+
   render() {
     const { classes, data, match } = this.props;
     const { currentTab } = this.state;
@@ -55,7 +97,7 @@ class RecordBooksView extends PureComponent {
     const recordBookId = parseInt(match.params.id, 10);
 
     return (
-      <Paper>
+      <div>
         {data.loading ? (
           <LoadingCircle />
         ) : (
@@ -77,53 +119,117 @@ class RecordBooksView extends PureComponent {
             </AppBar>
 
             {currentTab === 0 && (
-              <CompletionsList recordBookId={recordBookId} />
+              <Paper>
+                <CompletionsList recordBookId={recordBookId} />
+              </Paper>
             )}
 
             {currentTab === 1 && (
-              <ChallengesListContainer recordBookId={recordBookId} />
+              <Paper>
+                <ChallengesListContainer recordBookId={recordBookId} />
+              </Paper>
             )}
 
             {currentTab === 2 && (
-              <ParticipationsList recordBookId={recordBookId} />
+              <Paper>
+                <ParticipationsList recordBookId={recordBookId} />
+              </Paper>
             )}
 
             {currentTab === 3 && (
-              <div>
-                <Typography type="subheading">Start Time</Typography>
-                <Moment format="M/D/YYYY @ h:mma">
-                  {data.recordBook.startTime}
-                </Moment>
-                <Typography type="subheading">End Time</Typography>
-                <Moment format="M/D/YYYY @ h:mma">
-                  {data.recordBook.endTime}
-                </Moment>
-                <Typography type="subheading">Rush Start Time</Typography>
-                <Moment format="M/D/YYYY @ h:mma">
-                  {data.recordBook.rushStartTime}
-                </Moment>
-                <Typography type="subheading">Rush End Time</Typography>
-                <Moment format="M/D/YYYY @ h:mma">
-                  {data.recordBook.rushEndTime}
-                </Moment>
+              <div className={classNames(classes.cardContainer)}>
+                <Card className={classNames(classes.cardSizing)} raised>
+                  <CardContent>
+                    <div className={classNames(classes.cardHeader)}>
+                      <Typography type="title">Timing</Typography>
 
-                <Button
-                  disabled={data.recordBook.published}
-                  onClick={() => this.onPublishClick()}
-                  raised
-                >
-                  {data.recordBook.published ? 'Published' : 'Publish'}
-                </Button>
+                      <FormControlLabel
+                        control={<Switch checked={data.recordBook.published} />}
+                        onChange={this.onPublish}
+                        label="Published"
+                      />
+                    </div>
+
+                    <Divider />
+
+                    {this.renderTimeRow(
+                      'Start Time',
+                      data.recordBook.startTime
+                    )}
+
+                    {this.renderTimeRow('End Time', data.recordBook.endTime)}
+                  </CardContent>
+                </Card>
+
+                <Card className={classNames(classes.cardSizing)} raised>
+                  <CardContent>
+                    <div className={classNames(classes.cardHeader)}>
+                      <Typography type="title">Rush Week</Typography>
+
+                      <FormControlLabel
+                        control={
+                          <Switch checked={data.recordBook.rushWeekActive} />
+                        }
+                        onChange={this.onRushWeekActivate}
+                        label="On"
+                      />
+                    </div>
+
+                    <Divider />
+
+                    {this.renderTimeRow(
+                      'Start Time',
+                      data.recordBook.rushStartTime
+                    )}
+
+                    {this.renderTimeRow(
+                      'End Time',
+                      data.recordBook.rushEndTime
+                    )}
+                  </CardContent>
+                </Card>
               </div>
             )}
           </div>
         )}
-      </Paper>
+      </div>
     );
   }
 }
 
 const styles = theme => ({
+  cardContainer: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center'
+  },
+  cardHeader: {
+    alignItems: 'center',
+    display: 'flex',
+    justifyContent: 'space-between'
+  },
+  cardSizing: {
+    margin: theme.spacing.unit,
+    minWidth: 350
+  },
+  cardTextContainer: {
+    alignItems: 'center',
+    display: 'flex',
+    margin: [theme.spacing.unit, 0]
+  },
+  cardTextEnd: {
+    display: 'flex',
+    flex: 1,
+    justifyContent: 'flex-end'
+  },
+  cardTextMid: {
+    display: 'flex',
+    flex: 1,
+    justifyContent: 'center'
+  },
+  cardTextStart: {
+    flex: 1
+  },
   recordBookTitle: {
     padding: [10, 20]
   }

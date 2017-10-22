@@ -9,6 +9,7 @@ const recordBooksViewQuery = gql`
       published
       rushEndTime
       rushStartTime
+      rushWeekActive
       startTime
       uid
     }
