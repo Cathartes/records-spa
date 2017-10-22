@@ -106,7 +106,7 @@ class ChallengesList extends PureComponent {
 ChallengesList.propTypes = {
   challenges: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
-  recordBookId: PropTypes.string
+  recordBookId: PropTypes.number
 };
 
 ChallengesList.defaultProps = {

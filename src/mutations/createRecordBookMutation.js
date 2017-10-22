@@ -17,8 +17,7 @@ const createRecordBookMutation = gql`
       rushStartTime: $rushStartTime
       rushEndTime: $rushEndTime
     ) {
-      id
-      name
+      uid
     }
   }
 `;

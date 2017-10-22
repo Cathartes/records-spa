@@ -60,10 +60,7 @@ class UsersForm extends PureComponent {
               >
                 {challenges.map(challenge => {
                   return (
-                    <MenuItem
-                      key={challenge.id}
-                      value={parseInt(challenge.id, 10)}
-                    >
+                    <MenuItem key={challenge.id} value={challenge.id}>
                       {challenge.name}
                     </MenuItem>
                   );
@@ -83,10 +80,7 @@ class UsersForm extends PureComponent {
               >
                 {participations.map(participation => {
                   return (
-                    <MenuItem
-                      key={participation.id}
-                      value={parseInt(participation.id, 10)}
-                    >
+                    <MenuItem key={participation.id} value={participation.id}>
                       {participation.user.discordName}
                     </MenuItem>
                   );

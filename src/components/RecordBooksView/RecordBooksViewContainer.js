@@ -7,7 +7,9 @@ import RecordBooksView from './RecordBooksView';
 
 export default compose(
   graphql(recordBooksViewQuery, {
-    options: props => ({ variables: { recordBookId: props.match.params.id } })
+    options: props => ({
+      variables: { recordBookId: parseInt(props.match.params.id, 10) }
+    })
   }),
   graphql(updateRecordBookMutation)
 )(RecordBooksView);

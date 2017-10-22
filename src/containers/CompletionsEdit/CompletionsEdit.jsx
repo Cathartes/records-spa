@@ -48,7 +48,7 @@ class CompletionsEdit extends PureComponent {
 CompletionsEdit.propTypes = {
   completion: PropTypes.object.isRequired,
   onRequestClose: PropTypes.func.isRequired,
-  recordBookId: PropTypes.string.isRequired
+  recordBookId: PropTypes.number.isRequired
 };
 
 export default graphql(updateCompletionMutation)(CompletionsEdit);

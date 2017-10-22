@@ -47,7 +47,7 @@ class ChallengesEdit extends PureComponent {
 ChallengesEdit.propTypes = {
   challenge: PropTypes.object.isRequired,
   onRequestClose: PropTypes.func.isRequired,
-  recordBookId: PropTypes.string.isRequired
+  recordBookId: PropTypes.number.isRequired
 };
 
 export default graphql(updateChallengeMutation)(ChallengesEdit);

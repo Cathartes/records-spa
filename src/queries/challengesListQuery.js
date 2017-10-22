@@ -1,7 +1,7 @@
 import { gql } from 'react-apollo';
 
 const challengesListQuery = gql`
-  query challengesListQuery($recordBookId: ID!) {
+  query challengesListQuery($recordBookId: Int!) {
     challenges(recordBookId: $recordBookId) {
       completions {
         user {
@@ -16,6 +16,7 @@ const challengesListQuery = gql`
       pointsFirst
       pointsSecond
       pointsThird
+      uid
     }
   }
 `;

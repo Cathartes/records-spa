@@ -52,6 +52,8 @@ class RecordBooksView extends PureComponent {
     const { classes, data, match } = this.props;
     const { currentTab } = this.state;
 
+    const recordBookId = parseInt(match.params.id, 10);
+
     return (
       <Paper>
         {data.loading ? (
@@ -75,15 +77,15 @@ class RecordBooksView extends PureComponent {
             </AppBar>
 
             {currentTab === 0 && (
-              <CompletionsList recordBookId={match.params.id} />
+              <CompletionsList recordBookId={recordBookId} />
             )}
 
             {currentTab === 1 && (
-              <ChallengesListContainer recordBookId={match.params.id} />
+              <ChallengesListContainer recordBookId={recordBookId} />
             )}
 
             {currentTab === 2 && (
-              <ParticipationsList recordBookId={match.params.id} />
+              <ParticipationsList recordBookId={recordBookId} />
             )}
 
             {currentTab === 3 && (

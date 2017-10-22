@@ -2,7 +2,7 @@ import { gql } from 'react-apollo';
 
 const updateRecordBookMutation = gql`
   mutation updateRecordBookMutation(
-    $id: ID!
+    $id: Int!
     $name: String
     $published: Boolean
     $startTime: String
@@ -19,7 +19,7 @@ const updateRecordBookMutation = gql`
       rushStartTime: $rushStartTime
       rushEndTime: $rushEndTime
     ) {
-      id
+      uid
     }
   }
 `;

@@ -2,7 +2,7 @@ import { gql } from 'react-apollo';
 
 const updateUserMutation = gql`
   mutation updateUserMutation(
-    $id: ID!
+    $id: Int!
     $discordName: String
     $email: String
     $password: String
@@ -15,7 +15,7 @@ const updateUserMutation = gql`
       password: $password
       membershipType: $membershipType
     ) {
-      id
+      uid
     }
   }
 `;

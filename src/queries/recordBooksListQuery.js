@@ -5,6 +5,7 @@ const recordBooksListQuery = gql`
     recordBooks {
       id
       name
+      uid
     }
   }
 `;

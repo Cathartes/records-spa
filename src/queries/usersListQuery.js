@@ -7,6 +7,7 @@ const usersListQuery = gql`
       email
       id
       membershipType
+      uid
     }
   }
 `;
