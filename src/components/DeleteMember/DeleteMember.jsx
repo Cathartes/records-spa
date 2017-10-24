@@ -44,6 +44,8 @@ class DeleteMember extends PureComponent {
           Delete
         </Button>
         <PermanentConfirmationDialog
+          title={'Are you sure you want to delete member?'}
+          subtitle={"This action can't be reverted."}
           open={open}
           handleOnClick={this.handleOnClick}
           submitMutation={this.submitMutation}

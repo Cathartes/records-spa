@@ -121,10 +121,7 @@ class MembersPage extends PureComponent {
     return (
       <List>
         {users.map(user => {
-          if (
-            user.currentUserStatus === 'archived' ||
-            user.currentUserStatus === 'deleted'
-          ) {
+          if (user.currentUserStatus === 'archived') {
             return null;
           } else {
             return (

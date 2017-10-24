@@ -8,13 +8,13 @@ import DialogTitle from 'material-ui/Dialog/DialogTitle';
 
 class PermanentConfirmationDialog extends PureComponent {
   render() {
-    const { open, handleOnClick, submitMutation } = this.props;
+    const { open, handleOnClick, submitMutation, title, subtitle } = this.props;
 
     return (
       <Dialog open={open} onRequestClose={() => handleOnClick(false)}>
-        <DialogTitle>Are you sure you want to delete member?</DialogTitle>
+        <DialogTitle>{title}</DialogTitle>
         <DialogContent>
-          <DialogContentText>This action can't be reverted.</DialogContentText>
+          <DialogContentText>{subtitle}</DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button raised onClick={() => submitMutation()}>
