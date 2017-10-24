@@ -1,7 +1,7 @@
 import {
-  LOGIN_POST_REQUESTING,
-  LOGIN_POST_SUCCESS,
-  LOGOUT_DELETE
+  LOGIN_SUCCESS,
+  LOGOUT_SUCCESS,
+  SET_CURRENT_USER
 } from '../../actions/auth';
 
 const initialState = {
@@ -10,14 +10,19 @@ const initialState = {
 
 const auth = (state = initialState, action) => {
   switch (action.type) {
-    case LOGIN_POST_REQUESTING:
-      return Object.assign({}, state, {
-        loginPostRequesting: action.isRequesting
-      });
-    case LOGIN_POST_SUCCESS:
-      return Object.assign({}, state, { currentUser: action.user });
-    case LOGOUT_DELETE:
+    case LOGIN_SUCCESS:
+      localStorage.setItem('X-USER-TOKEN', action.token);
+      localStorage.setItem('X-USER-UID', action.uid);
+      return state;
+
+    case LOGOUT_SUCCESS:
+      localStorage.removeItem('X-USER-TOKEN');
+      localStorage.removeItem('X-USER-UID');
       return Object.assign({}, state, { currentUser: null });
+
+    case SET_CURRENT_USER:
+      return Object.assign({}, state, { currentUser: action.user });
+
     default:
       return state;
   }

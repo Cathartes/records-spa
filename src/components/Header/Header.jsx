@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import withStyles from 'material-ui/styles/withStyles';
@@ -15,24 +14,7 @@ import Typography from 'material-ui/Typography';
 
 import MenuIcon from 'material-ui-icons/Menu';
 
-import { sidenavToggle } from '../../actions/sidenav';
-import { snackbarClose, snackbarRemove } from '../../actions/snackbars';
-
 import Sidenav from '../Sidenav';
-
-const styles = theme => ({
-  appTitle: {
-    flex: 1
-  },
-  currentUser: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit
-  },
-  snackbar: {
-    top: 64,
-    zIndex: 1000
-  }
-});
 
 class Header extends PureComponent {
   handleExited = id => {
@@ -74,20 +56,10 @@ class Header extends PureComponent {
               CATHARTES
             </Typography>
 
-            {currentUser && (
-              <div className={classNames(classes.currentUser)}>
-                {currentUser.attributes.email}
-              </div>
-            )}
-            {currentUser && (
-              <Link to="/logout" className="button-link">
-                <Button>Logout</Button>
-              </Link>
-            )}
             {!currentUser && (
-              <Link to="/login" className="button-link">
-                <Button>Login</Button>
-              </Link>
+              <Button component={Link} to="/login">
+                Log In
+              </Button>
             )}
           </Toolbar>
         </AppBar>
@@ -97,8 +69,8 @@ class Header extends PureComponent {
             <Snackbar
               key={snackbar.id}
               open={snackbar.open}
-              anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
-              autoHideDuration={1500}
+              anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+              autoHideDuration={2000}
               onRequestClose={() => this.handleRequestClose(snackbar.id)}
               onExited={() => this.handleExited(snackbar.id)}
               message={<span>{snackbar.message}</span>}
@@ -111,28 +83,20 @@ class Header extends PureComponent {
   }
 }
 
-const mapStateToProps = state => {
+const styles = theme => {
   return {
-    currentUser: state.auth.currentUser,
-    isSidenavOpen: state.sidenav.isOpen,
-    snackbars: state.snackbars
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    onMenuIconClick: isSidenavOpen => {
-      dispatch(sidenavToggle(isSidenavOpen));
+    appTitle: {
+      flex: 1
     },
-    snackbarClose: id => {
-      dispatch(snackbarClose(id));
+    currentUser: {
+      marginLeft: theme.spacing.unit,
+      marginRight: theme.spacing.unit
     },
-    snackbarRemove: id => {
-      dispatch(snackbarRemove(id));
+    snackbar: {
+      top: 64,
+      zIndex: 1000
     }
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withStyles(styles)(Header)
-);
+export default withStyles(styles)(Header);

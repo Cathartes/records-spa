@@ -1,15 +1,18 @@
 import { combineReducers } from 'redux';
 
+import client from '../config/apolloClient';
+
 import auth from './auth';
-import challenges from './challenges';
-import sidenav from './sidenav';
 import snackbars from './snackbars';
+import ui from './ui';
+import usersList from './usersList';
 
 const appReducers = combineReducers({
+  apollo: client.reducer(),
   auth,
-  challenges,
-  sidenav,
-  snackbars
+  snackbars,
+  ui,
+  usersList
 });
 
 export default appReducers;

@@ -1,1 +1,1 @@
-export { default } from './Sidenav';
+export { default } from './SidenavContainer';

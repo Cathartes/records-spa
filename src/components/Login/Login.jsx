@@ -1,51 +1,39 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import classNames from 'classnames';
-import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import withStyles from 'material-ui/styles/withStyles';
+import formStyles from '../../styles/form';
 
 import Button from 'material-ui/Button';
 import Card, { CardActions, CardContent } from 'material-ui/Card';
 import TextField from 'material-ui/TextField';
+import Typography from 'material-ui/Typography';
 
-import { loginPost } from '../../actions/auth';
-
-const styles = theme => ({
-  container: {
-    display: 'flex',
-    justifyContent: 'center',
-    padding: 20
-  },
-  form: {
-    display: 'flex',
-    flexWrap: 'wrap'
-  },
-  submitButton: {
-    marginLeft: 2.5 * theme.spacing.unit,
-    marginRight: 2.5 * theme.spacing.unit
-  },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit
-  }
-});
-
-class Login extends Component {
-  email = null;
-  password = null;
-
-  handleEmailChange = event => {
-    this.email = event.target.value;
+class Login extends PureComponent {
+  state = {
+    email: null,
+    password: null
   };
 
-  handlePasswordChange = event => {
-    this.password = event.target.value;
+  handleTextChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
   };
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.loginPost(this.email, this.password);
+    this.props
+      .mutate({
+        variables: { email: this.state.email, password: this.state.password }
+      })
+      .then(({ data }) => {
+        if (data.login.token) {
+          this.props.loginSuccess(data.login.token, data.login.uid);
+          this.props.setCurrentUser(data.login.user);
+        }
+      });
   };
 
   render() {
@@ -56,37 +44,39 @@ class Login extends Component {
     }
 
     return (
-      <div className={classNames(classes.container)}>
+      <div className={classNames(classes.formContainer)}>
         <Card>
           <form onSubmit={this.handleSubmit} noValidate>
-            <CardContent className={classNames(classes.form)}>
+            <CardContent>
+              <Typography type="title">Log In</Typography>
+
               <TextField
-                required
                 autoFocus
-                id="email"
+                fullWidth
                 label="Email"
-                type="email"
-                onChange={this.handleEmailChange}
                 margin="normal"
-                fullWidth
-                className={classNames(classes.textField)}
-              />
-              <TextField
+                name="email"
+                onChange={this.handleTextChange}
                 required
-                id="password"
-                label="Password"
-                type="password"
-                onChange={this.handlePasswordChange}
-                margin="normal"
+                type="email"
+              />
+
+              <TextField
                 fullWidth
-                className={classNames(classes.textField)}
+                label="Password"
+                margin="normal"
+                name="password"
+                onChange={this.handleTextChange}
+                required
+                type="password"
               />
             </CardContent>
-            <CardActions>
+
+            <CardActions className={classNames(classes.submitContainer)}>
               <Button
+                className={classNames(classes.submitButton)}
                 raised
                 type="submit"
-                className={classNames(classes.submitButton)}
               >
                 Submit
               </Button>
@@ -98,20 +88,8 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    currentUser: state.auth.currentUser
-  };
+const styles = theme => {
+  return formStyles(theme);
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    loginPost: (email, password) => {
-      dispatch(loginPost(email, password));
-    }
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(
-  withStyles(styles)(Login)
-);
+export default withStyles(styles)(Login);
