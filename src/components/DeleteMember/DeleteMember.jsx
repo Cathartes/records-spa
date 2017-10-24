@@ -1,31 +1,43 @@
 import React, { PureComponent } from 'react';
 import { graphql } from 'react-apollo';
 import Button from 'material-ui/Button';
+import Snackbar from 'material-ui/Snackbar';
+import IconButton from 'material-ui/IconButton';
+import CloseIcon from 'material-ui-icons/Close';
 
-import DeleteMemberMutation from './DeleteMemberMutation';
+import destroyUserMutation from '../../mutations/destroyUserMutation';
 import PermanentConfirmationDialog from '../PermanentConfirmationDialog';
 
 class DeleteMember extends PureComponent {
   state = {
-    open: false
+    open: false,
+    snackbar: false
   };
 
   handleOnClick = bool => {
     this.setState({ open: bool });
   };
 
+  handleRequestClose = bool => {
+    this.setState({ snackbar: bool });
+  };
+
   submitMutation = () => {
     const { user, mutate, refetch, closeDialog } = this.props;
     mutate({
       variables: { id: parseInt(user.id, 0) }
-    }).then(({ data }) => {
-      closeDialog();
-      refetch();
-    });
+    })
+      .then(({ data }) => {
+        closeDialog();
+        refetch();
+      })
+      .catch(() => {
+        this.handleRequestClose(true);
+      });
   };
 
   render() {
-    const { open } = this.state;
+    const { open, snackbar } = this.state;
     return (
       <div>
         <Button raised onClick={() => this.handleOnClick(true)}>
@@ -36,9 +48,40 @@ class DeleteMember extends PureComponent {
           handleOnClick={this.handleOnClick}
           submitMutation={this.submitMutation}
         />
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right'
+          }}
+          open={snackbar}
+          autoHideDuration={6000}
+          onRequestClose={() => this.handleRequestClose(false)}
+          SnackbarContentProps={{
+            'aria-describedby': 'message-id'
+          }}
+          message={<span id="message-id"> An error occured! </span>}
+          action={[
+            <Button
+              key="undo"
+              color="accent"
+              dense
+              onClick={() => this.handleRequestClose(false)}
+            >
+              UNDO
+            </Button>,
+            <IconButton
+              key="close"
+              aria-label="Close"
+              color="inherit"
+              onClick={this.handleRequestClose}
+            >
+              <CloseIcon />
+            </IconButton>
+          ]}
+        />
       </div>
     );
   }
 }
 
-export default graphql(DeleteMemberMutation)(DeleteMember);
+export default graphql(destroyUserMutation)(DeleteMember);
