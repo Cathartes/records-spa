@@ -52,9 +52,9 @@ class Header extends PureComponent {
               <Sidenav />
             </Drawer>
 
-            <Typography type="title" className={classNames(classes.appTitle)}>
-              CATHARTES
-            </Typography>
+            <Link className={classNames(classes.appTitle)} to="/">
+              <Typography type="title">CATHARTES</Typography>
+            </Link>
 
             {!currentUser && (
               <Button component={Link} to="/login">
@@ -86,7 +86,8 @@ class Header extends PureComponent {
 const styles = theme => {
   return {
     appTitle: {
-      flex: 1
+      flex: 1,
+      textDecoration: 'none'
     },
     currentUser: {
       marginLeft: theme.spacing.unit,

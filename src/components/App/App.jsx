@@ -13,6 +13,7 @@ import Login from '../Login';
 import Logout from '../Logout';
 import RecordBooksAdd from '../RecordBooksAdd';
 import RecordBooksView from '../RecordBooksView';
+import Splash from '../Splash';
 
 import mainTheme from '../../config/themes/mainTheme';
 
@@ -33,7 +34,7 @@ class App extends PureComponent {
             <Header />
             <div className={classNames(classes.appContent)}>
               <Switch>
-                <Route exact path="/" />
+                <Route exact path="/" component={Splash} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/logout" component={Logout} />
                 <Route exact path="/members" component={MembersPage} />
@@ -56,6 +57,15 @@ const styles = theme => ({
     [theme.breakpoints.down('sm')]: {
       paddingTop: 56
     }
+  },
+  splashContainer: {
+    display: 'flex',
+    justifyContent: 'center'
+  },
+  splashImage: {
+    height: '80%',
+    position: 'absolute',
+    top: 80
   }
 });
 

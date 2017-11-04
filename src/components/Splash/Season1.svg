@@ -1,0 +1,304 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 194.75 295.17">
+  <defs>
+    <style>
+      .cls-1{fill:#fff;}.cls-2{fill:#d53f46;}.cls-3{fill:#e94546;}.cls-4{fill:#231f20;}
+    </style>
+  </defs>
+  <title>
+    Season1.svg
+  </title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Layer_1-2" data-name="Layer 1">
+      <path id="Banner_BG" d="M97.56 189.89H65.74v105.28l31.82-21.44 31.81 21.44V189.89H97.56z" data-name="Banner BG" class="cls-1">
+
+        <animateTransform
+          attributeName="transform"
+          attributeType="XML"
+          type="translate"
+          dur="2s"
+          values="0,-125;0,-125;0,0"
+          keySplines="0.1 0.8 0.2 1;
+                      0.1 0.8 0.2 1"
+          keyTimes="0;.7;1"
+          calcMode="spline"
+          repeatCount="0" />
+      </path>
+
+      <path id="BannerBot" d="M67.87 290.98l29.5-20.47 29.5 20.47v-95.47l-59 95.47z" class="cls-2">
+
+        <animateTransform
+          attributeName="transform"
+          attributeType="XML"
+          type="translate"
+          dur="2s"
+          values="0,-125;0,-125;0,0"
+          keySplines="0.1 0.8 0.2 1;
+                      0.1 0.8 0.2 1"
+          keyTimes="0;.7;1"
+          calcMode="spline"
+          repeatCount="0" />
+      </path>
+
+      <path id="BannerTop" d="M97.37 195.51h-29.5v95.47l59-95.47h-29.5z" class="cls-3">
+
+        <animateTransform
+          attributeName="transform"
+          attributeType="XML"
+          type="translate"
+          dur="2s"
+          values="0,-125;0,-125;0,0"
+          keySplines="0.1 0.8 0.2 1;
+                      0.1 0.8 0.2 1"
+          keyTimes="0;.7;1"
+          calcMode="spline"
+          repeatCount="0" />
+      </path>
+
+      <path id="_1" d="M95.15 232l-4.38 3.22v-4.64l4.38-3.23h4.39V258h-4.39z" data-name="1" class="cls-1">
+
+        <animateTransform
+          attributeName="transform"
+          attributeType="XML"
+          type="translate"
+          dur="2s"
+          values="0,-125;0,-125;0,0"
+          keySplines="0.1 0.8 0.2 1;
+                      0.1 0.8 0.2 1"
+          keyTimes="0;.7;1"
+          calcMode="spline"
+          repeatCount="0" />
+      </path>
+      <g>
+        <animateTransform
+          attributeName="transform"
+          attributeType="XML"
+          type="translate"
+          dur=".7s"
+          values="-20 0;0 0"
+          keySplines="0.1 0.8 0.2 1"
+          keyTimes="0;1"
+          calcMode="spline"
+          repeatCount="0"
+        />
+        <g id="Right">
+          <animateTransform
+            attributeName="transform"
+            attributeType="XML"
+            type="rotate"
+            dur="2s"
+            from="30 100 100"
+            to="0 100 100"
+            keySplines="0.1 0.8 0.2 1"
+            keyTimes="0;1"
+            calcMode="spline"
+            repeatCount="0" />
+          <path id="Right3" d="M194.75 143l-10.44 5.45c-7 17.76-21.11 29.56-45.75 32.87l-6.56 7.6a55.71 55.71 0 0 1-20.39-9.46c-4.58-8.49-6.79-18.93-6.17-31.75l-7.56-9.18q-3.33 19 2.72 34.7l-8.55-.14a71.51 71.51 0 0 0 16.51 14.48q9 12.06 24.76 21.73l-3.51-11.13a59.76 59.76 0 0 1-5.2-3.6q20 5.37 45-2.75l-10.89-4.5a52.29 52.29 0 0 1-20.26 2.58q39.44-4.17 56.29-46.9z" class="cls-3">
+            <animateTransform
+              attributeName="transform"
+              attributeType="XML"
+              type="scale"
+              dur=".8s"
+              from=".5 .5"
+              to="1 1"
+              keySplines="0.1 0.8 0.2 1"
+              keyTimes="0;1"
+              calcMode="spline"
+              repeatCount="0" />
+            </path>
+          <path id="Right2" d="M164.32 159.58v11.83q34.32-29.49 17.71-77l-4.39 10.84c6.28 18.04 3.29 36.04-13.32 54.33z" class="cls-3">
+            <animateTransform
+              attributeName="transform"
+              attributeType="XML"
+              type="scale"
+              dur=".8s"
+              from=".7 .7"
+              to="1 1"
+              keySplines="0.1 0.8 0.2 1"
+              keyTimes="0;1"
+              calcMode="spline"
+              repeatCount="0" />
+            </path>
+          <path id="Right1" d="M168.18 130.13l6.6 9.87Q187 96.7 146.6 66.11l2.4 11.43c15.29 11.63 22.83 28.28 19.18 52.59z" class="cls-3">
+            <animateTransform
+              attributeName="transform"
+              attributeType="XML"
+              type="scale"
+              dur=".8s"
+              from=".9 .9"
+              to="1 1"
+              keySplines="0.1 0.8 0.2 1"
+              keyTimes="0;1"
+              calcMode="spline"
+              repeatCount="0" />
+            </path>
+        </g>
+      </g>
+      <g>
+        <animateTransform
+          attributeName="transform"
+          attributeType="XML"
+          type="translate"
+          dur=".7s"
+          values="110 0;0 0"
+          keySplines="0.1 0.8 0.2 1"
+          keyTimes="0;1"
+          calcMode="spline"
+          repeatCount="0"
+        />
+        <g id="Left">
+          <animateTransform
+            attributeName="transform"
+            attributeType="XML"
+            type="rotate"
+            dur="2s"
+            from="-30 100 100"
+            to="0 100 100"
+            keySplines="0.1 0.8 0.2 1"
+            keyTimes="0;1"
+            calcMode="spline"
+            repeatCount="0" />
+          <path id="Left3" d="M94.11 173.06q6-15.72 2.72-34.7l-7.56 9.18c.62 12.82-1.59 23.26-6.17 31.75a56 56 0 0 1-20.39 9.46l-6.52-7.59c-24.64-3.31-38.71-15.11-45.75-32.87L0 142.84q16.85 42.74 56.2 46.89a52.11 52.11 0 0 1-20.26-2.59l-10.89 4.51q25.09 8.13 45.05 2.75a57.56 57.56 0 0 1-5.2 3.6l-3.52 11.14q15.79-9.67 24.77-21.73a71.51 71.51 0 0 0 16.51-14.48z" class="cls-3">
+            <animateTransform
+              attributeName="transform"
+              attributeType="XML"
+              type="scale"
+              dur=".8s"
+              from=".1 .5"
+              to="1 1"
+              keySplines="0.1 0.8 0.2 1"
+              keyTimes="0;1"
+              calcMode="spline"
+              repeatCount="0" />
+            </path>
+          <path id="Left2" d="M30.43 171.24v-11.83c-16.61-18.29-19.6-36.3-13.33-54.34l-4.38-10.83q-16.6 47.51 17.71 77z" class="cls-3">
+            <animateTransform
+              attributeName="transform"
+              attributeType="XML"
+              type="scale"
+              dur=".8s"
+              from=".3 .7"
+              to="1 1"
+              keySplines="0.1 0.8 0.2 1"
+              keyTimes="0;1"
+              calcMode="spline"
+              repeatCount="0" />
+            </path>
+          <path id="Left1" d="M26.57 130c-3.65-24.31 3.89-41 19.19-52.59l2.38-11.43Q7.79 96.51 20 139.83z" class="cls-3">
+            <animateTransform
+              attributeName="transform"
+              attributeType="XML"
+              type="scale"
+              dur=".8s"
+              from=".5 .9"
+              to="1 1"
+              keySplines="0.1 0.8 0.2 1"
+              keyTimes="0;1"
+              calcMode="spline"
+              repeatCount="0" />
+            </path>
+        </g>
+      </g>
+      <path id="Red_BG" d="M154.09 46H40.66a6.78 6.78 0 0 0-6.58 6.93v114.14c0 22.61 51.29 32.88 63.29 51.3 12-18.42 63.3-28.69 63.3-51.3V52.93a6.78 6.78 0 0 0-6.58-6.93z" data-name="Red BG" class="cls-3">
+        <animateTransform
+          attributeName="transform"
+          attributeType="XML"
+          type="translate"
+          dur=".5s"
+          values="0,0;0,.5;0,-1.2;0,0"
+          keySplines="0.5 0.5 0.5 0.5;
+                      0.3 0.8 0.3 0.8;
+                      0.1 0.8 0.2 0.8"
+          keyTimes="0;.3;.6;1"
+          calcMode="spline"
+          repeatCount="0" />
+        </path>
+      <path id="White_BG" d="M147.1 56.62H47.65a6 6 0 0 0-5.78 6.07v100.08c0 19.83 45 28.83 55.5 45 10.53-16.15 55.5-25.15 55.5-45V62.69a5.94 5.94 0 0 0-5.77-6.07z" data-name="White BG" class="cls-1">
+        <animateTransform
+          attributeName="transform"
+          attributeType="XML"
+          type="translate"
+          dur=".5s"
+          values="0,0;0,.5;0,-1.2;0,0"
+          keySplines="0.5 0.5 0.5 0.5;
+                      0.3 0.8 0.3 0.8;
+                      0.1 0.8 0.2 0.8"
+          keyTimes="0;.3;.6;1"
+          calcMode="spline"
+          repeatCount="0" />
+        </path>
+      <path id="Back_BG" d="M144.16 59.25H51A5.62 5.62 0 0 0 45.55 65v95.3c0 18.87 42.15 27.44 52 42.82 9.86-15.38 52-24 52-42.82V65a5.62 5.62 0 0 0-5.39-5.75z" data-name="Back BG" class="cls-4">
+        <animateTransform
+          attributeName="transform"
+          attributeType="XML"
+          type="translate"
+          dur=".5s"
+          values="0,0;0,.5;0,-1.2;0,0"
+          keySplines="0.5 0.5 0.5 0.5;
+                      0.3 0.8 0.3 0.8;
+                      0.1 0.8 0.2 0.8"
+          keyTimes="0;.3;.6;1"
+          calcMode="spline"
+          repeatCount="0" />
+        </path>
+      <path id="Bird" d="M59.05 164.47c.83-7.68 1.71-14.57 2.86-18.87.75 5.35 1.53 9.16 2.38 9.85 0-7.72.85-13.49 2.86-15.89.93 8.42 1.62 12 2.07 10.88 0-7.61.64-12.29 1.75-12.55.59 1.2 1 3.29 1 7.47.77.52 1.54-1.84 2.3-6.91.67 2.37 1.32 4.63 1.51 3.81 1.25-1.38 1.54-4.59 1.59-8.26a8.91 8.91 0 0 1 2.31 4.05c.34-.9.28-2.9-.08-5.72a15.11 15.11 0 0 1 3.57 2.94c.1-1.14-.42-2.77-1.82-5.09.36-.1 2.18.8 5 2.46.2-.94-.82-2.63-2.94-5 1 .14 2.21.32 4.53 2.22.67-1.18-.49-3-2.46-5.16 1.45.28 2.88 1.1 4.29 3.26.71-1 .67-2.77.32-4.85a80.37 80.37 0 0 1 16.68 7.15A252.93 252.93 0 0 1 136.92 162c.77-2.15-7.69-12.8-22.65-29.4 20.37 11.19 32.29 16.72 34 15.41-14.16-7-27.2-14.34-38.06-22.49-4.37-5.43-8.15-10.35-10.41-14.54 2.87-.19 4.86-.6 4.85-1.51a5.75 5.75 0 0 1-4.29-3.18c2.52 1.35 4.67 2.16 5.56 1.19a6 6 0 0 1-2.86-4c2.54 1.72 4.38 2.38 5.32 1.67a14.06 14.06 0 0 1-3.65-4.29q3.56 1.35 5.32.72a10.93 10.93 0 0 1-3.57-2.94c3.37 0 5.3-.37 5.64-1.2-2.61-.22-4.09-.65-4.45-1.27 4.29-.84 7.14-2 7.55-3.73-2.35 0-3.62-.07-4-.32 5.24-1.8 6.69-2.94 6.12-3.74-3.66 1-6.28 1.19-7.63.72 1.25-1.23 3.84-2.7 12.16-4.61-1.41-.38-5.7-.09-11.2.48 1.76-2.4 6.87-4.22 14.94-6.28-.94-.56-4.65-.54-10.17-.16 4-2 10.33-4.46 17.55-7.07l-.62-.44c-1.47-.19-5.37.23-11 1.07a70.12 70.12 0 0 0 6.74-3.91c6.6-5.22 14.34-10.8 14.34-10.8s-12 1.82-21.4 7.15c-11.38 6.46-25.89 18.26-19 25.6a2.6 2.6 0 0 1-1.28 2.47c-3.31.27-4.79 3-5.56 6.59-2.76.53-4.51 1-4.45 1.67-.16 1-3.76 0-9.53-1.59-2-4-5.25-5.36-10-3.89 0 0-7.6-4-8.1-3.34s5.08 6.91 5.08 6.91c-.44 4.71 1.62 7.62 6 8.82 2.46 4.76 5 8.69 3.74 8.9-.77.55-.79 2.57-.64 4.93-3.18 1.34-5.72 3-5 6.52a2.34 2.34 0 0 1-2.07 1.9c-8-4.83-14.55 6.06-20.07 22.16-4.62 13.48-2.43 20.44-2.43 20.44s5.23-8.18 6.76-12.24c1-2.63 1.19-5.29 2.31-7.23.34 5.37.8 9.32 1.46 10.8z" class="cls-1">
+        <animateTransform
+          attributeName="transform"
+          attributeType="XML"
+          type="translate"
+          dur=".5s"
+          values="0,0;0,.5;0,-1.2;0,0"
+          keySplines="0.5 0.5 0.5 0.5;
+                      0.3 0.8 0.3 0.8;
+                      0.1 0.8 0.2 0.8"
+          keyTimes="0;.3;.6;1"
+          calcMode="spline"
+          repeatCount="0" />
+      </path>
+      <path id="Right_Line" d="M113.19 15.75h3V38.5h-3z" data-name="Right Line" class="cls-3">
+        <animateTransform
+          attributeName="transform"
+          attributeType="XML"
+          type="translate"
+          begin=".54s"
+          dur="1.2s"
+          values="0,0;0,.5;0,-1.2;0,0"
+          keySplines="0.5 0.5 0.5 0.5;
+                      0.3 0.8 0.3 0.8;
+                      0.1 0.8 0.2 0.8"
+          keyTimes="0;.3;.6;1"
+          calcMode="spline"
+          repeatCount="0" />
+      </path>
+      <path id="Middle_Line" d="M94.87 0h3v38.5h-3z" data-name="Middle Line" class="cls-3">
+        <animateTransform
+          attributeName="transform"
+          attributeType="XML"
+          type="translate"
+          begin=".46s"
+          dur="1.2s"
+          values="0,0;0,-4;0,1;0,0"
+          keySplines="0.5 0.5 0.5 0.5;
+                      0.3 0.8 0.3 0.8;
+                      0.1 0.8 0.2 0.8"
+          keyTimes="0;.3;.6;1"
+          calcMode="spline"
+          repeatCount="0" />
+      </path>
+      <path id="Left_Line" d="M77.74 15.75h3V38.5h-3z" data-name="Left Line" class="cls-3">
+        <animateTransform
+          attributeName="transform"
+          attributeType="XML"
+          type="translate"
+          begin=".38s"
+          dur="1.2s"
+          values="0,0;0,-4;0,1;0,0"
+          keySplines="0.5 0.5 0.5 0.5;
+                      0.3 0.8 0.3 0.8;
+                      0.1 0.8 0.2 0.8"
+          keyTimes="0;.3;.6;1"
+          calcMode="spline"
+          repeatCount="0" />
+      </path>
+    </g>
+  </g>
+</svg>
