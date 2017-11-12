@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import { Redirect } from 'react-router-dom';
+import moment from 'moment';
 
 import withStyles from 'material-ui/styles/withStyles';
 import formStyles from '../../styles/form';
@@ -30,14 +31,15 @@ class RecordBooksAdd extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    const timeZone = moment().format('Z');
     this.props
       .mutate({
         variables: {
           name: this.state.name,
-          startTime: this.state.startTime,
-          endTime: this.state.endTime,
-          rushStartTime: this.state.rushStartTime,
-          rushEndTime: this.state.rushEndTime
+          startTime: this.state.startTime + timeZone,
+          endTime: this.state.endTime + timeZone,
+          rushStartTime: this.state.rushStartTime + timeZone,
+          rushEndTime: this.state.rushEndTime + timeZone
         },
         refetchQueries: [{ query: recordBooksListQuery }]
       })
