@@ -1,4 +1,4 @@
-import { gql } from 'react-apollo';
+import gql from 'graphql-tag';
 
 const updateUserMutation = gql`
   mutation updateUserMutation(

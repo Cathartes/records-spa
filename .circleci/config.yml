@@ -4,7 +4,7 @@ jobs:
     working_directory: ~/records-spa
 
     docker:
-      - image: circleci/node:8.7
+      - image: circleci/node:8.9
 
     steps:
       - checkout
@@ -33,7 +33,7 @@ jobs:
     working_directory: ~/records-spa
 
     docker:
-      - image: circleci/node:8.7
+      - image: circleci/node:8.9
 
     steps:
       - checkout
@@ -60,7 +60,7 @@ jobs:
     working_directory: ~/records-spa
 
     docker:
-      - image: circleci/node:8.7
+      - image: circleci/node:8.9
 
     steps:
       - checkout
