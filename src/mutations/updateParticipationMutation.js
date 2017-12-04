@@ -1,4 +1,4 @@
-import { gql } from 'react-apollo';
+import gql from 'graphql-tag';
 
 const updateParticipationMutation = gql`
   mutation updateParticipationMutation($id: Int!, $teamId: Int) {

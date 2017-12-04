@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import { ApolloProvider } from 'react-apollo';
 
-import apolloClient from '../../config/apolloClient';
 import store from '../../config/store';
+import apolloClient from '../../config/apolloClient';
 
 import RecordBooksView from './RecordBooksView';
 
@@ -16,9 +17,11 @@ it('renders without crashing', () => {
   };
 
   ReactDOM.render(
-    <ApolloProvider client={apolloClient} store={store}>
-      <RecordBooksView {...props} />
-    </ApolloProvider>,
+    <Provider store={store}>
+      <ApolloProvider client={apolloClient}>
+        <RecordBooksView {...props} />
+      </ApolloProvider>
+    </Provider>,
     div
   );
 });
