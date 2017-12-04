@@ -1,10 +1,12 @@
 import React, { PureComponent } from 'react';
+
 import Button from 'material-ui/Button';
-import Dialog from 'material-ui/Dialog';
-import DialogActions from 'material-ui/Dialog/DialogActions';
-import DialogContent from 'material-ui/Dialog/DialogContent';
-import DialogContentText from 'material-ui/Dialog/DialogContentText';
-import DialogTitle from 'material-ui/Dialog/DialogTitle';
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle
+} from 'material-ui/Dialog';
 
 class PermanentConfirmationDialog extends PureComponent {
   render() {

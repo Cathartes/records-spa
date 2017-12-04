@@ -1,14 +1,11 @@
-import { gql } from 'react-apollo';
+import gql from 'graphql-tag';
 
-export default gql`
+const destroyUserMutation = gql`
   mutation destroyUserMutation($id: Int!) {
     destroyUser(id: $id) {
-      discordName
-      email
       id
-      membershipType
-      admin
-      status
     }
   }
 `;
+
+export default destroyUserMutation;

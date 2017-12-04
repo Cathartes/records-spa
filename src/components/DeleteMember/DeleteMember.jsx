@@ -1,11 +1,14 @@
 import React, { PureComponent } from 'react';
 import { graphql } from 'react-apollo';
+
 import Button from 'material-ui/Button';
-import Snackbar from 'material-ui/Snackbar';
 import IconButton from 'material-ui/IconButton';
+import Snackbar from 'material-ui/Snackbar';
+
 import CloseIcon from 'material-ui-icons/Close';
 
 import destroyUserMutation from '../../mutations/destroyUserMutation';
+
 import PermanentConfirmationDialog from '../PermanentConfirmationDialog';
 
 class DeleteMember extends PureComponent {
@@ -44,8 +47,8 @@ class DeleteMember extends PureComponent {
           Delete
         </Button>
         <PermanentConfirmationDialog
-          title={'Are you sure you want to delete member?'}
-          subtitle={"This action can't be reverted."}
+          title="Are you sure you want to delete member?"
+          subtitle="This action can't be reverted."
           open={open}
           handleOnClick={this.handleOnClick}
           submitMutation={this.submitMutation}
