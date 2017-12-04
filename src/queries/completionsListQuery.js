@@ -1,4 +1,4 @@
-import { gql } from 'react-apollo';
+import gql from 'graphql-tag';
 
 const completionsListQuery = gql`
   query completionsListQuery($recordBookId: Int!) {

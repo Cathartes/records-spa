@@ -1,4 +1,4 @@
-import { gql } from 'react-apollo';
+import gql from 'graphql-tag';
 
 const usersListQuery = gql`
   query usersListQuery($membershipType: UserMembershipTypeEnum) {

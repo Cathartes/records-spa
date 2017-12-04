@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import { ApolloProvider } from 'react-apollo';
 
 import registerServiceWorker from './registerServiceWorker';
@@ -12,9 +13,11 @@ import 'typeface-roboto';
 import './index.css';
 
 ReactDOM.render(
-  <ApolloProvider client={apolloClient} store={store}>
-    <App />
-  </ApolloProvider>,
+  <Provider store={store}>
+    <ApolloProvider client={apolloClient}>
+      <App />
+    </ApolloProvider>
+  </Provider>,
   document.getElementById('root')
 );
 registerServiceWorker();

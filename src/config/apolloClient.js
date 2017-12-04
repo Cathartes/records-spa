@@ -1,27 +1,32 @@
-import { ApolloClient, createNetworkInterface } from 'react-apollo';
+import ApolloClient from 'apollo-client';
+import { ApolloLink } from 'apollo-link';
+import { createHttpLink } from 'apollo-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory';
 
-const networkInterface = createNetworkInterface({
+const httpLink = createHttpLink({
   uri: `${process.env.REACT_APP_API_URL}/graphql`
 });
 
-networkInterface.use([
-  {
-    applyMiddleware(req, next) {
-      if (!req.options.headers) {
-        req.options.headers = {};
-      }
-
-      const token = localStorage.getItem('X-USER-TOKEN');
-      const uid = localStorage.getItem('X-USER-UID');
-
-      req.options.headers['X-USER-TOKEN'] = token;
-      req.options.headers['X-USER-UID'] = uid;
-
-      next();
+const middlewareLink = new ApolloLink((operation, forward) => {
+  operation.setContext({
+    headers: {
+      'X-USER-TOKEN': localStorage.getItem('X-USER-TOKEN'),
+      'X-USER-UID': localStorage.getItem('X-USER-UID')
     }
-  }
-]);
+  });
+  return forward(operation);
+});
 
-const client = new ApolloClient({ networkInterface });
+const loggerLink = new ApolloLink((operation, forward) => {
+  console.log(operation.operationName);
+  return forward(operation).map(result => {
+    console.log(`received result from ${operation.operationName}`);
+    return result;
+  });
+});
+
+const link = loggerLink.concat(middlewareLink).concat(httpLink);
+
+const client = new ApolloClient({ link: link, cache: new InMemoryCache() });
 
 export default client;

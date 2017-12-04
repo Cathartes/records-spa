@@ -16,6 +16,7 @@ import ListItemIcon from 'material-ui/List/ListItemIcon';
 import ListItemText from 'material-ui/List/ListItemText';
 
 import PersonAddIcon from 'material-ui-icons/PersonAdd';
+import RemoveIcon from 'material-ui-icons/Remove';
 
 import AlphaIcon from '../../icons/Alpha';
 import BravoIcon from '../../icons/Bravo';
@@ -91,8 +92,11 @@ class ParticipationsList extends PureComponent {
                 <ListItem key={participation.id}>
                   <ListItemIcon onClick={this.toggleTeam(participation)}>
                     <IconButton aria-label="Change Team">
-                      {participation.team &&
-                        this.iconForTeam(participation.team.name)}
+                      {participation.team ? (
+                        this.iconForTeam(participation.team.name)
+                      ) : (
+                        <RemoveIcon />
+                      )}
                     </IconButton>
                   </ListItemIcon>
 
