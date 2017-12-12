@@ -7,10 +7,7 @@ import tableStyles from '../../styles/table';
 
 import Avatar from 'material-ui/Avatar';
 import Button from 'material-ui/Button';
-import List from 'material-ui/List';
-import ListItem from 'material-ui/List/ListItem';
-import ListItemAvatar from 'material-ui/List/ListItemAvatar';
-import ListItemText from 'material-ui/List/ListItemText';
+import List, { ListItem, ListItemAvatar, ListItemText } from 'material-ui/List';
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 
@@ -113,6 +110,7 @@ class MembersPage extends PureComponent {
             open
             onRequestClose={this.setEditUser(null)}
             user={editUser}
+            refetch={data.refetch}
           />
         )}
       </div>
@@ -123,20 +121,24 @@ class MembersPage extends PureComponent {
     return (
       <List>
         {users.map(user => {
-          return (
-            <ListItem button key={user.id} onClick={this.setEditUser(user)}>
-              <ListItemAvatar>
-                <Avatar>
-                  <AccountBoxIcon />
-                </Avatar>
-              </ListItemAvatar>
+          if (user.currentUserStatus === 'archived') {
+            return null;
+          } else {
+            return (
+              <ListItem button key={user.id} onClick={this.setEditUser(user)}>
+                <ListItemAvatar>
+                  <Avatar>
+                    <AccountBoxIcon />
+                  </Avatar>
+                </ListItemAvatar>
 
-              <ListItemText
-                primary={user.discordName.toUpperCase()}
-                secondary={user.email}
-              />
-            </ListItem>
-          );
+                <ListItemText
+                  primary={user.discordName.toUpperCase()}
+                  secondary={user.email}
+                />
+              </ListItem>
+            );
+          }
         })}
       </List>
     );

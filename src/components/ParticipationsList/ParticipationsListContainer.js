@@ -8,7 +8,7 @@ import participationsListQuery from '../../queries/participationsListQuery';
 import ParticipationsList from './ParticipationsList';
 
 const mapStateToProps = state => {
-  return { selectedUsers: state.usersList.selectedUsers };
+  return { currentUser: state.auth.currentUser };
 };
 
 export default compose(
