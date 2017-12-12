@@ -40,10 +40,22 @@ class DeleteMember extends PureComponent {
   };
 
   render() {
+    const { user } = this.props;
     const { open, snackbar } = this.state;
+    console.log(
+      user.participations.length > 0,
+      user.participations[0].completions.length > 0
+    );
     return (
       <div>
-        <Button raised onClick={() => this.handleOnClick(true)}>
+        <Button
+          raised
+          onClick={() => this.handleOnClick(true)}
+          disabled={
+            user.participations.length > 0 &&
+            user.participations[0].completions.length > 0
+          }
+        >
           Delete
         </Button>
         <PermanentConfirmationDialog

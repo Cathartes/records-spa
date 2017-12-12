@@ -8,6 +8,13 @@ const usersListQuery = gql`
       id
       membershipType
       uid
+      participations {
+        id
+        completions {
+          id
+          status
+        }
+      }
     }
   }
 `;
