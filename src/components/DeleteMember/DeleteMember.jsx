@@ -42,10 +42,6 @@ class DeleteMember extends PureComponent {
   render() {
     const { user } = this.props;
     const { open, snackbar } = this.state;
-    console.log(
-      user.participations.length > 0,
-      user.participations[0].completions.length > 0
-    );
     return (
       <div>
         <Button
