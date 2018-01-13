@@ -1,25 +1,21 @@
-# Installation
-### 1. Clone The Repo
-  #### If you have ssh set up
-    `git clone git@github.com:Cathartes/records-spa.git`
-  #### If you don't have ssh set up *and really enjoy typing in your username and password*
-    `git clone https://github.com/Cathartes/records-spa.git`
+# Cathartes Records Web App
 
-### 2. Install Yarn
-  #### Linux
-    `sudo apt install yarn`
+[![CircleCI](https://circleci.com/gh/Cathartes/records-spa.svg?style=svg)](https://circleci.com/gh/Cathartes/records-spa)
+[![Maintainability](https://api.codeclimate.com/v1/badges/21d2055c85d4dfe4206d/maintainability)](https://codeclimate.com/github/Cathartes/records-spa/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/21d2055c85d4dfe4206d/test_coverage)](https://codeclimate.com/github/Cathartes/records-spa/test_coverage)
 
-  #### MacOS
-    `brew install yarn`
+### Dependencies
 
-  #### Windows
-    [Download Installer](https://yarnpkg.com/latest.msi)
+*   Node: v8.9.4
+*   Yarn: v1.3.2
 
-### 3. Move To The Directory
-  `cd records-spa`
+### Setup Instructions
 
-### 4. Install All Dependencies
-  `yarn install`
+1.  Install dependencies
+2.  Run `yarn` _or_ `yarn install`
 
-### 5. Start The App
-  `yarn start`
+### Common Commands
+
+*   Start Node server: `yarn start`
+*   Run Jest test suite: `yarn test`
+*   Build the project: `yarn build`

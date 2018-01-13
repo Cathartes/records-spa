@@ -21,12 +21,18 @@ jobs:
           paths:
             - node_modules
       - run:
+          name: Setup Code Climate Test Reporter
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+      - run:
           name: Run Jest Test Suite
-          command: CI=true yarn test
+          command: |
+            ./cc-test-reporter before-build
+            CI=true yarn test --coverage --json --outputFile=test-results.json
+            ./cc-test-reporter after-build --exit-code $?
       - store_test_results:
-          path: /tmp/test-results
-      - store_artifacts:
-          path: /tmp/test-results
+          path: test-results.json
 
 
   deploy_staging:
